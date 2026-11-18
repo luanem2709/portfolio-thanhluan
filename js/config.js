@@ -65,7 +65,7 @@ const CONFIG = {
     // Personal info
     info: {
         name: 'Nguyễn Thành Luân',
-        title: 'Software Engineer & Content Creator',
+        title: 'Software Engineer · Web & IT Specialist',
         email: 'nguyenthanhluan.270924@gmail.com',
         phone: '0816042709',
         github: 'luanem2709',

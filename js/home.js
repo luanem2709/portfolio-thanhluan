@@ -7,7 +7,7 @@
             el.textContent = target.toLocaleString('vi-VN') + (suffix || '');
             return;
         }
-        const duration = 1200;
+        const duration = 650;
         const start = performance.now();
         const from = 0;
 

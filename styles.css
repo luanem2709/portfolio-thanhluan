@@ -540,9 +540,9 @@ img {
     padding: 0;
 }
 
-.experience-list li {
+.experience-list > li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 18px;
     padding: 20px;
     margin-bottom: 14px;
@@ -554,38 +554,115 @@ img {
     transition: transform 0.2s var(--ease-out), border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
 }
 
-.experience-list li:hover {
+.experience-list > li:hover {
     transform: translateX(4px);
     box-shadow: var(--shadow-sm);
     border-left-color: var(--accent);
 }
 
-.experience-list li i {
-    font-size: 28px;
+.experience-list > li > i {
+    font-size: 24px;
     color: var(--brand);
-    min-width: 32px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--brand-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.experience-list li div {
+.experience-list > li > div {
     flex: 1;
+    min-width: 0;
     color: var(--text);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
-.experience-list li div strong {
+.exp-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+    margin-bottom: 4px;
+}
+
+.experience-list > li > div .exp-header strong {
     color: var(--text-strong);
     font-weight: 700;
     font-size: 17px;
     display: block;
+}
+
+.exp-bullets strong {
+    display: inline;
+    color: var(--text-strong);
+    font-weight: 700;
+}
+
+.exp-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--brand-soft);
+    color: var(--brand-hover);
+    border: 1px solid color-mix(in srgb, var(--brand) 22%, transparent);
+    white-space: nowrap;
+}
+
+.experience-list > li > div > span,
+.exp-meta {
+    display: block;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.exp-bullets {
+    list-style: disc;
+    padding-left: 18px;
+    margin: 10px 0 0;
+    color: var(--text);
+    font-size: 14.5px;
+    line-height: 1.6;
+}
+
+.exp-bullets li {
+    margin-bottom: 6px;
+}
+
+.exp-bullets li:last-child {
+    margin-bottom: 0;
+}
+
+.edu-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-xs);
+}
+
+.edu-card strong {
+    display: block;
+    color: var(--text-strong);
+    font-size: 17px;
     margin-bottom: 4px;
 }
 
-.experience-list li div span {
-    color: var(--muted);
-    font-size: 14px;
+.edu-card p {
+    color: var(--muted-strong);
+    font-size: 14.5px;
+    margin: 0;
 }
 
-.achievements-list li {
+.achievements-list > li {
     display: flex;
     align-items: center;
     gap: 14px;
@@ -601,13 +678,13 @@ img {
     font-size: 15.5px;
 }
 
-.achievements-list li:hover {
+.achievements-list > li:hover {
     transform: translateX(4px);
     box-shadow: var(--shadow-sm);
     border-left-color: var(--accent);
 }
 
-.achievements-list li i {
+.achievements-list > li > i {
     font-size: 22px;
     color: #d97706;
     min-width: 24px;

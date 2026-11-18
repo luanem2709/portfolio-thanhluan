@@ -1,11 +1,11 @@
 ﻿// Hiệu ứng gõ chữ ở hero (chỉ chạy khi có phần tử .typing-text)
 const typingText = document.querySelector('.typing-text');
 const phrases = [
-    'Lập Trình Viên',
-    'Discord Bot Developer',
+    'Software Engineer',
+    'Web & WordPress Developer',
+    'IT HelpDesk & Systems',
     'Chrome Extension Dev',
-    'Community Builder',
-    'Content Creator'
+    'Discord Bot & Automation'
 ];
 let phraseIndex = 0;
 let charIndex = 0;
@@ -71,27 +71,12 @@ if (progressBars.length) {
     }
 }
 
-// Reveal khi cuộn (bỏ qua card do home.js hoặc ProjectFilter tự quản lý)
-const fadeObserverOptions = {
-    threshold: 0.08,
-    rootMargin: '0px 0px 40px 0px'
-};
-
-const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-active', 'fade-in-visible');
-            fadeObserver.unobserve(entry.target);
-        }
-    });
-}, fadeObserverOptions);
-
-const animateElements = document.querySelectorAll(
+// Bảo đảm các card nội dung luôn hiển thị sẵn (tránh bị ẩn khi cuộn nhanh)
+document.querySelectorAll(
     '.achievement-card, .skill-item, .stat-item, .info-card, .skill-card, .blog-card, .section-header'
-);
-animateElements.forEach(el => {
-    el.classList.add('fade-in');
-    fadeObserver.observe(el);
+).forEach(el => {
+    el.classList.remove('fade-in');
+    el.classList.add('reveal-active', 'fade-in-visible');
 });
 
 // Lightbox xem phóng to chứng chỉ ở trang Thành tựu
