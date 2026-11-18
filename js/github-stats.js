@@ -236,14 +236,13 @@ githubStyles.textContent = `
         bottom: 24px;
         left: 24px;
         width: 310px;
-        background: linear-gradient(135deg, rgba(17, 34, 64, 0.95), rgba(26, 47, 82, 0.95));
-        backdrop-filter: blur(20px);
+        background: var(--surface, #ffffff);
         border-radius: 16px;
-        border: 1px solid rgba(0, 212, 255, 0.2);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--line, #dce4e9);
+        box-shadow: var(--shadow-md, 0 12px 32px rgba(11, 29, 43, 0.12));
         z-index: 940;
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .github-stats-widget.collapsed {
@@ -268,23 +267,23 @@ githubStyles.textContent = `
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 15px 20px;
-        background: rgba(0, 102, 255, 0.1);
-        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        padding: 14px 18px;
+        background: var(--surface-muted, #f7f9fa);
+        border-bottom: 1px solid var(--line, #dce4e9);
         cursor: pointer;
     }
 
     .github-widget-header i.fa-github {
         font-size: 18px;
-        color: #00D4FF;
+        color: var(--brand, #086d80);
         flex-shrink: 0;
     }
 
     .github-widget-header span {
         flex: 1;
-        color: #E6F1FF;
+        color: var(--text-strong, #0a1d2b);
         font-weight: 600;
-        font-size: 14px;
+        font-size: 13.5px;
         white-space: nowrap;
         line-height: 1.2;
     }
@@ -292,85 +291,77 @@ githubStyles.textContent = `
     .widget-toggle {
         background: none;
         border: none;
-        color: #A8B2D1;
+        color: var(--muted, #627485);
         cursor: pointer;
         padding: 2px 4px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        transition: all 0.3s ease;
+        transition: color 0.2s ease;
     }
 
     .widget-toggle:hover {
-        color: #00D4FF;
+        color: var(--brand, #086d80);
     }
 
     .widget-toggle i {
-        transition: transform 0.3s ease;
+        transition: transform 0.25s ease;
     }
 
     .github-widget-content {
-        padding: 20px;
+        padding: 18px;
         max-height: 600px;
-        opacity: 1;
-        transition: all 0.3s ease;
         overflow-y: auto;
         overflow-x: hidden;
     }
 
-    /* Custom scrollbar for widget */
     .github-widget-content::-webkit-scrollbar {
         width: 6px;
     }
 
     .github-widget-content::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
+        background: var(--surface-muted, #f7f9fa);
         border-radius: 10px;
     }
 
     .github-widget-content::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #0066FF, #00D4FF);
+        background: var(--line-strong, #c3cfd7);
         border-radius: 10px;
-    }
-
-    .github-widget-content::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #0080FF, #00E4FF);
     }
 
     .github-stat-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 20px;
+        gap: 12px;
+        margin-bottom: 16px;
     }
 
     .github-stat-item {
         text-align: center;
-        padding: 15px;
-        background: rgba(0, 102, 255, 0.05);
-        border-radius: 10px;
-        border: 1px solid rgba(0, 212, 255, 0.1);
-        transition: all 0.3s ease;
+        padding: 12px;
+        background: var(--surface-muted, #f7f9fa);
+        border-radius: 12px;
+        border: 1px solid var(--line, #dce4e9);
+        transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .github-stat-item:hover {
-        background: rgba(0, 102, 255, 0.1);
-        border-color: rgba(0, 212, 255, 0.3);
-        transform: translateY(-3px);
+        border-color: var(--brand, #086d80);
+        transform: translateY(-2px);
     }
 
     .github-stat-item i {
-        font-size: 20px;
-        color: #0066FF;
-        margin-bottom: 8px;
+        font-size: 18px;
+        color: var(--brand, #086d80);
+        margin-bottom: 6px;
     }
 
     .stat-value {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 700;
-        color: #E6F1FF;
-        margin-bottom: 5px;
+        color: var(--text-strong, #0a1d2b);
+        margin-bottom: 4px;
     }
 
     .github-stat-item--langs .stat-value {
@@ -385,36 +376,36 @@ githubStyles.textContent = `
 
     .stat-label {
         font-size: 11px;
-        color: #8892B0;
+        color: var(--muted, #627485);
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
     .github-latest-repo {
-        background: rgba(0, 212, 255, 0.05);
-        padding: 15px;
+        background: var(--brand-soft, #e9f4f6);
+        padding: 12px 14px;
         border-radius: 10px;
-        margin-bottom: 15px;
-        border-left: 3px solid #0066FF;
+        margin-bottom: 14px;
+        border-left: 3px solid var(--brand, #086d80);
     }
 
     .repo-label {
         font-size: 11px;
-        color: #8892B0;
+        color: var(--muted, #627485);
         text-transform: uppercase;
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
 
     .repo-name {
         font-size: 14px;
-        color: #00D4FF;
-        font-weight: 600;
+        color: var(--brand-hover, #055c6d);
+        font-weight: 700;
         margin-bottom: 3px;
     }
 
     .repo-time {
         font-size: 12px;
-        color: #8892B0;
+        color: var(--muted, #627485);
     }
 
     .github-profile-link {
@@ -422,19 +413,19 @@ githubStyles.textContent = `
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 12px;
-        background: linear-gradient(135deg, #0066FF, #00D4FF);
-        color: white;
+        padding: 11px 14px;
+        background: linear-gradient(180deg, color-mix(in srgb, var(--brand, #086d80) 90%, #ffffff), var(--brand, #086d80));
+        color: var(--on-brand, #ffffff);
         text-decoration: none;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 600;
         font-size: 13px;
-        transition: all 0.3s ease;
+        transition: filter 0.2s ease, transform 0.2s ease;
     }
 
     .github-profile-link:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 20px rgba(0, 102, 255, 0.4);
+        filter: brightness(1.06);
     }
 
     /* Mobile responsive */

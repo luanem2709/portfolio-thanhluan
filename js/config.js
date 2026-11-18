@@ -7,38 +7,46 @@ const CONFIG = {
     // Theme settings
     themes: {
         default: {
-            name: 'Default',
-            primary: '#0066FF',
-            secondary: '#00D4FF',
-            dark: '#0A192F',
-            light: '#E6F1FF'
+            name: 'Digital Teal',
+            primary: '#086d80',
+            secondary: '#168da2',
+            hover: '#055c6d',
+            soft: '#e9f4f6',
+            dark: '#08121d',
+            light: '#e8f1f7'
         },
-        madao: {
-            name: 'Ma Đạo',
-            primary: '#9333EA',
-            secondary: '#EC4899',
-            dark: '#1E1B4B',
-            light: '#F3E8FF'
+        indigo: {
+            name: 'Cobalt Blue',
+            primary: '#1d4ed8',
+            secondary: '#0284c7',
+            hover: '#1e40af',
+            soft: '#eff6ff',
+            dark: '#091120',
+            light: '#e8f1f7'
         },
-        hacker: {
-            name: 'Hacker',
-            primary: '#00FF41',
-            secondary: '#00D9FF',
-            dark: '#0D0208',
-            light: '#39FF14'
+        emerald: {
+            name: 'Emerald',
+            primary: '#0c7a54',
+            secondary: '#10b981',
+            hover: '#065f46',
+            soft: '#e6f5ef',
+            dark: '#071713',
+            light: '#e8f5ef'
         },
         sunset: {
-            name: 'Sunset',
-            primary: '#FF6B35',
-            secondary: '#F7931E',
-            dark: '#1A1423',
-            light: '#FFE5D9'
+            name: 'Amber Slate',
+            primary: '#b45309',
+            secondary: '#d97706',
+            hover: '#92400e',
+            soft: '#fef3c7',
+            dark: '#17110d',
+            light: '#f7eee8'
         }
     },
 
     // Feature flags (chỉ giữ những flag thực sự được script đọc)
     features: {
-        particleCursor: true,
+        particleCursor: false,
         easterEggs: true,
         githubStats: true,
         musicPlayer: false

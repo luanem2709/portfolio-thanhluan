@@ -126,10 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
 const style = document.createElement('style');
 style.textContent = `
     img[data-src] {
-        background: linear-gradient(90deg, 
-            rgba(0, 102, 255, 0.1) 0%, 
-            rgba(0, 212, 255, 0.1) 50%, 
-            rgba(0, 102, 255, 0.1) 100%);
+        background: linear-gradient(90deg,
+            var(--surface-muted, #f7f9fa) 0%,
+            var(--brand-soft, #e9f4f6) 50%,
+            var(--surface-muted, #f7f9fa) 100%);
         background-size: 200% 100%;
         min-height: 200px;
     }

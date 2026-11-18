@@ -1,19 +1,17 @@
 // ========================================
-// DARK MODE & THEME SYSTEM
-// Hệ thống theme với nhiều màu sắc
+// LIGHT / DARK THEME & PALETTE MANAGER
+// Giao diện nhẹ, chuyển đổi mượt bằng CSS tokens
 // ========================================
 
 class ThemeManager {
     constructor() {
         this.currentTheme = 'default';
         this.isDark = false;
-        this.isImmersive = false;  // NEW: Track immersive state
         this.themes = CONFIG.themes;
         this.init();
     }
 
     init() {
-        // Load saved theme
         const savedTheme = localStorage.getItem('portfolio-theme');
         const savedMode = localStorage.getItem('portfolio-dark-mode');
 
@@ -21,20 +19,12 @@ class ThemeManager {
             this.currentTheme = savedTheme;
         }
 
+        // Mặc định dùng nền sáng; chỉ bật dark khi người dùng chọn
         if (savedMode === 'true') {
             this.isDark = true;
         }
 
-        // Load saved immersive state
-        const savedImmersive = localStorage.getItem('portfolio-immersive');
-        if (savedImmersive === 'true') {
-            this.isImmersive = true;
-        }
-
-        // Create theme controls
         this.createControls();
-
-        // Apply theme
         this.applyTheme();
     }
 
@@ -42,7 +32,7 @@ class ThemeManager {
         const controls = document.createElement('div');
         controls.className = 'theme-controls';
         controls.innerHTML = `
-            <button type="button" class="theme-toggle" id="dark-mode-toggle" title="Chuyển chế độ Tối / Sáng" aria-label="Chuyển chế độ Tối / Sáng">
+            <button type="button" class="theme-toggle" id="dark-mode-toggle" title="Chuyển chế độ Sáng / Tối" aria-label="Chuyển chế độ Sáng / Tối">
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -58,7 +48,7 @@ class ThemeManager {
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
             </button>
-            
+
             <div class="theme-selector">
                 <button type="button" class="theme-selector-btn" title="Đổi bảng màu" aria-label="Đổi bảng màu" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -82,7 +72,6 @@ class ThemeManager {
 
         document.body.appendChild(controls);
 
-        // Event listeners
         document.getElementById('dark-mode-toggle').addEventListener('click', () => this.toggleDarkMode());
 
         const selectorBtn = controls.querySelector('.theme-selector-btn');
@@ -101,7 +90,6 @@ class ThemeManager {
             selectorBtn.setAttribute('aria-expanded', String(isOpen));
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.theme-selector')) {
                 dropdown.classList.remove('show');
@@ -111,15 +99,9 @@ class ThemeManager {
     }
 
     toggleDarkMode() {
-        // Enhanced: Toggle both dark mode and immersive mode together
         this.isDark = !this.isDark;
-        this.isImmersive = this.isDark;  // Immersive follows dark mode
-
-        localStorage.setItem('portfolio-dark-mode', this.isDark);
-        localStorage.setItem('portfolio-immersive', this.isImmersive);
-
+        localStorage.setItem('portfolio-dark-mode', String(this.isDark));
         this.applyTheme();
-        this.applyImmersiveEffects();
     }
 
     setTheme(themeName) {
@@ -128,7 +110,6 @@ class ThemeManager {
         this.currentTheme = themeName;
         localStorage.setItem('portfolio-theme', themeName);
 
-        // Update active state
         document.querySelectorAll('.theme-option').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.theme === themeName);
         });
@@ -137,148 +118,96 @@ class ThemeManager {
     }
 
     applyTheme() {
-        const theme = this.themes[this.currentTheme];
+        const theme = this.themes[this.currentTheme] || this.themes.default;
         const root = document.documentElement;
 
-        // Apply CSS variables
-        if (this.isDark) {
-            root.style.setProperty('--p', theme.primary);
-            root.style.setProperty('--s', theme.secondary);
-            root.style.setProperty('--d', theme.dark);
-            root.style.setProperty('--l', theme.light);
-            root.style.setProperty('--bg', theme.dark);
-            root.style.setProperty('--text', theme.light);
-            document.body.classList.add('dark-mode');
+        // Xoá lớp overlay cũ nếu tồn tại
+        const oldOverlay = document.querySelector('.immersive-overlay');
+        if (oldOverlay) oldOverlay.remove();
+
+        root.dataset.theme = this.isDark ? 'dark' : 'light';
+        root.style.colorScheme = this.isDark ? 'dark' : 'light';
+        document.body.classList.toggle('dark-mode', this.isDark);
+        document.body.classList.remove('immersive-mode');
+
+        if (this.currentTheme === 'default' && !this.isDark) {
+            root.style.removeProperty('--brand');
+            root.style.removeProperty('--brand-hover');
+            root.style.removeProperty('--brand-soft');
+            root.style.removeProperty('--accent');
+        } else if (this.isDark && this.currentTheme === 'default') {
+            root.style.removeProperty('--brand');
+            root.style.removeProperty('--brand-hover');
+            root.style.removeProperty('--brand-soft');
+            root.style.removeProperty('--accent');
         } else {
-            root.style.setProperty('--p', theme.primary);
-            root.style.setProperty('--s', theme.secondary);
-            root.style.setProperty('--d', theme.dark);
-            root.style.setProperty('--l', '#8892B0');
-            root.style.setProperty('--bg', theme.dark);
-            root.style.setProperty('--text', '#E6F1FF');
-            document.body.classList.remove('dark-mode');
+            const accentBrand = this.isDark ? theme.secondary : theme.primary;
+            root.style.setProperty('--brand', accentBrand);
+            root.style.setProperty('--brand-hover', theme.hover || theme.primary);
+            root.style.setProperty('--accent', theme.secondary);
+            if (!this.isDark && theme.soft) {
+                root.style.setProperty('--brand-soft', theme.soft);
+            } else {
+                root.style.removeProperty('--brand-soft');
+            }
         }
-
-        // Add transition class
-        document.body.classList.add('theme-transitioning');
-        setTimeout(() => {
-            document.body.classList.remove('theme-transitioning');
-        }, 500);
-
-        // Apply immersive effects after theme
-        this.applyImmersiveEffects();
-    }
-
-    // NEW: Immersive mode effects
-    applyImmersiveEffects() {
-        if (this.isImmersive) {
-            document.body.classList.add('immersive-mode');
-            this.addImmersiveOverlay();
-        } else {
-            document.body.classList.remove('immersive-mode');
-            this.removeImmersiveOverlay();
-        }
-    }
-
-    addImmersiveOverlay() {
-        if (document.querySelector('.immersive-overlay')) return;
-
-        const overlay = document.createElement('div');
-        overlay.className = 'immersive-overlay';
-        overlay.innerHTML = `
-            <div class="immersive-particles">
-                ${this.generateParticles(15)}
-            </div>
-        `;
-
-        document.body.prepend(overlay);
-        setTimeout(() => overlay.classList.add('active'), 100);
-    }
-
-    removeImmersiveOverlay() {
-        const overlay = document.querySelector('.immersive-overlay');
-        if (overlay) {
-            overlay.classList.remove('active');
-            setTimeout(() => overlay.remove(), 600);
-        }
-    }
-
-    generateParticles(count) {
-        let html = '';
-        for (let i = 0; i < count; i++) {
-            const size = Math.random() * 4 + 2;
-            const left = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const duration = Math.random() * 10 + 10;
-
-            html += `<div class="particle" style="
-                width: ${size}px;
-                height: ${size}px;
-                left: ${left}%;
-                animation-delay: ${delay}s;
-                animation-duration: ${duration}s;
-            "></div>`;
-        }
-        return html;
     }
 }
 
-// Add theme styles
 const themeStyles = document.createElement('style');
 themeStyles.textContent = `
     .theme-controls {
         position: fixed;
-        top: 100px;
-        right: 30px;
+        top: 96px;
+        right: 28px;
         z-index: 950;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
     }
 
     .theme-toggle,
     .theme-selector-btn {
-        width: 50px;
-        height: 50px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(17, 34, 64, 0.9), rgba(26, 47, 82, 0.9));
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(0, 212, 255, 0.2);
+        background: var(--surface, #ffffff);
+        border: 1px solid var(--line, #dce4e9);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: var(--shadow-sm, 0 8px 24px rgba(11, 29, 43, 0.08));
     }
 
     .theme-toggle:hover,
     .theme-selector-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 30px rgba(0, 102, 255, 0.4);
-        border-color: rgba(0, 212, 255, 0.5);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md, 0 12px 28px rgba(11, 29, 43, 0.14));
+        border-color: var(--brand, #086d80);
     }
 
-    .theme-toggle svg {
-        width: 24px;
-        height: 24px;
-        color: #E6F1FF;
-        transition: all 0.3s ease;
-    }
-
-    .theme-toggle .sun-icon {
-        display: block;
+    .theme-toggle svg,
+    .theme-selector-btn svg {
+        width: 21px;
+        height: 21px;
+        color: var(--text-strong, #0a1d2b);
     }
 
     .theme-toggle .moon-icon {
-        display: none;
+        display: block;
     }
 
-    body.dark-mode .theme-toggle .sun-icon {
+    .theme-toggle .sun-icon {
         display: none;
     }
 
     body.dark-mode .theme-toggle .moon-icon {
+        display: none;
+    }
+
+    body.dark-mode .theme-toggle .sun-icon {
         display: block;
     }
 
@@ -286,26 +215,19 @@ themeStyles.textContent = `
         position: relative;
     }
 
-    .theme-selector-btn svg {
-        width: 24px;
-        height: 24px;
-        color: #E6F1FF;
-    }
-
     .theme-dropdown {
         position: absolute;
-        right: 60px;
+        right: 56px;
         top: 0;
-        background: rgba(13, 27, 52, 0.97);
-        backdrop-filter: blur(20px);
-        border-radius: 12px;
-        padding: 10px;
-        min-width: 200px;
-        border: 1px solid rgba(0, 212, 255, 0.25);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        background: var(--surface, #ffffff);
+        border-radius: 14px;
+        padding: 8px;
+        min-width: 196px;
+        border: 1px solid var(--line, #dce4e9);
+        box-shadow: var(--shadow-md, 0 16px 36px rgba(11, 29, 43, 0.14));
         opacity: 0;
         visibility: hidden;
-        transform: translateX(10px);
+        transform: translateX(8px);
         transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
     }
 
@@ -320,59 +242,39 @@ themeStyles.textContent = `
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px;
+        padding: 9px 10px;
         background: transparent;
         border: 1px solid transparent;
-        border-radius: 8px;
+        border-radius: 9px;
         cursor: pointer;
-        transition: all 0.2s ease;
-        color: #E6F1FF;
+        transition: background 0.18s ease, border-color 0.18s ease;
+        color: var(--text-strong, #0a1d2b);
     }
 
     .theme-option:hover {
-        background: rgba(0, 102, 255, 0.1);
-        border-color: rgba(0, 212, 255, 0.3);
+        background: var(--surface-muted, #f7f9fa);
+        border-color: var(--line, #dce4e9);
     }
 
     .theme-option.active {
-        background: rgba(0, 102, 255, 0.2);
-        border-color: rgba(0, 212, 255, 0.5);
+        background: var(--brand-soft, #e9f4f6);
+        border-color: color-mix(in srgb, var(--brand, #086d80) 30%, transparent);
     }
 
     .theme-preview {
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.2);
+        border: 2px solid var(--surface, #ffffff);
+        box-shadow: 0 0 0 1px var(--line, #dce4e9);
+        flex-shrink: 0;
     }
 
     .theme-name {
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 13.5px;
+        font-weight: 600;
     }
 
-    /* Smooth theme transition */
-    body.theme-transitioning {
-        transition: background-color 0.4s ease, color 0.4s ease;
-    }
-
-    /* Dark mode adjustments */
-    body.dark-mode {
-        background: linear-gradient(-45deg, #000000, #0A0A0A, #0D0D0D, #050505);
-    }
-
-    body.dark-mode .navbar {
-        background: rgba(0, 0, 0, 0.9);
-    }
-
-    body.dark-mode .project-card,
-    body.dark-mode .achievement-card,
-    body.dark-mode .stat-item,
-    body.dark-mode .skills-category {
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(10, 10, 10, 0.8));
-    }
-
-    /* Mobile responsive */
     @media (max-width: 768px) {
         .theme-controls {
             top: auto;
@@ -390,8 +292,8 @@ themeStyles.textContent = `
 
         .theme-toggle svg,
         .theme-selector-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 19px;
+            height: 19px;
         }
 
         .theme-dropdown {
@@ -400,152 +302,13 @@ themeStyles.textContent = `
             bottom: 52px;
         }
     }
-
-    /* Immersive Mode Styles */
-    .immersive-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(ellipse at center, 
-            rgba(10, 25, 47, 0.3) 0%, 
-            rgba(0, 0, 0, 0.6) 100%);
-        pointer-events: none;
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 0.6s ease;
-    }
-
-    .immersive-overlay.active {
-        opacity: 1;
-    }
-
-    .immersive-particles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    .particle {
-        position: absolute;
-        background: radial-gradient(circle, 
-            rgba(0, 212, 255, 0.6) 0%, 
-            rgba(0, 102, 255, 0.2) 50%, 
-            transparent 100%);
-        border-radius: 50%;
-        filter: blur(2px);
-        animation: particleFloat linear infinite;
-    }
-
-    @keyframes particleFloat {
-        0% {
-            transform: translateY(100vh) translateX(0);
-            opacity: 0;
-        }
-        10% {
-            opacity: 1;
-        }
-        90% {
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(-100px) translateX(100px);
-            opacity: 0;
-        }
-    }
-
-    body.immersive-mode {
-        background: #000000;
-    }
-
-    body.immersive-mode .project-card,
-    body.immersive-mode .blog-card,
-    body.immersive-mode .achievement-card {
-        box-shadow: 
-            0 12px 48px rgba(0, 102, 255, 0.3),
-            0 0 40px rgba(0, 212, 255, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-
-    /* Ensure content is above overlay without overriding fixed navbar */
-    .hero,
-    section,
-    footer {
-        position: relative;
-        z-index: 2;
-    }
-
-    /* Footer Dark Mode Styles */
-    body.dark-mode .footer {
-        background: linear-gradient(135deg, 
-            rgba(0, 0, 0, 0.95), 
-            rgba(10, 10, 10, 0.95));
-        border-top: 1px solid rgba(0, 212, 255, 0.15);
-    }
-
-    body.dark-mode .footer h3,
-    body.dark-mode .footer h4 {
-        color: #E6F1FF;
-    }
-
-    body.dark-mode .footer p {
-        color: #8892B0;
-    }
-
-    body.dark-mode .footer-links a {
-        color: #CCD6F6;
-    }
-
-    body.dark-mode .footer-links a:hover {
-        color: #00D4FF;
-    }
-
-    body.dark-mode .footer-contact li {
-        color: #8892B0;
-    }
-
-    body.dark-mode .footer-contact i {
-        color: #0066FF;
-    }
-
-    body.dark-mode .footer-social a {
-        background: rgba(0, 102, 255, 0.1);
-        border-color: rgba(0, 212, 255, 0.2);
-        color: #8892B0;
-    }
-
-    body.dark-mode .footer-social a:hover {
-        background: linear-gradient(135deg, #0066FF, #00D4FF);
-        color: white;
-        border-color: rgba(0, 212, 255, 0.5);
-    }
-
-    body.dark-mode .footer-bottom {
-        border-top: 1px solid rgba(0, 212, 255, 0.1);
-    }
-
-    body.dark-mode .footer-bottom p {
-        color: #8892B0;
-    }
-
-    /* Scroll Top Button Dark Mode */
-    body.dark-mode .scroll-top {
-        background: linear-gradient(135deg, 
-            rgba(0, 102, 255, 0.15),
-            rgba(0, 212, 255, 0.15));
-        border: 1px solid rgba(0, 212, 255, 0.3);
-    }
-
-    body.dark-mode .scroll-top:hover {
-        background: linear-gradient(135deg, #0066FF, #00D4FF);
-        box-shadow: 0 6px 24px rgba(0, 212, 255, 0.4);
-    }
 `;
 document.head.appendChild(themeStyles);
 
-// Initialize theme manager
-window.addEventListener('load', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new ThemeManager();
+    });
+} else {
     new ThemeManager();
-});
+}

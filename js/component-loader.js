@@ -110,10 +110,16 @@ class ComponentLoader {
         const navbar = document.getElementById('navbar');
         if (!navbar) return;
 
+        let pending = false;
         const onScroll = () => {
-            navbar.classList.toggle('scrolled', window.pageYOffset > 50);
+            if (pending) return;
+            pending = true;
+            requestAnimationFrame(() => {
+                navbar.classList.toggle('scrolled', window.pageYOffset > 50);
+                pending = false;
+            });
         };
-        onScroll();
+        navbar.classList.toggle('scrolled', window.pageYOffset > 50);
         window.addEventListener('scroll', onScroll, { passive: true });
     }
 
@@ -121,9 +127,16 @@ class ComponentLoader {
         const btn = document.getElementById('scroll-top');
         if (!btn) return;
 
-        window.addEventListener('scroll', () => {
-            btn.classList.toggle('show', window.pageYOffset > 300);
-        }, { passive: true });
+        let pending = false;
+        const onScroll = () => {
+            if (pending) return;
+            pending = true;
+            requestAnimationFrame(() => {
+                btn.classList.toggle('show', window.pageYOffset > 300);
+                pending = false;
+            });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
 
         btn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });

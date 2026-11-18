@@ -18,11 +18,12 @@
 }
 
 .blog-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 15px;
+    background: var(--surface);
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s ease;
+    border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.22s var(--ease-out), border-color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
     position: relative;
     z-index: 5;
     display: flex;
@@ -36,16 +37,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 5%, transparent), transparent 60%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.25s var(--ease-out);
     pointer-events: none;
 }
 
 .blog-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(52, 152, 219, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--brand) 30%, var(--line));
+    box-shadow: var(--shadow-md);
 }
 
 .blog-card:hover::before {
@@ -80,7 +81,7 @@
 }
 
 .blog-image.database-bg {
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
 }
 
 .blog-image .blog-icon {
@@ -100,21 +101,22 @@
 
 .blog-category {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: linear-gradient(135deg, #3498db, #9b59b6);
-    color: white;
-    padding: 6px 15px;
-    border-radius: 20px;
+    top: 14px;
+    right: 14px;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    color: var(--brand);
+    border: 1px solid color-mix(in srgb, var(--brand) 25%, var(--line));
+    padding: 5px 14px;
+    border-radius: 999px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
     z-index: 2;
 }
 
 .blog-content {
-    padding: 25px;
+    padding: 24px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -124,9 +126,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px 16px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--muted);
 }
 
 .blog-meta span {
@@ -137,27 +139,27 @@
 }
 
 .blog-meta i {
-    color: #3498db;
+    color: var(--brand);
 }
 
 .blog-content h3 {
-    font-size: 20px;
-    color: white;
-    margin-bottom: 12px;
+    font-size: 19px;
+    color: var(--text-strong);
+    margin-bottom: 10px;
     line-height: 1.4;
     font-weight: 700;
-    transition: color 0.3s ease;
+    transition: color 0.2s var(--ease-out);
 }
 
 .blog-card:hover .blog-content h3 {
-    color: #3498db;
+    color: var(--brand);
 }
 
 .blog-content p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-bottom: 18px;
     flex: 1;
 }
 
@@ -165,24 +167,23 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .blog-tags .tag {
-    background: rgba(52, 152, 219, 0.1);
-    color: #3498db;
+    background: var(--brand-soft);
+    color: var(--brand-hover);
     padding: 5px 12px;
-    border-radius: 15px;
+    border-radius: 999px;
     font-size: 12px;
-    font-weight: 500;
-    border: 1px solid rgba(52, 152, 219, 0.2);
-    transition: all 0.3s ease;
+    font-weight: 600;
+    border: 1px solid color-mix(in srgb, var(--brand) 20%, transparent);
+    transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
     white-space: nowrap;
 }
 
 .blog-tags .tag:hover {
-    background: rgba(52, 152, 219, 0.2);
-    transform: translateY(-2px);
+    background: var(--brand-soft-strong);
 }
 
 .blog-link {
@@ -190,19 +191,20 @@
     align-items: center;
     gap: 8px;
     margin-top: auto;
-    color: #3498db;
-    font-weight: 600;
+    color: var(--brand);
+    font-weight: 700;
     font-size: 14px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: color 0.2s var(--ease-out), gap 0.2s var(--ease-out);
 }
 
 .blog-link i {
-    transition: transform 0.3s ease;
+    transition: transform 0.2s var(--ease-out);
 }
 
 .blog-link:hover {
-    color: #5dade2;
+    color: var(--brand-hover);
+    gap: 11px;
 }
 
 .blog-link:hover i {

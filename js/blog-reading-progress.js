@@ -62,23 +62,25 @@ class BlogReadingProgress {
     }
 
     createProgressBar() {
-        // Create progress container
         this.progressContainer = document.createElement('div');
         this.progressContainer.className = 'reading-progress-container';
-        this.progressContainer.innerHTML = `
-            <div class="reading-progress-bar"></div>
-            <div class="reading-stats">
-                <span class="time-remaining">
-                    <i class="fas fa-clock"></i>
-                    <span class="time-text">Tính toán...</span>
-                </span>
-                <span class="progress-percentage">0%</span>
-            </div>
-        `;
-
+        this.progressContainer.innerHTML = `<div class="reading-progress-bar"></div>`;
         document.body.prepend(this.progressContainer);
+
+        const statsBadge = document.createElement('div');
+        statsBadge.className = 'reading-stats';
+        statsBadge.innerHTML = `
+            <span class="time-remaining">
+                <i class="fas fa-clock"></i>
+                <span class="time-text">Tính toán...</span>
+            </span>
+            <span class="progress-percentage">0%</span>
+        `;
+        document.body.appendChild(statsBadge);
+
         this.progressBar = this.progressContainer.querySelector('.reading-progress-bar');
-        this.timeEstimate = this.progressContainer.querySelector('.time-text');
+        this.timeEstimate = statsBadge.querySelector('.time-text');
+        this.progressPercentage = statsBadge.querySelector('.progress-percentage');
     }
 
     calculateReadingTime() {
@@ -128,8 +130,9 @@ class BlogReadingProgress {
         this.progressBar.style.width = `${progressPercent}%`;
 
         // Update percentage display
-        const percentageDisplay = this.progressContainer.querySelector('.progress-percentage');
-        percentageDisplay.textContent = `${Math.round(progressPercent)}%`;
+        if (this.progressPercentage) {
+            this.progressPercentage.textContent = `${Math.round(progressPercent)}%`;
+        }
 
         // Update time remaining
         if (this.totalReadingMinutes) {
@@ -152,28 +155,32 @@ class BlogReadingProgress {
     }
 
     markCurrentAsRead() {
-        // Get article ID from URL or data attribute
         const articleId = this.getArticleId();
 
         if (articleId && !this.readArticles.includes(articleId)) {
-            // Mark as read after user scrolls at least 50% of the article
             let marked = false;
+            let pending = false;
 
-            window.addEventListener('scroll', () => {
-                if (marked) return;
+            const onScroll = () => {
+                if (marked || pending) return;
+                pending = true;
+                window.requestAnimationFrame(() => {
+                    pending = false;
+                    if (marked) return;
+                    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollPercent = totalScroll > 0 ? (window.pageYOffset / totalScroll) * 100 : 0;
 
-                const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercent = totalScroll > 0 ? (window.pageYOffset / totalScroll) * 100 : 0;
+                    if (scrollPercent > 50) {
+                        this.readArticles.push(articleId);
+                        this.saveReadArticles();
+                        marked = true;
+                        window.removeEventListener('scroll', onScroll);
+                        this.showNotification('Đã đánh dấu bài viết là đã đọc', 'success');
+                    }
+                });
+            };
 
-                if (scrollPercent > 50) {
-                    this.readArticles.push(articleId);
-                    this.saveReadArticles();
-                    marked = true;
-
-                    // Show subtle notification
-                    this.showNotification('Đã đánh dấu bài viết là đã đọc', 'success');
-                }
-            }, { passive: true });
+            window.addEventListener('scroll', onScroll, { passive: true });
         }
     }
 
@@ -268,12 +275,11 @@ progressStyles.textContent = `
         left: 0;
         width: 100%;
         height: 4px;
-        background: rgba(10, 25, 47, 0.95);
+        background: var(--line, #dce4e9);
         z-index: 1005;
         opacity: 0;
         transform: translateY(-100%);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
     .reading-progress-container.visible {
@@ -283,10 +289,9 @@ progressStyles.textContent = `
 
     .reading-progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, #0066FF, #00D4FF);
+        background: linear-gradient(90deg, var(--brand, #086d80), var(--accent, #168da2));
         width: 0%;
         transition: width 0.1s ease-out;
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     }
 
     .reading-stats {
@@ -296,15 +301,14 @@ progressStyles.textContent = `
         display: flex;
         gap: 12px;
         align-items: center;
-        background: linear-gradient(135deg, rgba(10, 25, 47, 0.94), rgba(17, 34, 64, 0.94));
-        backdrop-filter: blur(12px);
+        background: var(--surface, #ffffff);
         padding: 9px 16px;
         border-radius: 999px;
         font-size: 12px;
         font-weight: 600;
-        color: #E6F1FF;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-        border: 1px solid rgba(0, 212, 255, 0.25);
+        color: var(--text-strong, #0a1d2b);
+        box-shadow: var(--shadow-md, 0 8px 24px rgba(11, 29, 43, 0.12));
+        border: 1px solid var(--line, #dce4e9);
         z-index: 940;
     }
 
@@ -312,7 +316,7 @@ progressStyles.textContent = `
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #00D4FF;
+        color: var(--brand, #086d80);
     }
 
     .time-remaining i {
@@ -320,7 +324,7 @@ progressStyles.textContent = `
     }
 
     .progress-percentage {
-        color: #E6F1FF;
+        color: var(--text-strong, #0a1d2b);
         font-weight: 700;
         min-width: 34px;
         text-align: right;
@@ -328,20 +332,8 @@ progressStyles.textContent = `
 
     /* Read article indicator */
     .blog-card.read-article {
-        opacity: 0.8;
+        opacity: 0.92;
         position: relative;
-    }
-
-    .blog-card.read-article::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), transparent);
-        pointer-events: none;
-        border-radius: inherit;
     }
 
     .read-indicator {
@@ -349,10 +341,10 @@ progressStyles.textContent = `
         align-items: center;
         gap: 6px;
         padding: 4px 10px;
-        background: rgba(0, 212, 255, 0.15);
-        border: 1px solid rgba(0, 212, 255, 0.3);
+        background: var(--brand-soft, #e9f4f6);
+        border: 1px solid color-mix(in srgb, var(--brand, #086d80) 22%, transparent);
         border-radius: 20px;
-        color: #00D4FF;
+        color: var(--brand-hover, #055c6d);
         font-size: 11px;
         font-weight: 600;
         margin-bottom: 10px;
@@ -368,20 +360,20 @@ progressStyles.textContent = `
         bottom: 30px;
         left: 50%;
         transform: translateX(-50%) translateY(100px);
-        background: linear-gradient(135deg, #0A192F, #112240);
-        color: #E6F1FF;
+        background: var(--surface, #ffffff);
+        color: var(--text-strong, #0a1d2b);
         padding: 12px 20px;
-        border-radius: 8px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         gap: 10px;
         font-size: 14px;
         font-weight: 600;
         z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(0, 212, 255, 0.3);
+        box-shadow: var(--shadow-md, 0 12px 32px rgba(11, 29, 43, 0.15));
+        border: 1px solid var(--line, #dce4e9);
         opacity: 0;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .blog-notification.show {
@@ -390,11 +382,11 @@ progressStyles.textContent = `
     }
 
     .blog-notification.success {
-        border-color: rgba(0, 255, 65, 0.3);
+        border-color: rgba(12, 122, 84, 0.35);
     }
 
     .blog-notification i {
-        color: #00FF41;
+        color: #0c7a54;
         font-size: 18px;
     }
 

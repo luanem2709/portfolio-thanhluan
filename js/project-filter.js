@@ -39,9 +39,9 @@ class ProjectFilter {
             if (matches) {
                 card.classList.add('fade-in-visible', 'reveal-active');
                 card.style.display = '';
-                card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
                 card.style.opacity = '0';
-                card.style.transform = 'scale(0.95)';
+                card.style.transform = 'scale(0.97)';
 
                 const timer = setTimeout(() => {
                     card.style.opacity = '1';
@@ -50,15 +50,9 @@ class ProjectFilter {
                 }, 16);
                 this.timers.set(card, timer);
             } else {
-                card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                card.style.display = 'none';
                 card.style.opacity = '0';
-                card.style.transform = 'scale(0.95)';
-
-                const timer = setTimeout(() => {
-                    card.style.display = 'none';
-                    this.timers.delete(card);
-                }, 250);
-                this.timers.set(card, timer);
+                card.style.transform = 'scale(0.97)';
             }
         });
     }

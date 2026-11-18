@@ -22,39 +22,40 @@ section {
 }
 
 .filter-btn {
-    padding: 12px 28px;
-    background: rgba(17, 34, 64, 0.6);
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    border-radius: 50px;
-    color: #E6F1FF;
+    padding: 11px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--muted-strong);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer !important;
-    transition: all 0.3s ease;
+    transition: all 0.22s var(--ease-out);
     position: relative;
     z-index: 20;
-    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-xs);
     pointer-events: auto !important;
     user-select: none;
 }
 
 .filter-btn:hover {
-    background: rgba(0, 102, 255, 0.2);
-    border-color: rgba(0, 212, 255, 0.6);
+    background: var(--brand-soft);
+    border-color: var(--brand);
+    color: var(--brand);
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 102, 255, 0.3);
+    box-shadow: var(--shadow-sm);
 }
 
 .filter-btn.active {
-    background: linear-gradient(135deg, #0066FF, #00D4FF);
-    border-color: transparent;
-    color: white;
-    box-shadow: 0 5px 25px rgba(0, 102, 255, 0.5);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 90%, #ffffff), var(--brand));
+    border-color: var(--brand);
+    color: var(--on-brand);
+    box-shadow: 0 6px 18px color-mix(in srgb, var(--brand) 22%, transparent);
 }
 
 .filter-btn.active:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 102, 255, 0.6);
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--brand) 28%, transparent);
 }
 
 /* Projects Grid */
