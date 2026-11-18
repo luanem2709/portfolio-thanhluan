@@ -37,35 +37,35 @@
 }
 
 .contact-notification.success {
-    border-left-color: #00FF88;
+    border-left-color: #059669;
 }
 
 .contact-notification.success i {
-    color: #00FF88;
+    color: #059669;
 }
 
 .contact-notification.error {
-    border-left-color: #FF4444;
+    border-left-color: #dc2626;
 }
 
 .contact-notification.error i {
-    color: #FF4444;
+    color: #dc2626;
 }
 
 .contact-notification.warning {
-    border-left-color: #FFAA00;
+    border-left-color: #d97706;
 }
 
 .contact-notification.warning i {
-    color: #FFAA00;
+    color: #d97706;
 }
 
 .contact-notification.info {
-    border-left-color: #00D4FF;
+    border-left-color: var(--brand, #0284c7);
 }
 
 .contact-notification.info i {
-    color: #00D4FF;
+    color: var(--brand, #0284c7);
 }
 
 /* Loading button spinner */

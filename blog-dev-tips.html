@@ -4,36 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 Development Tips Mọi Developer Cần Biết - Nguyễn Thành Luân</title>
+    <title>Thói quen làm việc giúp sinh viên CNTT đi đường dài với dự án thật - Nguyễn Thành Luân</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="10 development tips thực tế mọi developer nên biết: Git, clean code, best practices và thói quen giúp bạn code hiệu quả hơn mỗi ngày.">
+        content="Những thói quen giúp sinh viên Công nghệ Thông tin làm việc hiệu quả trên dự án thật: đọc stack trace, viết README rõ ràng, Git commit có ngữ cảnh và refactor gọn.">
     <meta name="author" content="Nguyễn Thành Luân">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://luanem2709.github.io/portfolio-thanhluan/blog-dev-tips.html">
-    <meta property="og:title" content="10 Development Tips Mọi Developer Cần Biết">
+    <meta property="og:title" content="Thói quen làm việc giúp sinh viên CNTT đi đường dài với dự án thật">
     <meta property="og:description"
-        content="Git, clean code, best practices và thói quen giúp bạn code hiệu quả hơn mỗi ngày.">
+        content="Từ cách đọc lỗi có hệ thống, giữ tài liệu README sạch sẽ đến thói quen quản lý phiên bản Git rõ ràng.">
     <meta property="og:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="10 Development Tips Mọi Developer Cần Biết">
+    <meta property="twitter:title" content="Thói quen làm việc giúp sinh viên CNTT đi đường dài với dự án thật">
     <meta property="twitter:description"
-        content="Git, clean code, best practices và thói quen giúp bạn code hiệu quả hơn mỗi ngày.">
+        content="Từ cách đọc lỗi có hệ thống, giữ tài liệu README sạch sẽ đến thói quen quản lý phiên bản Git rõ ràng.">
     <meta property="twitter:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-dev-tips.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=2">
-    <link rel="stylesheet" href="blog-styles.css?v=2">
-    <link rel="stylesheet" href="blog-post.css?v=2">
-    <link rel="stylesheet" href="logo-style.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="blog-styles.css?v=5">
+    <link rel="stylesheet" href="blog-post.css?v=5">
+    <link rel="stylesheet" href="logo-style.css?v=5">
+    <link rel="stylesheet" href="animations.css?v=5">
+    <link rel="stylesheet" href="enhanced-styles.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Fonts -->
@@ -47,12 +49,12 @@
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "10 Development Tips Mọi Developer Cần Biết",
+      "headline": "Thói quen làm việc giúp sinh viên CNTT đi đường dài với dự án thật",
       "author": { "@type": "Person", "name": "Nguyễn Thành Luân" },
       "url": "https://luanem2709.github.io/portfolio-thanhluan/blog-dev-tips.html",
       "image": "https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg",
       "datePublished": "2025-02-18",
-      "publisher": { "@type": "Organization", "name": "Ma Đạo Community" }
+      "publisher": { "@type": "Organization", "name": "Nguyễn Thành Luân" }
     }
     </script>
 </head>
@@ -68,28 +70,27 @@
                     <span>/</span>
                     <a href="pages/blog.html">Blog</a>
                     <span>/</span>
-                    <span>Dev Tips</span>
+                    <span>Kỹ Thuật &amp; Code</span>
                 </div>
-                <div class="post-category">Code</div>
-                <h1>10 Development Tips Mọi Developer Cần Biết</h1>
+                <div class="post-category">Kỹ Thuật &amp; Code</div>
+                <h1>Thói quen làm việc giúp sinh viên CNTT đi đường dài với dự án thật</h1>
                 <div class="post-meta">
                     <div class="author-info">
                         <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân">
                         <div>
-                            <span class="author-name">Nguyễn Thanh Luân</span>
+                            <span class="author-name">Nguyễn Thành Luân</span>
                             <span class="post-date">18 Tháng 02, 2025</span>
                         </div>
                     </div>
                     <div class="post-stats">
-                        <span><i class="fas fa-clock"></i> 9 phút đọc</span>
-                        <span><i class="fas fa-eye"></i> 1.1K lượt xem</span>
+                        <span><i class="fas fa-clock"></i> 6 phút đọc</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="post-featured-image">
-            <div class="post-featured-gradient database-bg">
+            <div class="post-featured-gradient code-bg">
                 <i class="fas fa-code"></i>
             </div>
         </div>
@@ -98,363 +99,52 @@
             <div class="container">
                 <div class="content-wrapper">
                     <div class="main-content">
-                        <p class="lead">Sau 3 năm học IT và làm các dự án thực tế, mình nhận ra có nhiều thứ trường
-                            không dạy nhưng cực kỳ quan trọng. Bài này tổng hợp 10 tips giúp bạn code tốt hơn, làm việc
-                            hiệu quả hơn! 💪</p>
+                        <p class="lead">Qua những đồ án học phần tại HUTECH lẫn các sản phẩm tự làm cho cộng đồng, mình nhận ra sự khác biệt lớn nhất khi chuyển từ bài tập nhỏ sang dự án dài hơi không nằm ở việc biết thêm một framework mới, mà ở những thói quen kỹ thuật hàng ngày giúp mã nguồn luôn kiểm soát được.</p>
 
-                        <h2>1. 🔍 Google-fu Là Kỹ Năng Quan Trọng Nhất</h2>
+                        <h2>1. Đọc kỹ thông báo lỗi trước khi thử sửa mò</h2>
+                        <p>Lúc mới làm quen với lập trình, hễ thấy màn hình báo đỏ là mình thường có phản xạ sửa vội một vài dòng hoặc tìm kiếm những cụm từ quá chung chung. Cách đó tốn rất nhiều thời gian.</p>
+                        <p>Thói quen hiệu quả hơn là đọc đúng ba dòng đầu của stack trace: lỗi loại gì, xảy ra ở file nào và dòng thứ bao nhiêu, biến nào đang mang giá trị <code>undefined</code>. Khi đi tìm tài liệu hoặc hỏi người có kinh nghiệm, việc đưa ra đúng ngữ cảnh, phiên bản thư viện và đoạn mã liên quan gần như giải quyết được một nửa vấn đề.</p>
 
-                        <p>90% công việc của developer là... Google 😂 Nhưng phải Google đúng cách!</p>
-
-                        <h3>❌ Google Kiểu Newbie:</h3>
+                        <h2>2. Viết README đủ dùng cho chính mình sau vài tháng</h2>
+                        <p>Một kho mã nguồn không có hướng dẫn chạy sẽ trở thành gánh nặng ngay cho tác giả khi quay lại bảo trì sau 3 đến 6 tháng. Chỉ cần một file <code>README.md</code> ngắn gọn nhưng đủ các ý sau:</p>
                         <ul>
-                            <li>"node js error"</li>
-                            <li>"code không chạy"</li>
-                            <li>"fix lỗi javascript"</li>
+                            <li>Mục tiêu của dự án và kiến trúc thư mục chính.</li>
+                            <li>Yêu cầu môi trường (Node phiên bản nào, cần biến môi trường gì).</li>
+                            <li>Lệnh cài đặt và chạy local để người tuyển dụng hoặc đồng đội kiểm tra được ngay.</li>
                         </ul>
 
-                        <h3>✅ Google Kiểu Pro:</h3>
-                        <ul>
-                            <li>"TypeError: Cannot read property 'map' of undefined" (Full error message)</li>
-                            <li>"discord.js v14 event handler not working" (Specific version + issue)</li>
-                            <li>"mongodb connection refused ECONNREFUSED site:stackoverflow.com" (Search specific site)
-                            </li>
-                        </ul>
+                        <h2>3. Commit Git rõ ràng theo từng phần việc</h2>
+                        <p>Nhật ký Git là tài liệu lịch sử trung thực nhất của một dự án. Thay vì gom hàng chục thay đổi không liên quan vào một commit mang tên <code>update</code>, tách mỗi tính năng hoặc bản sửa lỗi thành một commit nhỏ kèm mô tả đúng trọng tâm giúp việc quay lui (<code>git revert</code>) hoặc rà soát sự cố dễ hơn rất nhiều.</p>
 
-                        <div class="info-box">
-                            <i class="fas fa-lightbulb"></i>
-                            <p><strong>Pro Tip:</strong> Thêm "site:stackoverflow.com" hoặc "site:github.com" để search
-                                targeted hơn!</p>
-                        </div>
+                        <pre><code>git commit -m "feat: them bo loc danh muc du an theo loai"
+git commit -m "fix: khac phuc loi tran khung tren man hinh di dong"
+git commit -m "docs: cap nhat huong dan chay local trong README"</code></pre>
 
-                        <h2>2. 📝 README.md Là Người Bạn Tốt Nhất</h2>
+                        <h2>4. Tách cấu hình bảng tra thay cho chuỗi if/else lặp lại</h2>
+                        <p>Trong giai đoạn hoàn thành tính năng gấp, code rất dễ mọc ra những chuỗi điều kiện nối dài. Khi quay lại dọn dẹp (refactor), đưa các nhánh xử lý giống nhau về một bảng ánh xạ hoặc hàm dùng chung giúp logic sáng hơn và giảm đáng kể nguy cơ sửa sót.</p>
 
-                        <p>Mỗi project phải có README tốt! Sau 6 tháng bạn sẽ quên cách setup project của mình 😅</p>
-
-                        <h3>README Chuẩn Phải Có:</h3>
-                        <pre><code># Project Name
-
-## 📖 Mô Tả
-Giải thích ngắn gọn project làm gì
-
-## 🚀 Cài Đặt
-```bash
-npm install
-npm run dev
-```
-
-## ⚙️ Cấu Hình
-Copy `.env.example` thành `.env` và điền thông tin:
-- BOT_TOKEN=...
-- DATABASE_URL=...
-
-## 📂 Cấu Trúc
-```
-src/
-  ├── commands/
-  ├── events/
-  └── utils/
-```
-
-## 🐛 Known Issues
-- Issue #1: ...
-- Workaround: ...
-
-## 📝 License
-MIT</code></pre>
-
-                        <h2>3. 🎨 Git Commit Messages Phải Có Ý Nghĩa</h2>
-
-                        <h3>❌ Commit Messages Tệ:</h3>
-                        <pre><code>git commit -m "update"
-git commit -m "fix bug"
-git commit -m "asdasd"
-git commit -m "done"</code></pre>
-
-                        <h3>✅ Commit Messages Tốt:</h3>
-                        <pre><code>git commit -m "feat: add user authentication"
-git commit -m "fix: resolve memory leak in event handler"
-git commit -m "refactor: optimize database queries"
-git commit -m "docs: update API documentation"</code></pre>
-
-                        <h3>🎯 Convention:</h3>
-                        <ul>
-                            <li><code>feat:</code> - Feature mới</li>
-                            <li><code>fix:</code> - Fix bug</li>
-                            <li><code>refactor:</code> - Refactor code</li>
-                            <li><code>docs:</code> - Documentation</li>
-                            <li><code>style:</code> - Format code</li>
-                            <li><code>test:</code> - Tests</li>
-                        </ul>
-
-                        <h2>4. 🚫 .gitignore Ngay Từ Đầu</h2>
-
-                        <p>Đừng commit những thứ không cần thiết! Mình từng push file .env lên GitHub và phải regenerate
-                            tất cả tokens 😭</p>
-
-                        <h3>Node.js .gitignore Template:</h3>
-                        <pre><code># Dependencies
-node_modules/
-
-# Environment
-.env
-.env.local
-
-# Logs
-*.log
-logs/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Build
-dist/
-build/</code></pre>
-
-                        <h2>5. 🔧 VS Code Extensions Phải Có</h2>
-
-                        <p>Những extensions này giúp mình code nhanh hơn 3x:</p>
-
-                        <div class="tips-grid">
-                            <div class="tip-card">
-                                <h4>ESLint</h4>
-                                <p>Bắt lỗi code realtime</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <h4>Prettier</h4>
-                                <p>Auto format code đẹp</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <h4>GitLens</h4>
-                                <p>Git history trong editor</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <h4>Live Server</h4>
-                                <p>Preview HTML realtime</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <h4>Error Lens</h4>
-                                <p>Hiển thị error inline</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <h4>GitHub Copilot</h4>
-                                <p>AI code assistant</p>
-                            </div>
-                        </div>
-
-                        <h2>6. 💻 Terminal Shortcuts</h2>
-
-                        <p>Ngừng dùng chuột cho mọi thứ! Shortcuts giúp bạn nhanh hơn:</p>
-
-                        <h3>Windows/Linux:</h3>
-                        <ul>
-                            <li><code>Ctrl + C</code> - Stop process</li>
-                            <li><code>Ctrl + L</code> - Clear terminal</li>
-                            <li><code>Tab</code> - Auto-complete</li>
-                            <li><code>↑/↓</code> - Previous/next command</li>
-                            <li><code>Ctrl + R</code> - Search command history</li>
-                        </ul>
-
-                        <h3>Useful Commands:</h3>
-                        <pre><code># Clear terminal
-clear
-
-# View file content
-cat filename.txt
-
-# Find process by port
-netstat -ano | findstr :3000
-
-# Kill process
-taskkill /PID [pid] /F
-
-# Git shortcuts
-git status  →  git st (alias)
-git commit  →  git ci
-git branch  →  git br</code></pre>
-
-                        <h2>7. 🐛 Debug Đúng Cách</h2>
-
-                        <h3>❌ Console.log Everywhere:</h3>
-                        <pre><code>console.log('here 1');
-console.log('here 2');
-console.log('data:', data);
-console.log('user:', user);
-console.log('asdasd');</code></pre>
-
-                        <h3>✅ Dùng Debugger:</h3>
-                        <pre><code>// VS Code debugger
-// 1. Đặt breakpoint (click vào line number)
-// 2. F5 để start debug
-// 3. F10 step over, F11 step into
-
-// Chrome DevTools
-debugger; // Code sẽ pause ở đây
-
-// Console tips
-console.table(arrayOfObjects); // Hiển thị dạng table
-console.time('loop'); 
-// ... code ...
-console.timeEnd('loop'); // Đo thời gian execution</code></pre>
-
-                        <h2>8. 📚 Đọc Docs Trước Khi Hỏi</h2>
-
-                        <p>Mình biết docs đôi khi khô khan, nhưng nó luôn chính xác nhất! 📖</p>
-
-                        <h3>Quy trình giải quyết lỗi:</h3>
-                        <ol>
-                            <li>Đọc error message kỹ</li>
-                            <li>Google full error message</li>
-                            <li>Check official docs</li>
-                            <li>Search GitHub issues</li>
-                            <li>Hỏi trên Stack Overflow (với context đầy đủ)</li>
-                            <li>Hỏi trong Discord community</li>
-                        </ol>
-
-                        <blockquote>
-                            <p>"Đừng hỏi 'code này sao không chạy' mà không show code. Không ai có năng lực ngoại cảm
-                                cả!" 😅</p>
-                        </blockquote>
-
-                        <h2>9. 🔄 Refactor Thường Xuyên</h2>
-
-                        <p>Code working không có nghĩa là code tốt! Refactor để code dễ đọc, dễ maintain hơn.</p>
-
-                        <h3>Ví dụ Refactoring:</h3>
-
-                        <h4>Before (Messy):</h4>
-                        <pre><code>function calc(a, b, c) {
-    if (c == 1) {
-        return a + b;
-    } else if (c == 2) {
-        return a - b;
-    } else if (c == 3) {
-        return a * b;
-    } else {
-        return a / b;
-    }
-}</code></pre>
-
-                        <h4>After (Clean):</h4>
                         <pre><code>const operations = {
     add: (a, b) => a + b,
     subtract: (a, b) => a - b,
     multiply: (a, b) => a * b,
-    divide: (a, b) => a / b
+    divide: (a, b) => (b !== 0 ? a / b : null)
 };
 
-function calculate(a, b, operation) {
-    return operations[operation]?.(a, b) ?? null;
-}
+function calculate(a, b, op) {
+    return operations[op]?.(a, b) ?? null;
+}</code></pre>
 
-// Usage
-calculate(10, 5, 'add');      // 15
-calculate(10, 5, 'multiply'); // 50</code></pre>
+                        <h2>5. Học tốt nhất bằng sản phẩm có người dùng thật</h2>
+                        <p>Một extension nhỏ giúp trải nghiệm xem video mượt hơn như <strong>FUNNYGAME YouTube Ad Block</strong> hay một con bot phục vụ cộng đồng vài nghìn thành viên mang lại bài học khác hẳn bài lab: bạn phải chú ý đến phản hồi thực tế, tối ưu hiệu năng trình duyệt và giữ giao diện dễ hiểu với người không rành kỹ thuật.</p>
+                        <p>Bắt đầu từ một vấn đề nhỏ xung quanh mình, làm chạy ổn, rồi cải thiện dần từng tuần — đó là cách tự nhiên nhất để rèn tay nghề trước khi bước vào môi trường doanh nghiệp.</p>
 
-                        <h2>10. 🎯 Learn By Doing</h2>
-
-                        <p>Đọc tutorial cả ngày mà không code = vô dụng! Học bằng cách làm project thực tế.</p>
-
-                        <h3>Roadmap Học Hiệu Quả:</h3>
-
-                        <div class="highlight-box">
-                            <p><strong>Tháng 1-2: Basics</strong></p>
-                            <ul>
-                                <li>HTML, CSS, JavaScript fundamentals</li>
-                                <li>Project: Portfolio website (như của mình đây!)</li>
-                            </ul>
-                        </div>
-
-                        <div class="highlight-box">
-                            <p><strong>Tháng 3-4: Backend</strong></p>
-                            <ul>
-                                <li>Node.js, Express, MongoDB</li>
-                                <li>Project: Simple REST API (Todo app, Notes app)</li>
-                            </ul>
-                        </div>
-
-                        <div class="highlight-box">
-                            <p><strong>Tháng 5-6: Integration</strong></p>
-                            <ul>
-                                <li>Discord Bot, Telegram Bot</li>
-                                <li>Project: Bot với database (như Ma Đạo Bot của mình)</li>
-                            </ul>
-                        </div>
-
-                        <div class="highlight-box">
-                            <p><strong>Tháng 7+: Specialize</strong></p>
-                            <ul>
-                                <li>Chọn direction: Frontend (React), Backend (APIs), DevOps, Mobile...</li>
-                                <li>Project: Cái gì bạn passionate nhất!</li>
-                            </ul>
-                        </div>
-
-                        <h2>💡 Bonus Tips</h2>
-
-                        <h3>11. Backup Code Thường Xuyên</h3>
-                        <ul>
-                            <li>Push lên GitHub mỗi ngày</li>
-                            <li>3-2-1 rule: 3 copies, 2 media types, 1 offsite</li>
-                        </ul>
-
-                        <h3>12. Học Từ Code Của Người Khác</h3>
-                        <ul>
-                            <li>Read source code của open-source projects</li>
-                            <li>Xem cách họ structure, handle errors, comment...</li>
-                        </ul>
-
-                        <h3>13. Join Communities</h3>
-                        <ul>
-                            <li>Discord servers (như Ma Đạo Community 😊)</li>
-                            <li>GitHub discussions</li>
-                            <li>Stack Overflow</li>
-                            <li>Dev.to, Reddit r/programming</li>
-                        </ul>
-
-                        <h3>14. Take Breaks!</h3>
-                        <p>Debug 3 tiếng không ra → Nghỉ 30 phút → Quay lại fix được trong 5 phút! 🤯</p>
-
-                        <blockquote>
-                            <p>"Sometimes the best debugging tool is a good night's sleep." - Anonymous</p>
-                        </blockquote>
-
-                        <h3>15. Don't Compare Yourself</h3>
-                        <p>Thấy người khác code giỏi hơn → Motivation. Không phải → Depression. Focus vào journey của
-                            bản thân! 🌱</p>
-
-                        <h2>🎓 Kết Luận</h2>
-
-                        <p>Những tips này mình học được sau nhiều đêm debug đến 4-5 giờ sáng, sau vô số lần "code chạy
-                            được rồi nhưng không biết tại sao", sau khi refactor lại code cũ và nghĩ "mình đã viết cái
-                            quái gì vậy?" 😂</p>
-
-                        <p>Development không chỉ là code. Nó là:</p>
-                        <ul>
-                            <li>✅ Problem solving</li>
-                            <li>✅ Research skills</li>
-                            <li>✅ Communication</li>
-                            <li>✅ Continuous learning</li>
-                            <li>✅ Patience (rất nhiều patience!)</li>
-                        </ul>
-
-                        <p>Keep coding, keep learning, keep building! 🚀</p>
+                        <p class="signature">— Nguyễn Thành Luân, ghi chú học tập &amp; làm dự án</p>
 
                         <div class="post-tags">
-                            <i class="fas fa-tags"></i>
                             <span class="tag">Development</span>
-                            <span class="tag">Tips</span>
-                            <span class="tag">Best Practices</span>
-                            <span class="tag">Career</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">Debug</span>
+                            <span class="tag">Refactoring</span>
                         </div>
 
                         <div class="post-share">
@@ -470,13 +160,13 @@ calculate(10, 5, 'multiply'); // 50</code></pre>
 
                     <aside class="post-sidebar">
                         <div class="sidebar-card author-card">
-                            <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân" class="author-image">
+                            <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân">
                             <h3>Nguyễn Thành Luân</h3>
-                            <p>Sinh viên IT năm cuối với đam mê coding và chia sẻ kiến thức! 🎓💻</p>
+                            <p>Sinh viên Công nghệ Phần mềm (HUTECH) · Thực tập IT HelpDesk &amp; Web tại Hyundai Miền Nam · Founder Ma Đạo Community</p>
                             <div class="author-social">
-                                <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i
-                                        class="fab fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/in/luanem2709" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="https://github.com/luanem2709" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                                 <a href="https://discord.gg/NUh6Mf22" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
                             </div>
                         </div>
@@ -484,35 +174,35 @@ calculate(10, 5, 'multiply'); // 50</code></pre>
                         <div class="sidebar-card">
                             <h3>Bài Viết Liên Quan</h3>
                             <div class="related-posts">
+                                <a href="blog-thuc-tap-it-web.html" class="related-post">
+                                    <div class="related-gradient web-bg">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div class="related-info">
+                                        <h4>9 tuần thực tập IT &amp; Web tại Hyundai Miền Nam</h4>
+                                        <span>6 phút đọc</span>
+                                    </div>
+                                </a>
                                 <a href="blog-nodejs-tips.html" class="related-post">
-                                    <div class="related-gradient code-bg">
+                                    <div class="related-gradient database-bg">
                                         <i class="fab fa-node-js blog-icon"></i>
                                     </div>
                                     <div class="related-info">
-                                        <h4>Node.js Tips & Tricks</h4>
+                                        <h4>Những nguyên tắc giữ mã nguồn Node.js ổn định</h4>
                                         <span>7 phút đọc</span>
-                                    </div>
-                                </a>
-                                <a href="blog-discord-bot.html" class="related-post">
-                                    <div class="related-gradient code-bg">
-                                        <i class="fas fa-robot blog-icon"></i>
-                                    </div>
-                                    <div class="related-info">
-                                        <h4>Discord Bot Development</h4>
-                                        <span>8 phút đọc</span>
                                     </div>
                                 </a>
                             </div>
                         </div>
 
                         <div class="sidebar-card">
-                            <h3>Tags Phổ Biến</h3>
+                            <h3>Chủ Đề Nổi Bật</h3>
                             <div class="tag-cloud">
-                                <span class="tag">Development</span>
-                                <span class="tag">Node.js</span>
-                                <span class="tag">Tips</span>
-                                <span class="tag">Best Practices</span>
-                                <span class="tag">Git</span>
+                                <span class="tag">Git Workflow</span>
+                                <span class="tag">Clean Code</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Extension</span>
+                                <span class="tag">HUTECH</span>
                             </div>
                         </div>
                     </aside>
@@ -523,11 +213,12 @@ calculate(10, 5, 'multiply'); // 50</code></pre>
 
     <!-- Footer + nút cuộn được nạp bởi component-loader.js -->
 
-    <script src="js/config.js?v=2"></script>
+    <script src="js/config.js?v=5"></script>
     <script src="js/component-loader.js?v=2"></script>
-    <script src="js/theme-manager.js?v=2"></script>
-    <script src="js/blog-reading-progress.js?v=2"></script>
-    <script src="script.js"></script>
+    <script src="js/theme-manager.js?v=5"></script>
+    <script src="js/visual-effects.js?v=5"></script>
+    <script src="js/blog-reading-progress.js?v=5"></script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>

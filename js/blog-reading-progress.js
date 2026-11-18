@@ -21,8 +21,9 @@ class BlogReadingProgress {
         this.articleBody = document.querySelector('.blog-post-content, .post-content, article.blog-post');
 
         if (!this.articleBody) {
-            // If not on a blog post page, just mark read articles in the blog list
+            // If not on a blog post page, mark read articles and wire category filter
             this.markReadArticlesInList();
+            this.initBlogFilter();
             return;
         }
 
@@ -31,6 +32,55 @@ class BlogReadingProgress {
         this.attachScrollListener();
         this.markCurrentAsRead();
         this.initShareButtons();
+        this.initCodeCopyButtons();
+    }
+
+    initBlogFilter() {
+        const buttons = document.querySelectorAll('.blog-filter-btn');
+        const cards = document.querySelectorAll('.blog-card[data-category]');
+        if (!buttons.length || !cards.length) return;
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    const visible = filter === 'all' || cat === filter;
+                    card.style.display = visible ? '' : 'none';
+                });
+            });
+        });
+    }
+
+    initCodeCopyButtons() {
+        const blocks = this.articleBody.querySelectorAll('pre');
+        blocks.forEach(pre => {
+            if (pre.querySelector('.copy-code-btn')) return;
+            pre.classList.add('has-copy-btn');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'copy-code-btn';
+            btn.innerHTML = '<i class="far fa-copy"></i> Sao chép';
+            btn.addEventListener('click', async () => {
+                const codeEl = pre.querySelector('code');
+                const text = codeEl ? codeEl.innerText : pre.innerText;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.innerHTML = '<i class="fas fa-check"></i> Đã chép';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> Sao chép';
+                        btn.classList.remove('copied');
+                    }, 1800);
+                } catch {
+                    this.showNotification('Không thể sao chép đoạn mã.', 'info');
+                }
+            });
+            pre.appendChild(btn);
+        });
     }
 
     initShareButtons() {
@@ -127,7 +177,7 @@ class BlogReadingProgress {
         const progressPercent = Math.min(100, Math.max(0, currentProgress));
 
         // Update progress bar
-        this.progressBar.style.width = `${progressPercent}%`;
+        this.progressBar.style.transform = `scaleX(${progressPercent / 100})`;
 
         // Update percentage display
         if (this.progressPercentage) {
@@ -275,7 +325,7 @@ progressStyles.textContent = `
         left: 0;
         width: 100%;
         height: 4px;
-        background: var(--line, #dce4e9);
+        background: var(--line, #dbeafe);
         z-index: 1005;
         opacity: 0;
         transform: translateY(-100%);
@@ -289,9 +339,11 @@ progressStyles.textContent = `
 
     .reading-progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, var(--brand, #086d80), var(--accent, #168da2));
-        width: 0%;
-        transition: width 0.1s ease-out;
+        width: 100%;
+        background: linear-gradient(90deg, var(--brand, #0284c7), var(--accent, #38bdf8));
+        transform: scaleX(0);
+        transform-origin: left center;
+        will-change: transform;
     }
 
     .reading-stats {
@@ -306,9 +358,9 @@ progressStyles.textContent = `
         border-radius: 999px;
         font-size: 12px;
         font-weight: 600;
-        color: var(--text-strong, #0a1d2b);
-        box-shadow: var(--shadow-md, 0 8px 24px rgba(11, 29, 43, 0.12));
-        border: 1px solid var(--line, #dce4e9);
+        color: var(--text-strong, #0b1f33);
+        box-shadow: var(--shadow-md, 0 8px 24px rgba(14, 116, 184, 0.12));
+        border: 1px solid var(--line, #dbeafe);
         z-index: 940;
     }
 
@@ -316,7 +368,7 @@ progressStyles.textContent = `
         display: flex;
         align-items: center;
         gap: 6px;
-        color: var(--brand, #086d80);
+        color: var(--brand, #0284c7);
     }
 
     .time-remaining i {
@@ -324,7 +376,7 @@ progressStyles.textContent = `
     }
 
     .progress-percentage {
-        color: var(--text-strong, #0a1d2b);
+        color: var(--text-strong, #0b1f33);
         font-weight: 700;
         min-width: 34px;
         text-align: right;
@@ -332,7 +384,7 @@ progressStyles.textContent = `
 
     /* Read article indicator */
     .blog-card.read-article {
-        opacity: 0.92;
+        opacity: 0.94;
         position: relative;
     }
 
@@ -341,17 +393,54 @@ progressStyles.textContent = `
         align-items: center;
         gap: 6px;
         padding: 4px 10px;
-        background: var(--brand-soft, #e9f4f6);
-        border: 1px solid color-mix(in srgb, var(--brand, #086d80) 22%, transparent);
+        background: var(--brand-soft, #e0f2fe);
+        border: 1px solid color-mix(in srgb, var(--brand, #0284c7) 24%, transparent);
         border-radius: 20px;
-        color: var(--brand-hover, #055c6d);
+        color: var(--brand-hover, #0369a1);
         font-size: 11px;
         font-weight: 600;
         margin-bottom: 10px;
+        width: fit-content;
     }
 
     .read-indicator i {
         font-size: 12px;
+    }
+
+    /* Code block copy button */
+    .main-content pre.has-copy-btn {
+        position: relative;
+        padding-top: 44px;
+    }
+
+    .copy-code-btn {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(125, 211, 252, 0.28);
+        background: rgba(15, 42, 72, 0.85);
+        color: #bae6fd;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .copy-code-btn:hover {
+        background: #0284c7;
+        border-color: #38bdf8;
+        color: #ffffff;
+    }
+
+    .copy-code-btn.copied {
+        background: #059669;
+        border-color: #34d399;
+        color: #ffffff;
     }
 
     /* Notification */
@@ -361,7 +450,7 @@ progressStyles.textContent = `
         left: 50%;
         transform: translateX(-50%) translateY(100px);
         background: var(--surface, #ffffff);
-        color: var(--text-strong, #0a1d2b);
+        color: var(--text-strong, #0b1f33);
         padding: 12px 20px;
         border-radius: 10px;
         display: flex;
@@ -370,8 +459,8 @@ progressStyles.textContent = `
         font-size: 14px;
         font-weight: 600;
         z-index: 10000;
-        box-shadow: var(--shadow-md, 0 12px 32px rgba(11, 29, 43, 0.15));
-        border: 1px solid var(--line, #dce4e9);
+        box-shadow: var(--shadow-md, 0 12px 32px rgba(14, 116, 184, 0.15));
+        border: 1px solid var(--line, #dbeafe);
         opacity: 0;
         transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }

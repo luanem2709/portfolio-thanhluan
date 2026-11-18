@@ -4,37 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Nguyễn Thành Luân | Chia sẻ kiến thức</title>
+    <title>Blog &amp; Ghi Chú Thực Tế - Nguyễn Thành Luân</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Blog của Nguyễn Thành Luân: chia sẻ về Discord bot, Node.js, phát triển web, CSKH game và kinh nghiệm xây dựng cộng đồng.">
+        content="Ghi chú thực tế của Nguyễn Thành Luân về lập trình Node.js, Discord Bot, quản trị WordPress, IT HelpDesk tại doanh nghiệp và vận hành nội dung số.">
     <meta name="author" content="Nguyễn Thành Luân">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://luanem2709.github.io/portfolio-thanhluan/pages/blog.html">
-    <meta property="og:title" content="Blog - Nguyễn Thành Luân">
+    <meta property="og:title" content="Blog &amp; Ghi Chú Thực Tế - Nguyễn Thành Luân">
     <meta property="og:description"
-        content="Chia sẻ về Discord bot, Node.js, phát triển web, CSKH game và kinh nghiệm xây dựng cộng đồng.">
+        content="Ghi chép về thực tập IT HelpDesk &amp; Web, lập trình Node.js, quy trình làm việc và vận hành cộng đồng.">
     <meta property="og:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Blog - Nguyễn Thành Luân">
+    <meta property="twitter:title" content="Blog &amp; Ghi Chú Thực Tế - Nguyễn Thành Luân">
     <meta property="twitter:description"
-        content="Chia sẻ về Discord bot, Node.js, phát triển web, CSKH game và kinh nghiệm xây dựng cộng đồng.">
+        content="Ghi chép về thực tập IT HelpDesk &amp; Web, lập trình Node.js, quy trình làm việc và vận hành cộng đồng.">
     <meta property="twitter:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/pages/blog.html">
     <link rel="icon" type="image/png" href="../assets/madao-logo.png">
 
-    <link rel="stylesheet" href="../styles.css?v=4">
-    <link rel="stylesheet" href="../logo-style.css?v=2">
-    <link rel="stylesheet" href="../animations.css?v=2">
-    <link rel="stylesheet" href="../enhanced-styles.css?v=2">
-    <link rel="stylesheet" href="../blog-styles.css?v=2">
+    <link rel="stylesheet" href="../styles.css?v=5">
+    <link rel="stylesheet" href="../logo-style.css?v=5">
+    <link rel="stylesheet" href="../animations.css?v=5">
+    <link rel="stylesheet" href="../enhanced-styles.css?v=5">
+    <link rel="stylesheet" href="../blog-styles.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Fonts -->
@@ -50,147 +50,162 @@
     <section id="blog" class="blog" style="padding-top: 120px; min-height: 100vh;">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Chia Sẻ Kiến Thức</span>
-                <h1 class="section-title">Blog & Bài Viết</h1>
-                <p class="section-subtitle">Chia sẻ về Code, Game, Community và Kinh nghiệm thực tế</p>
+                <span class="section-badge">Ghi Chú Nghề Nghiệp</span>
+                <h1 class="section-title">Blog &amp; Bài Viết</h1>
+                <p class="section-subtitle">Những ghi chép rút ra từ quá trình học CNTT, làm dự án thực tế và đi thực tập tại doanh nghiệp</p>
+            </div>
+
+            <div class="blog-filter" role="tablist" aria-label="Lọc bài viết theo chủ đề">
+                <button type="button" class="blog-filter-btn active" data-filter="all">Tất Cả</button>
+                <button type="button" class="blog-filter-btn" data-filter="it">IT &amp; Doanh Nghiệp</button>
+                <button type="button" class="blog-filter-btn" data-filter="code">Kỹ Thuật &amp; Code</button>
+                <button type="button" class="blog-filter-btn" data-filter="ops">Vận Hành &amp; Nội Dung</button>
             </div>
 
             <!-- Blog Grid -->
             <div class="blog-grid">
-                <!-- Blog 1: Discord Bot -->
-                <article class="blog-card">
-                    <div class="blog-image code-bg">
-                        <i class="fas fa-robot blog-icon"></i>
-                        <div class="blog-category">Code</div>
+                <!-- Blog 1: Thực tập Hyundai Miền Nam -->
+                <article class="blog-card" data-category="it">
+                    <div class="blog-image web-bg">
+                        <i class="fas fa-laptop-code blog-icon"></i>
+                        <div class="blog-category">IT &amp; Web</div>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 15/12/2024</span>
-                            <span><i class="fas fa-clock"></i> 8 phút đọc</span>
-                            <span><i class="fas fa-eye"></i> 1.2K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 06/2026</span>
+                            <span><i class="fas fa-clock"></i> 6 phút đọc</span>
                         </div>
-                        <h3>Xây dựng Discord Bot từ A-Z với Node.js</h3>
-                        <p>Hướng dẫn chi tiết cách tạo Discord Bot chuyên nghiệp với Discord.js v14, từ setup môi trường
-                            đến deploy lên cloud. Kinh nghiệm thực tế từ Ma Đạo Bot phục vụ 3000+ users.</p>
+                        <h3>9 tuần thực tập IT HelpDesk &amp; Quản trị Web tại Hyundai Miền Nam</h3>
+                        <p>Những việc thực tế khi bước vào doanh nghiệp: chuẩn hóa quy trình HelpDesk 5 bước, chẩn đoán mạng LAN, quản trị WordPress hyundaimiennam.com và phối hợp cùng đội Marketing.</p>
+                        <div class="blog-tags">
+                            <span class="tag">WordPress</span>
+                            <span class="tag">IT HelpDesk</span>
+                            <span class="tag">Rank Math SEO</span>
+                        </div>
+                        <a href="../blog-thuc-tap-it-web.html" class="blog-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog 2: Discord Bot -->
+                <article class="blog-card" data-category="code">
+                    <div class="blog-image code-bg">
+                        <i class="fas fa-robot blog-icon"></i>
+                        <div class="blog-category">Kỹ Thuật</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 12/2024</span>
+                            <span><i class="fas fa-clock"></i> 8 phút đọc</span>
+                        </div>
+                        <h3>Xây dựng hệ thống Ticket &amp; Bot Discord với Node.js cho cộng đồng 3.000+ thành viên</h3>
+                        <p>Quá trình chuyển từ hỗ trợ thủ công qua tin nhắn rời rạc sang hệ thống Ticket gọn gàng bằng discord.js v14, cách chia handler và giữ bot vận hành ổn định 24/7.</p>
                         <div class="blog-tags">
                             <span class="tag">Node.js</span>
                             <span class="tag">Discord.js</span>
-                            <span class="tag">API</span>
+                            <span class="tag">Kiến trúc Bot</span>
                         </div>
-                        <a href="../blog-discord-bot.html" class="blog-link">Đọc thêm <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="../blog-discord-bot.html" class="blog-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
 
-                <!-- Blog 2: Game CSKH -->
-                <article class="blog-card">
-                    <div class="blog-image game-bg">
-                        <i class="fas fa-gamepad blog-icon"></i>
-                        <div class="blog-category">Game</div>
+                <!-- Blog 3: Node.js Practices -->
+                <article class="blog-card" data-category="code">
+                    <div class="blog-image database-bg">
+                        <i class="fab fa-node-js blog-icon"></i>
+                        <div class="blog-category">Kỹ Thuật</div>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 20/12/2025</span>
-                            <span><i class="fas fa-clock"></i> 10 phút đọc</span>
-                            <span><i class="fas fa-eye"></i> 3.2K lượt xem</span>
-                        </div>
-                        <h3>Kinh nghiệm CSKH trong ngành Game từ MOLA</h3>
-                        <p>Góc nhìn từ vị trí Customer Service tại công ty game. Cách xử lý khiếu nại, tư vấn kỹ thuật
-                            và xây dựng chiến lược player retention cho game mobile.</p>
-                        <div class="blog-tags">
-                            <span class="tag">Game Industry</span>
-                            <span class="tag">Customer Service</span>
-                            <span class="tag">Tips</span>
-                        </div>
-                        <a href="../blog-cskh-game.html" class="blog-link">Đọc thêm <i
-                                class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-
-                <!-- Blog 3: Node.js Tips -->
-                <article class="blog-card">
-                    <div class="blog-image code-bg">
-                        <i class="fab fa-js-square blog-icon"></i>
-                        <div class="blog-category">Code</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 10/01/2025</span>
+                            <span><i class="fas fa-calendar"></i> 01/2025</span>
                             <span><i class="fas fa-clock"></i> 7 phút đọc</span>
-                            <span><i class="fas fa-eye"></i> 920 lượt xem</span>
                         </div>
-                        <h3>Node.js Tips & Tricks cho Developer</h3>
-                        <p>15 tips thực tế từ 2 năm làm việc với Node.js. Error handling, async/await, Promise.all(), và
-                            các kỹ thuật tối ưu performance.</p>
+                        <h3>Những nguyên tắc giúp mã nguồn Node.js ổn định và dễ bảo trì hơn</h3>
+                        <p>Ghi chú về quản lý biến môi trường, xử lý lỗi bất đồng bộ, chạy tác vụ song song đúng lúc, kiểm soát rò rỉ listener và cách tách module rõ ràng theo trách nhiệm.</p>
                         <div class="blog-tags">
                             <span class="tag">Node.js</span>
                             <span class="tag">JavaScript</span>
-                            <span class="tag">Best Practices</span>
+                            <span class="tag">Clean Code</span>
                         </div>
-                        <a href="../blog-nodejs-tips.html" class="blog-link">Đọc thêm <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="../blog-nodejs-tips.html" class="blog-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
 
-                <!-- Blog 4: Dev Tips -->
-                <article class="blog-card">
+                <!-- Blog 4: Dev Habits -->
+                <article class="blog-card" data-category="code">
                     <div class="blog-image code-bg">
                         <i class="fas fa-code blog-icon"></i>
-                        <div class="blog-category">Code</div>
+                        <div class="blog-category">Kỹ Thuật</div>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 18/02/2025</span>
-                            <span><i class="fas fa-clock"></i> 9 phút đọc</span>
-                            <span><i class="fas fa-eye"></i> 1.1K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 02/2025</span>
+                            <span><i class="fas fa-clock"></i> 6 phút đọc</span>
                         </div>
-                        <h3>10 Development Tips Mọi Developer Cần Biết</h3>
-                        <p>Những mẹo thực tế giúp code hiệu quả hơn: Git workflow, clean code, best practices và thói
-                            quen làm việc rút ra từ các dự án thật.</p>
+                        <h3>Thói quen làm việc giúp sinh viên CNTT đi đường dài với dự án thật</h3>
+                        <p>Từ cách đọc thông báo lỗi có hệ thống, giữ thói quen viết README dễ hiểu cho chính mình, đến cách tổ chức commit Git rõ ràng để dễ kiểm tra lại khi dự án phình to.</p>
                         <div class="blog-tags">
-                            <span class="tag">Development</span>
-                            <span class="tag">Best Practices</span>
-                            <span class="tag">Git</span>
+                            <span class="tag">Git Workflow</span>
+                            <span class="tag">Debug</span>
+                            <span class="tag">Thực hành</span>
                         </div>
-                        <a href="../blog-dev-tips.html" class="blog-link">Đọc thêm <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="../blog-dev-tips.html" class="blog-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
 
-                <!-- Blog 5: TikTok Growth -->
-                <article class="blog-card">
-                    <div class="blog-image content-bg">
-                        <i class="fab fa-tiktok blog-icon"></i>
-                        <div class="blog-category">Content</div>
+                <!-- Blog 5: Game CSKH -->
+                <article class="blog-card" data-category="ops">
+                    <div class="blog-image game-bg">
+                        <i class="fas fa-headset blog-icon"></i>
+                        <div class="blog-category">Vận Hành</div>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 05/11/2024</span>
-                            <span><i class="fas fa-clock"></i> 9 phút đọc</span>
-                            <span><i class="fas fa-eye"></i> 2.1K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 12/2025</span>
+                            <span><i class="fas fa-clock"></i> 6 phút đọc</span>
                         </div>
-                        <h3>Tăng từ 0 lên 50K Followers TikTok trong 1 năm</h3>
-                        <p>Cách tôi phát triển kênh TikTok lên 50K+ followers. Chiến lược nội dung, thuật toán TikTok,
-                            lịch đăng bài và các chiến thuật tương tác thực sự hiệu quả.</p>
+                        <h3>Bài học về lắng nghe và xử lý sự cố từ công việc CSKH ngành Game tại MOLA</h3>
+                        <p>Cách tách biệt cảm xúc người dùng khỏi nguyên nhân kỹ thuật, phản hồi minh bạch từng mốc xử lý và lý do nền tảng CSKH giúp mình xử lý ca IT HelpDesk bình tĩnh hơn.</p>
                         <div class="blog-tags">
-                            <span class="tag">TikTok</span>
-                            <span class="tag">Marketing</span>
-                            <span class="tag">Growth</span>
+                            <span class="tag">CSKH</span>
+                            <span class="tag">MOLA</span>
+                            <span class="tag">Xử lý sự cố</span>
                         </div>
-                        <a href="../blog-tiktok.html" class="blog-link">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        <a href="../blog-cskh-game.html" class="blog-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog 6: TikTok Analytics & Content -->
+                <article class="blog-card" data-category="ops">
+                    <div class="blog-image content-bg">
+                        <i class="fab fa-tiktok blog-icon"></i>
+                        <div class="blog-category">Nội Dung</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 06/2026</span>
+                            <span><i class="fas fa-clock"></i> 6 phút đọc</span>
+                        </div>
+                        <h3>Xây dựng nội dung ngắn &amp; đọc chỉ số tăng trưởng tự nhiên trên TikTok</h3>
+                        <p>Góc nhìn dữ liệu khi vận hành nội dung số: tối ưu 3 giây đầu, theo dõi Retention Rate trên TikTok Analytics từ kênh cộng đồng @madaotz tới chiến dịch 3.4M+ views tại doanh nghiệp.</p>
+                        <div class="blog-tags">
+                            <span class="tag">TikTok Analytics</span>
+                            <span class="tag">Retention</span>
+                            <span class="tag">Marketing Ops</span>
+                        </div>
+                        <a href="../blog-tiktok.html" class="blog-link">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <script src="../js/config.js?v=2"></script>
+    <script src="../js/config.js?v=5"></script>
     <script src="../js/component-loader.js?v=2"></script>
     <script src="../js/lazy-loading.js?v=2"></script>
-    <script src="../js/theme-manager.js?v=2"></script>
-    <script src="../js/visual-effects.js?v=2"></script>
-    <script src="../js/blog-reading-progress.js?v=2"></script>
-    <script src="../script.js?v=4"></script>
+    <script src="../js/theme-manager.js?v=5"></script>
+    <script src="../js/visual-effects.js?v=5"></script>
+    <script src="../js/blog-reading-progress.js?v=5"></script>
+    <script src="../script.js?v=5"></script>
 </body>
 
 </html>

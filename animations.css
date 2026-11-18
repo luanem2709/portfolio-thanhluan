@@ -1,9 +1,9 @@
-/* Lightweight UI transitions without infinite GPU-heavy background animations */
+/* GPU-friendly animations and micro-interactions (transform & opacity only) */
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(16px);
     }
     to {
         opacity: 1;
@@ -11,29 +11,91 @@
     }
 }
 
+@keyframes floatSoft {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes ringOrbit {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes statusPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    70%, 100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+@keyframes scrollHint {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(4px);
+    }
+}
+
 .hero-content > * {
     animation: fadeInUp 0.45s var(--ease-out) backwards;
 }
 
-.hero-text .greeting { animation-delay: 0.05s; }
-.hero-text .hero-title { animation-delay: 0.1s; }
-.hero-text .typing-container { animation-delay: 0.15s; }
-.hero-text .hero-description { animation-delay: 0.2s; }
-.hero-text .hero-buttons { animation-delay: 0.25s; }
-.hero-text .social-links { animation-delay: 0.3s; }
+.hero-text .greeting { animation-delay: 0.04s; }
+.hero-text .hero-title { animation-delay: 0.08s; }
+.hero-text .typing-container { animation-delay: 0.12s; }
+.hero-text .hero-description { animation-delay: 0.16s; }
+.hero-text .hero-buttons { animation-delay: 0.2s; }
+.hero-text .social-links { animation-delay: 0.24s; }
+
+.image-wrapper::before {
+    animation: ringOrbit 38s linear infinite;
+}
+
+.scroll-down a i {
+    animation: scrollHint 2.4s ease-in-out infinite;
+}
 
 /* Card & Interactive Hover States */
 .project-card,
+.blog-card,
 .achievement-card,
 .info-card,
 .stat-item,
-.soft-skill-item {
-    transition: transform 0.22s var(--ease-out), border-color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+.soft-skill-item,
+.home-service,
+.home-stat,
+.home-skill-group {
+    transition: transform 0.24s var(--ease-out), border-color 0.24s var(--ease-out), box-shadow 0.24s var(--ease-out);
     position: relative;
 }
 
+.info-card:hover i,
+.home-service:hover .home-service-icon,
+.home-stat:hover i {
+    transform: translateY(-2px) scale(1.06);
+}
+
+.home-service-icon,
+.home-stat i,
+.info-card i {
+    transition: transform 0.24s var(--ease-out), background 0.24s var(--ease-out), color 0.24s var(--ease-out);
+}
+
 .tag {
-    transition: transform 0.18s var(--ease-out), background 0.18s var(--ease-out);
+    transition: transform 0.18s var(--ease-out), background 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
 }
 
 .tag:hover {
@@ -45,7 +107,7 @@
 }
 
 .achievement-card:hover .achievement-badge {
-    transform: scale(1.06);
+    transform: scale(1.08);
 }
 
 @media (prefers-reduced-motion: reduce) {

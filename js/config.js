@@ -7,13 +7,13 @@ const CONFIG = {
     // Theme settings
     themes: {
         default: {
-            name: 'Digital Teal',
-            primary: '#086d80',
-            secondary: '#168da2',
-            hover: '#055c6d',
-            soft: '#e9f4f6',
-            dark: '#08121d',
-            light: '#e8f1f7'
+            name: 'Sky Blue',
+            primary: '#0284c7',
+            secondary: '#38bdf8',
+            hover: '#0369a1',
+            soft: '#e0f2fe',
+            dark: '#07121e',
+            light: '#e6f1fc'
         },
         indigo: {
             name: 'Cobalt Blue',

@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Báo cáo thực tập tốt nghiệp tại Công ty TNHH Ô tô Hyundai Miền Nam">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0e3040"/>
-      <stop offset="100%" stop-color="#061a24"/>
+      <stop offset="0%" stop-color="#0b2d4d"/>
+      <stop offset="100%" stop-color="#061829"/>
     </linearGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#168da2"/>
-      <stop offset="100%" stop-color="#63c7dc"/>
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#7dd3fc"/>
     </linearGradient>
   </defs>
   <rect width="800" height="450" fill="url(#bg)"/>
-  <circle cx="710" cy="70" r="180" fill="#168da2" fill-opacity="0.14"/>
-  <circle cx="90" cy="390" r="140" fill="#63c7dc" fill-opacity="0.08"/>
-  <rect x="44" y="42" width="712" height="366" rx="22" fill="#0d2635" stroke="#25485b" stroke-width="1.5"/>
+  <circle cx="710" cy="70" r="180" fill="#38bdf8" fill-opacity="0.14"/>
+  <circle cx="90" cy="390" r="140" fill="#60a5fa" fill-opacity="0.1"/>
+  <rect x="44" y="42" width="712" height="366" rx="22" fill="#0d1c2e" stroke="#224c75" stroke-width="1.5"/>
   <rect x="44" y="42" width="6" height="366" rx="3" fill="url(#accent)"/>
-  <rect x="78" y="72" width="215" height="34" rx="17" fill="#11313c" stroke="#2a687c"/>
-  <text x="185" y="94" text-anchor="middle" fill="#79d0e2" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="700">THỰC TẬP TỐT NGHIỆP · 9 TUẦN</text>
-  <text x="78" y="152" fill="#f6fbfe" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="800">HYUNDAI MIỀN NAM</text>
-  <text x="78" y="186" fill="#9eb0c1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">IT HelpDesk &amp; Quản Trị Website Doanh Nghiệp</text>
-  <rect x="78" y="216" width="640" height="1" fill="#1e3c4e"/>
-  <rect x="78" y="242" width="198" height="114" rx="14" fill="#132d3d" stroke="#24485c"/>
-  <text x="98" y="276" fill="#63c7dc" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="800">20+ Trang</text>
-  <text x="98" y="305" fill="#e8f1f7" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">hyundaimiennam.com</text>
-  <text x="98" y="328" fill="#9eb0c1" font-family="Segoe UI, Arial, sans-serif" font-size="12.5">WordPress &amp; Form Báo Giá</text>
-  <rect x="298" y="242" width="198" height="114" rx="14" fill="#132d3d" stroke="#24485c"/>
-  <text x="318" y="276" fill="#63c7dc" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="800">5 Bước IT</text>
-  <text x="318" y="305" fill="#e8f1f7" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">HelpDesk &amp; Hạ Tầng</text>
-  <text x="318" y="328" fill="#9eb0c1" font-family="Segoe UI, Arial, sans-serif" font-size="12.5">LAN, Windows, Phần Cứng</text>
-  <rect x="518" y="242" width="198" height="114" rx="14" fill="#132d3d" stroke="#24485c"/>
-  <text x="538" y="276" fill="#63c7dc" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="800">3.4M+ Views</text>
-  <text x="538" y="305" fill="#e8f1f7" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">Social &amp; TikTok Ops</text>
-  <text x="538" y="328" fill="#9eb0c1" font-family="Segoe UI, Arial, sans-serif" font-size="12.5">60K Thích · FB Ads 5 Tỉnh</text>
-  <text x="78" y="388" fill="#79d0e2" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="600">09/04/2026 – 09/06/2026 · HUTECH Công Nghệ Phần Mềm (22DTHG1)</text>
+  <rect x="78" y="72" width="215" height="34" rx="17" fill="#102d47" stroke="#2a6799"/>
+  <text x="185" y="94" text-anchor="middle" fill="#7dd3fc" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="700">THỰC TẬP TỐT NGHIỆP · 9 TUẦN</text>
+  <text x="78" y="152" fill="#f6faff" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="800">HYUNDAI MIỀN NAM</text>
+  <text x="78" y="186" fill="#98b1c9" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">IT HelpDesk &amp; Quản Trị Website Doanh Nghiệp</text>
+  <rect x="78" y="216" width="640" height="1" fill="#1e3b5c"/>
+  <rect x="78" y="242" width="198" height="114" rx="14" fill="#12263d" stroke="#23486e"/>
+  <text x="98" y="276" fill="#38bdf8" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="800">20+ Trang</text>
+  <text x="98" y="305" fill="#e6f1fc" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">hyundaimiennam.com</text>
+  <text x="98" y="328" fill="#98b1c9" font-family="Segoe UI, Arial, sans-serif" font-size="12.5">WordPress &amp; Form Báo Giá</text>
+  <rect x="298" y="242" width="198" height="114" rx="14" fill="#12263d" stroke="#23486e"/>
+  <text x="318" y="276" fill="#38bdf8" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="800">5 Bước IT</text>
+  <text x="318" y="305" fill="#e6f1fc" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">HelpDesk &amp; Hạ Tầng</text>
+  <text x="318" y="328" fill="#98b1c9" font-family="Segoe UI, Arial, sans-serif" font-size="12.5">LAN, Windows, Phần Cứng</text>
+  <rect x="518" y="242" width="198" height="114" rx="14" fill="#12263d" stroke="#23486e"/>
+  <text x="538" y="276" fill="#38bdf8" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="800">3.4M+ Views</text>
+  <text x="538" y="305" fill="#e6f1fc" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">Social &amp; TikTok Ops</text>
+  <text x="538" y="328" fill="#98b1c9" font-family="Segoe UI, Arial, sans-serif" font-size="12.5">60K Thích · FB Ads 5 Tỉnh</text>
+  <text x="78" y="388" fill="#7dd3fc" font-family="Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="600">09/04/2026 – 09/06/2026 · HUTECH Công Nghệ Phần Mềm (22DTHG1)</text>
 </svg>

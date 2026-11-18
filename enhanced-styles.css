@@ -141,12 +141,16 @@
     color: var(--on-brand);
 }
 
-/* Project Card Enhancement */
-.project-card {
+/* Card Top Sky-Blue Accent Sweep */
+.project-card,
+.blog-card,
+.achievement-card {
     position: relative;
 }
 
-.project-card::after {
+.project-card::after,
+.blog-card::after,
+.achievement-card::after {
     content: '';
     position: absolute;
     top: 0;
@@ -155,10 +159,15 @@
     height: 3px;
     background: linear-gradient(90deg, var(--brand), var(--accent));
     transform: scaleX(0);
-    transition: transform 0.25s var(--ease-out);
+    transform-origin: left center;
+    transition: transform 0.28s var(--ease-out);
+    z-index: 6;
+    pointer-events: none;
 }
 
-.project-card:hover::after {
+.project-card:hover::after,
+.blog-card:hover::after,
+.achievement-card:hover::after {
     transform: scaleX(1);
 }
 

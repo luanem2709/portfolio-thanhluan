@@ -121,5 +121,5 @@ if (achievementCards.length) {
     });
 }
 
-console.log('%c👋 Xin chào! Welcome!', 'color:#0066FF;font-size:20px;font-weight:bold');
-console.log('%cNguyễn Thành Luân - Software Engineer & Content Creator', 'color:#00D4FF;font-size:14px');
+console.log('%cNguyễn Thành Luân - Software Engineer & Web / IT Portfolio', 'color:#0284c7;font-size:16px;font-weight:700');
+console.log('%cHUTECH Công nghệ Phần mềm · Hyundai Miền Nam Intern', 'color:#38bdf8;font-size:13px');

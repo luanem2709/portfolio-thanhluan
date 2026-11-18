@@ -172,27 +172,27 @@ themeStyles.textContent = `
         height: 46px;
         border-radius: 50%;
         background: var(--surface, #ffffff);
-        border: 1px solid var(--line, #dce4e9);
+        border: 1px solid var(--line, #dbeafe);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: var(--shadow-sm, 0 8px 24px rgba(11, 29, 43, 0.08));
+        box-shadow: var(--shadow-sm, 0 8px 24px rgba(14, 116, 184, 0.08));
     }
 
     .theme-toggle:hover,
     .theme-selector-btn:hover {
         transform: translateY(-2px);
-        box-shadow: var(--shadow-md, 0 12px 28px rgba(11, 29, 43, 0.14));
-        border-color: var(--brand, #086d80);
+        box-shadow: var(--shadow-md, 0 12px 28px rgba(14, 116, 184, 0.14));
+        border-color: var(--brand, #0284c7);
     }
 
     .theme-toggle svg,
     .theme-selector-btn svg {
         width: 21px;
         height: 21px;
-        color: var(--text-strong, #0a1d2b);
+        color: var(--text-strong, #0b1f33);
     }
 
     .theme-toggle .moon-icon {
@@ -223,8 +223,8 @@ themeStyles.textContent = `
         border-radius: 14px;
         padding: 8px;
         min-width: 196px;
-        border: 1px solid var(--line, #dce4e9);
-        box-shadow: var(--shadow-md, 0 16px 36px rgba(11, 29, 43, 0.14));
+        border: 1px solid var(--line, #dbeafe);
+        box-shadow: var(--shadow-md, 0 16px 36px rgba(14, 116, 184, 0.14));
         opacity: 0;
         visibility: hidden;
         transform: translateX(8px);
@@ -248,17 +248,17 @@ themeStyles.textContent = `
         border-radius: 9px;
         cursor: pointer;
         transition: background 0.18s ease, border-color 0.18s ease;
-        color: var(--text-strong, #0a1d2b);
+        color: var(--text-strong, #0b1f33);
     }
 
     .theme-option:hover {
-        background: var(--surface-muted, #f7f9fa);
-        border-color: var(--line, #dce4e9);
+        background: var(--surface-muted, #eef6ff);
+        border-color: var(--line, #dbeafe);
     }
 
     .theme-option.active {
-        background: var(--brand-soft, #e9f4f6);
-        border-color: color-mix(in srgb, var(--brand, #086d80) 30%, transparent);
+        background: var(--brand-soft, #e0f2fe);
+        border-color: color-mix(in srgb, var(--brand, #0284c7) 30%, transparent);
     }
 
     .theme-preview {
@@ -266,7 +266,7 @@ themeStyles.textContent = `
         height: 24px;
         border-radius: 50%;
         border: 2px solid var(--surface, #ffffff);
-        box-shadow: 0 0 0 1px var(--line, #dce4e9);
+        box-shadow: 0 0 0 1px var(--line, #dbeafe);
         flex-shrink: 0;
     }
 

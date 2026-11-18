@@ -6,29 +6,29 @@
 
 :root {
     --font-sans: 'Be Vietnam Pro', 'Sora', 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
-    --background: #f3f6f8;
+    --background: #f5f9ff;
     --surface: #ffffff;
-    --surface-muted: #f7f9fa;
-    --surface-strong: #eaf0f3;
-    --surface-inverse: #0d2635;
-    --text: #213342;
-    --text-strong: #0a1d2b;
-    --muted: #627485;
-    --muted-strong: #405667;
-    --line: #dce4e9;
-    --line-strong: #c3cfd7;
-    --brand: #086d80;
-    --brand-hover: #055c6d;
-    --brand-active: #044a58;
-    --brand-soft: #e9f4f6;
-    --brand-soft-strong: #d8ecef;
-    --accent: #168da2;
+    --surface-muted: #eef6ff;
+    --surface-strong: #e0f0fe;
+    --surface-inverse: #0b2d4d;
+    --text: #1e354d;
+    --text-strong: #0b1f33;
+    --muted: #5a728a;
+    --muted-strong: #37516a;
+    --line: #dbeafe;
+    --line-strong: #bfdbfe;
+    --brand: #0284c7;
+    --brand-hover: #0369a1;
+    --brand-active: #075985;
+    --brand-soft: #e0f2fe;
+    --brand-soft-strong: #bae6fd;
+    --accent: #38bdf8;
     --on-brand: #ffffff;
-    --shadow-xs: 0 1px 2px rgba(11, 29, 43, 0.045);
-    --shadow-sm: 0 1px 2px rgba(11, 29, 43, 0.035), 0 8px 24px rgba(11, 29, 43, 0.045);
-    --shadow-md: 0 2px 6px rgba(11, 29, 43, 0.04), 0 20px 48px rgba(11, 29, 43, 0.105);
+    --shadow-xs: 0 1px 2px rgba(12, 74, 130, 0.045);
+    --shadow-sm: 0 1px 3px rgba(12, 74, 130, 0.04), 0 8px 24px rgba(14, 116, 184, 0.06);
+    --shadow-md: 0 4px 10px rgba(12, 74, 130, 0.045), 0 20px 44px rgba(14, 116, 184, 0.12);
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent);
+    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--brand) 20%, transparent);
 
     /* Alias tương thích cho các module dùng tên ngắn */
     --p: var(--brand);
@@ -41,24 +41,24 @@
 
 :root[data-theme="dark"],
 body.dark-mode {
-    --background: #08121d;
-    --surface: #0e1b29;
-    --surface-muted: #132333;
-    --surface-strong: #1a2d3f;
-    --surface-inverse: #eaf4f9;
-    --text: #e8f1f7;
-    --text-strong: #f6fbfe;
-    --muted: #9eb0c1;
-    --muted-strong: #bdcbd7;
-    --line: #25384a;
-    --line-strong: #41566a;
-    --brand: #63c7dc;
-    --brand-hover: #82d6e7;
-    --brand-active: #a0e1ed;
-    --brand-soft: #11313c;
-    --brand-soft-strong: #174452;
-    --accent: #79d0e2;
-    --on-brand: #061821;
+    --background: #07121e;
+    --surface: #0d1c2e;
+    --surface-muted: #12263d;
+    --surface-strong: #19324d;
+    --surface-inverse: #eaf4ff;
+    --text: #e6f1fc;
+    --text-strong: #f6faff;
+    --muted: #98b1c9;
+    --muted-strong: #c0d4e8;
+    --line: #1e3752;
+    --line-strong: #315072;
+    --brand: #38bdf8;
+    --brand-hover: #7dd3fc;
+    --brand-active: #bae6fd;
+    --brand-soft: #102d47;
+    --brand-soft-strong: #163d5e;
+    --accent: #60a5fa;
+    --on-brand: #061829;
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
     --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.28);
     --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.42);
@@ -69,11 +69,11 @@ html {
     overflow-x: clip;
 }
 
-/* Nền sáng tối giản với ánh cyan nhẹ phía trên */
+/* Nền trắng thoáng với ánh xanh da trời dịu phía trên */
 body {
     font-family: var(--font-sans);
     background:
-        radial-gradient(circle at 50% -14%, color-mix(in srgb, var(--brand-soft) 45%, transparent), transparent 32rem),
+        radial-gradient(circle at 50% -12%, color-mix(in srgb, var(--brand-soft) 78%, transparent), transparent 34rem),
         var(--background);
     color: var(--text);
     line-height: 1.62;
@@ -323,19 +323,39 @@ img {
     border-radius: 999px;
     font-weight: 600;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
     transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
     border: none;
 }
 
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
 .btn-primary {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 90%, #ffffff), var(--brand));
+    background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
     color: var(--on-brand);
-    box-shadow: 0 6px 18px color-mix(in srgb, var(--brand) 22%, transparent);
+    box-shadow: 0 6px 18px color-mix(in srgb, var(--brand) 24%, transparent);
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.28) 50%, transparent 75%);
+    transform: translateX(-130%);
+    transition: transform 0.55s var(--ease-out);
+    pointer-events: none;
+}
+
+.btn-primary:hover::after {
+    transform: translateX(130%);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px color-mix(in srgb, var(--brand) 28%, transparent);
+    box-shadow: 0 10px 26px color-mix(in srgb, var(--brand) 32%, transparent);
 }
 
 .btn-secondary {
@@ -959,7 +979,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: color-mix(in srgb, var(--brand) 86%, #061821);
+    background: color-mix(in srgb, var(--brand) 82%, #071d33);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1374,30 +1394,30 @@ img {
     box-shadow: var(--focus-ring);
 }
 
-/* Footer tối xanh navy tương phản với nền sáng */
+/* Footer xanh biển sâu tương phản dịu với nền trắng & xanh da trời */
 .footer {
     position: relative;
     z-index: 2;
-    background: radial-gradient(circle at 18% -30%, rgba(61, 165, 184, 0.2), transparent 34rem), linear-gradient(155deg, #0e3040 0%, #08232f 100%);
-    color: rgba(232, 241, 247, 0.84);
+    background: radial-gradient(circle at 18% -30%, rgba(56, 189, 248, 0.22), transparent 34rem), linear-gradient(155deg, #0b2d4d 0%, #071d33 100%);
+    color: rgba(230, 241, 252, 0.88);
     padding: 60px 0 30px;
-    border-top: 1px solid rgba(99, 199, 220, 0.2);
+    border-top: 1px solid rgba(56, 189, 248, 0.24);
 }
 
 .footer-section h3 {
-    color: #f6fbfe;
+    color: #f6faff;
     font-size: 20px;
     margin-bottom: 10px;
 }
 
 .footer-section h4 {
-    color: #f6fbfe;
+    color: #f6faff;
     font-size: 16px;
     margin-bottom: 16px;
 }
 
 .footer-section p {
-    color: #bdcbd7;
+    color: #c0d4e8;
     margin-bottom: 18px;
     font-size: 14px;
     line-height: 1.6;
@@ -1419,19 +1439,20 @@ img {
     width: 40px;
     height: 40px;
     background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #e8f1f7;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    color: #e6f1fc;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .footer-social a:hover {
-    background: #168da2;
-    border-color: #63c7dc;
+    background: #0284c7;
+    border-color: #38bdf8;
     color: #ffffff;
+    transform: translateY(-2px);
 }
 
 .footer-links ul,
@@ -1443,18 +1464,18 @@ img {
 .footer-contact li {
     margin-bottom: 10px;
     font-size: 14px;
-    color: #bdcbd7;
+    color: #c0d4e8;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .footer-links a:hover {
-    color: #63c7dc;
+    color: #7dd3fc;
 }
 
 .footer-contact i {
-    color: #63c7dc;
+    color: #38bdf8;
     width: 16px;
     text-align: center;
     flex-shrink: 0;
@@ -1468,16 +1489,16 @@ img {
 
 .footer-bottom p {
     font-size: 13px;
-    color: #9eb0c1;
+    color: #98b1c9;
     margin-bottom: 6px;
 }
 
 .footer-bottom a {
-    color: #bdcbd7;
+    color: #c0d4e8;
 }
 
 .footer-bottom a:hover {
-    color: #63c7dc;
+    color: #7dd3fc;
 }
 
 .scroll-top {

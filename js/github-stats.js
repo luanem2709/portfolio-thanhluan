@@ -238,8 +238,8 @@ githubStyles.textContent = `
         width: 310px;
         background: var(--surface, #ffffff);
         border-radius: 16px;
-        border: 1px solid var(--line, #dce4e9);
-        box-shadow: var(--shadow-md, 0 12px 32px rgba(11, 29, 43, 0.12));
+        border: 1px solid var(--line, #dbeafe);
+        box-shadow: var(--shadow-md, 0 12px 32px rgba(14, 116, 184, 0.12));
         z-index: 940;
         overflow: hidden;
         transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -268,20 +268,20 @@ githubStyles.textContent = `
         align-items: center;
         gap: 10px;
         padding: 14px 18px;
-        background: var(--surface-muted, #f7f9fa);
-        border-bottom: 1px solid var(--line, #dce4e9);
+        background: var(--surface-muted, #eef6ff);
+        border-bottom: 1px solid var(--line, #dbeafe);
         cursor: pointer;
     }
 
     .github-widget-header i.fa-github {
         font-size: 18px;
-        color: var(--brand, #086d80);
+        color: var(--brand, #0284c7);
         flex-shrink: 0;
     }
 
     .github-widget-header span {
         flex: 1;
-        color: var(--text-strong, #0a1d2b);
+        color: var(--text-strong, #0b1f33);
         font-weight: 600;
         font-size: 13.5px;
         white-space: nowrap;
@@ -291,7 +291,7 @@ githubStyles.textContent = `
     .widget-toggle {
         background: none;
         border: none;
-        color: var(--muted, #627485);
+        color: var(--muted, #5a728a);
         cursor: pointer;
         padding: 2px 4px;
         display: inline-flex;
@@ -302,7 +302,7 @@ githubStyles.textContent = `
     }
 
     .widget-toggle:hover {
-        color: var(--brand, #086d80);
+        color: var(--brand, #0284c7);
     }
 
     .widget-toggle i {
@@ -321,12 +321,12 @@ githubStyles.textContent = `
     }
 
     .github-widget-content::-webkit-scrollbar-track {
-        background: var(--surface-muted, #f7f9fa);
+        background: var(--surface-muted, #eef6ff);
         border-radius: 10px;
     }
 
     .github-widget-content::-webkit-scrollbar-thumb {
-        background: var(--line-strong, #c3cfd7);
+        background: var(--line-strong, #bfdbfe);
         border-radius: 10px;
     }
 
@@ -340,27 +340,27 @@ githubStyles.textContent = `
     .github-stat-item {
         text-align: center;
         padding: 12px;
-        background: var(--surface-muted, #f7f9fa);
+        background: var(--surface-muted, #eef6ff);
         border-radius: 12px;
-        border: 1px solid var(--line, #dce4e9);
+        border: 1px solid var(--line, #dbeafe);
         transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .github-stat-item:hover {
-        border-color: var(--brand, #086d80);
+        border-color: var(--brand, #0284c7);
         transform: translateY(-2px);
     }
 
     .github-stat-item i {
         font-size: 18px;
-        color: var(--brand, #086d80);
+        color: var(--brand, #0284c7);
         margin-bottom: 6px;
     }
 
     .stat-value {
         font-size: 22px;
         font-weight: 700;
-        color: var(--text-strong, #0a1d2b);
+        color: var(--text-strong, #0b1f33);
         margin-bottom: 4px;
     }
 
@@ -376,36 +376,36 @@ githubStyles.textContent = `
 
     .stat-label {
         font-size: 11px;
-        color: var(--muted, #627485);
+        color: var(--muted, #5a728a);
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
     .github-latest-repo {
-        background: var(--brand-soft, #e9f4f6);
+        background: var(--brand-soft, #e0f2fe);
         padding: 12px 14px;
         border-radius: 10px;
         margin-bottom: 14px;
-        border-left: 3px solid var(--brand, #086d80);
+        border-left: 3px solid var(--brand, #0284c7);
     }
 
     .repo-label {
         font-size: 11px;
-        color: var(--muted, #627485);
+        color: var(--muted, #5a728a);
         text-transform: uppercase;
         margin-bottom: 4px;
     }
 
     .repo-name {
         font-size: 14px;
-        color: var(--brand-hover, #055c6d);
+        color: var(--brand-hover, #0369a1);
         font-weight: 700;
         margin-bottom: 3px;
     }
 
     .repo-time {
         font-size: 12px;
-        color: var(--muted, #627485);
+        color: var(--muted, #5a728a);
     }
 
     .github-profile-link {
@@ -414,7 +414,7 @@ githubStyles.textContent = `
         justify-content: center;
         gap: 8px;
         padding: 11px 14px;
-        background: linear-gradient(180deg, color-mix(in srgb, var(--brand, #086d80) 90%, #ffffff), var(--brand, #086d80));
+        background: linear-gradient(135deg, var(--brand, #0284c7), var(--accent, #38bdf8));
         color: var(--on-brand, #ffffff);
         text-decoration: none;
         border-radius: 10px;

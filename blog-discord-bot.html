@@ -4,36 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xây dựng Discord Bot từ A-Z với Node.js - Nguyễn Thành Luân</title>
+    <title>Xây dựng hệ thống Ticket &amp; Bot Discord với Node.js - Nguyễn Thành Luân</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Hướng dẫn xây dựng Discord Bot từ A-Z với Node.js và discord.js: setup, code bot đầu tiên, ticket system, database và deploy - đúc kết từ Ma Đạo Bot 3000+ thành viên.">
+        content="Kinh nghiệm phát triển Discord Bot bằng Node.js và discord.js v14 cho Ma Đạo Community 3.000+ thành viên: chia module handler, xử lý Ticket tự động và deploy ổn định.">
     <meta name="author" content="Nguyễn Thành Luân">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://luanem2709.github.io/portfolio-thanhluan/blog-discord-bot.html">
-    <meta property="og:title" content="Xây dựng Discord Bot từ A-Z với Node.js">
+    <meta property="og:title" content="Xây dựng hệ thống Ticket &amp; Bot Discord với Node.js">
     <meta property="og:description"
-        content="Kinh nghiệm thực tế xây dựng Discord Bot với Node.js: setup, ticket system, database và deploy 24/7.">
+        content="Kinh nghiệm tổ chức mã nguồn discord.js v14, xây luồng Ticket hỗ trợ tự động và vận hành ổn định cho cộng đồng 3.000+ thành viên.">
     <meta property="og:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Xây dựng Discord Bot từ A-Z với Node.js">
+    <meta property="twitter:title" content="Xây dựng hệ thống Ticket &amp; Bot Discord với Node.js">
     <meta property="twitter:description"
-        content="Kinh nghiệm thực tế xây dựng Discord Bot với Node.js: setup, ticket system, database và deploy 24/7.">
+        content="Kinh nghiệm tổ chức mã nguồn discord.js v14, xây luồng Ticket hỗ trợ tự động và vận hành ổn định cho cộng đồng 3.000+ thành viên.">
     <meta property="twitter:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-discord-bot.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=2">
-    <link rel="stylesheet" href="blog-styles.css?v=2">
-    <link rel="stylesheet" href="blog-post.css?v=2">
-    <link rel="stylesheet" href="logo-style.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="blog-styles.css?v=5">
+    <link rel="stylesheet" href="blog-post.css?v=5">
+    <link rel="stylesheet" href="logo-style.css?v=5">
+    <link rel="stylesheet" href="animations.css?v=5">
+    <link rel="stylesheet" href="enhanced-styles.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Fonts -->
@@ -47,12 +49,12 @@
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "Xây dựng Discord Bot từ A-Z với Node.js",
+      "headline": "Xây dựng hệ thống Ticket & Bot Discord với Node.js",
       "author": { "@type": "Person", "name": "Nguyễn Thành Luân" },
       "url": "https://luanem2709.github.io/portfolio-thanhluan/blog-discord-bot.html",
       "image": "https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg",
       "datePublished": "2024-12-15",
-      "publisher": { "@type": "Organization", "name": "Ma Đạo Community" }
+      "publisher": { "@type": "Organization", "name": "Nguyễn Thành Luân" }
     }
     </script>
 </head>
@@ -68,10 +70,10 @@
                     <span>/</span>
                     <a href="pages/blog.html">Blog</a>
                     <span>/</span>
-                    <span>Discord Bot Development</span>
+                    <span>Kỹ Thuật &amp; Code</span>
                 </div>
-                <div class="post-category">Code</div>
-                <h1>Xây dựng Discord Bot từ A-Z với Node.js</h1>
+                <div class="post-category">Kỹ Thuật &amp; Code</div>
+                <h1>Xây dựng hệ thống Ticket &amp; Bot Discord với Node.js cho cộng đồng 3.000+ thành viên</h1>
                 <div class="post-meta">
                     <div class="author-info">
                         <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân">
@@ -82,7 +84,6 @@
                     </div>
                     <div class="post-stats">
                         <span><i class="fas fa-clock"></i> 8 phút đọc</span>
-                        <span><i class="fas fa-eye"></i> 1.2K lượt xem</span>
                     </div>
                 </div>
             </div>
@@ -98,332 +99,109 @@
             <div class="container">
                 <div class="content-wrapper">
                     <div class="main-content">
-                        <p class="lead">Sau gần 2 năm phát triển Ma Đạo Bot phục vụ cộng đồng 3000+ thành viên, mình
-                            quyết định viết bài này để chia sẻ toàn bộ kinh nghiệm từ zero đến hero. Nếu bạn đang muốn
-                            tạo bot riêng cho server Discord của mình, bài viết này dành cho bạn!</p>
+                        <p class="lead">Khi Ma Đạo Community tăng từ vài trăm lên hơn 3.000 thành viên, việc nhận tin nhắn riêng lẻ để hỗ trợ hoặc xử lý đơn hàng ở Ma Đạo Store bắt đầu quá tải và dễ trôi yêu cầu. Đây là lý do mình xây dựng hệ thống Ticket bằng Node.js và thư viện <code>discord.js v14</code> để tự động hóa quy trình tiếp nhận.</p>
 
-                        <h2>🎯 Tại sao nên học làm Discord Bot?</h2>
-                        <p>Hồi đầu năm 2023, mình chỉ là một sinh viên IT bình thường, biết chút ít JavaScript nhưng
-                            chưa làm dự án thực tế nào. Khi quyết định tạo Ma Đạo Community, mình nhận ra cần một bot
-                            để:</p>
-
+                        <h2>1. Bài toán thực tế đặt ra</h2>
+                        <p>Lúc mới mở server, thành viên cần mua vật phẩm hoặc báo lỗi thường nhắn tin trực tiếp cho quản trị viên. Cách làm đó gặp ba vấn đề lớn: thông tin bị phân tán, các cộng tác viên hỗ trợ không nắm được trạng thái xử lý của nhau và khó tra lại lịch sử đối chiếu khi cần.</p>
+                        <p>Mục tiêu của <strong>Ma Đạo Ticket Bot</strong> là giải quyết gọn luồng tiếp nhận đó ngay trong Discord:</p>
                         <ul>
-                            <li><strong>Tự động hóa</strong> - Welcome members mới, auto-role, moderation</li>
-                            <li><strong>Tăng engagement</strong> - Mini game, economy system, leveling</li>
-                            <li><strong>Quản lý hiệu quả</strong> - Ticket system, logging, analytics</li>
-                            <li><strong>Giải trí</strong> - Music bot, meme commands, fun features</li>
+                            <li>Thành viên chỉ cần bấm nút tạo yêu cầu theo đúng phân loại (Mua hàng hoặc Hỗ trợ - Bảo hành).</li>
+                            <li>Bot tự mở một kênh riêng tư chỉ gồm người gửi và đội ngũ có quyền <code>roleSupport</code>.</li>
+                            <li>Nhân sự có thể khóa, mở lại hoặc đóng và đưa kênh về mục lưu trữ thay vì xóa mất dữ liệu.</li>
                         </ul>
 
-                        <p>Và quan trọng nhất: <em>học được một skill thực tế siêu hữu ích!</em> 💪</p>
+                        <h2>2. Thiết lập môi trường &amp; bảo mật Token</h2>
+                        <p>Dự án dùng Node.js bản LTS cùng hai gói cơ bản là <code>discord.js</code> và <code>dotenv</code>. Điểm quan trọng nhất khi khởi tạo trên <em>Discord Developer Portal</em> là bật đúng <strong>Gateway Intents</strong> phù hợp (<code>Guilds</code>, <code>GuildMessages</code>, <code>MessageContent</code>) và tách toàn bộ Token ra file <code>.env</code> kèm khai báo trong <code>.gitignore</code> để tránh rò rỉ khóa truy cập lên GitHub.</p>
 
-                        <h2>⚙️ Setup môi trường (15 phút)</h2>
-
-                        <h3>Bước 1: Cài đặt Node.js</h3>
-                        <p>Download Node.js từ <a href="https://nodejs.org" target="_blank">nodejs.org</a> (khuyên dùng
-                            bản LTS). Kiểm tra cài đặt thành công:</p>
-
-                        <pre><code>node --version
-npm --version</code></pre>
-
-                        <h3>Bước 2: Tạo Discord Application</h3>
-                        <p>Vào <a href="https://discord.com/developers/applications" target="_blank">Discord Developer
-                                Portal</a>:</p>
-                        <ol>
-                            <li>Click "New Application", đặt tên bot (ví dụ: "Ma Đạo Bot")</li>
-                            <li>Vào tab <strong>Bot</strong> → "Add Bot" → "Yes, do it!"</li>
-                            <li>Copy <strong>Token</strong> (giữ bí mật, đừng share lên GitHub!)</li>
-                            <li>Bật <strong>Privileged Gateway Intents</strong>: Presence, Server Members, Message
-                                Content</li>
-                        </ol>
-
-                        <div class="info-box">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <p><strong>Lưu ý:</strong> Token giống như mật khẩu của bot. Nếu bị lộ, hacker có thể kiểm
-                                soát bot của bạn. Luôn dùng file .env và thêm vào .gitignore!</p>
-                        </div>
-
-                        <h3>Bước 3: Khởi tạo project</h3>
-                        <pre><code>mkdir my-discord-bot
-cd my-discord-bot
-npm init -y
+                        <pre><code>npm init -y
 npm install discord.js dotenv</code></pre>
 
-                        <p>Tạo file <code>.env</code> để lưu token:</p>
-                        <pre><code>TOKEN=your_bot_token_here
-CLIENT_ID=your_client_id</code></pre>
-
-                        <h2>🚀 Code bot đầu tiên (30 phút)</h2>
-
-                        <p>Tạo file <code>index.js</code>:</p>
+                        <p>Khung khởi tạo client tối giản để kiểm tra kết nối trước khi gắn các handler nghiệp vụ:</p>
 
                         <pre><code>require('dotenv').config();
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 
-// Tạo client instance
-const client = new Client({ 
+const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers
-    ] 
+        GatewayIntentBits.MessageContent
+    ]
 });
 
-// Event: Bot ready
-client.once(Events.ClientReady, c => {
-    console.log(`✅ Bot online! Đăng nhập với tên ${c.user.tag}`);
-    client.user.setActivity('Ma Đạo Community', { type: 'WATCHING' });
+client.once(Events.ClientReady, (readyClient) => {
+    console.log(`Bot da san sang voi tai khoan ${readyClient.user.tag}`);
 });
 
-// Event: Nhận message
-client.on(Events.MessageCreate, async message => {
-    // Ignore bot messages
-    if (message.author.bot) return;
-    
-    // Command: !hello
-    if (message.content === '!hello') {
-        message.reply(`Xin chào ${message.author.username}! 👋`);
-    }
-    
-    // Command: !server
-    if (message.content === '!server') {
-        message.reply(`Server: ${message.guild.name}\nThành viên: ${message.guild.memberCount}`);
-    }
-});
-
-// Login bot
 client.login(process.env.TOKEN);</code></pre>
 
-                        <p>Chạy bot:</p>
-                        <pre><code>node index.js</code></pre>
+                        <h2>3. Tổ chức mã nguồn cho Ma Đạo Ticket Bot</h2>
+                        <p>Thay vì viết toàn bộ logic bắt sự kiện vào một file <code>index.js</code> dài hàng trăm dòng, mã nguồn dự án được tách thành các thành phần theo trách nhiệm để dễ thêm loại ticket mới về sau:</p>
 
-                        <p>Nếu thấy "Bot online!", chúc mừng bạn đã tạo bot thành công! 🎉</p>
-
-                        <h2>🎮 Case Study: Ma Đạo Ticket System</h2>
-
-                        <p>Một trong những dự án mình tự hào nhất là <strong>Ma Đạo Ticket Bot</strong> - hệ thống quản
-                            lý ticket cho Ma Đạo Store. Bạn có thể xem source code tại <a
-                                href="https://github.com/luanem2709/MaDao-Ticket-NodeJS" target="_blank">GitHub của
-                                mình</a>! 🔗</p>
-
-                        <h3>💡 Ý tưởng ra đời</h3>
-                        <p>Hồi đó Ma Đạo Store bán các item in-game, nhận support từ customers qua DM loạn xà ngầu. Mình
-                            và chez1s quyết định làm một hệ thống ticket chuyên nghiệp như các trang web lớn! 🎯</p>
-
-                        <div class="info-box">
-                            <i class="fas fa-lightbulb"></i>
-                            <p><strong>Tính năng chính:</strong></p>
-                            <ul>
-                                <li>Hiển thị embed với các nút bấm tạo ticket</li>
-                                <li>Người dùng chọn loại ticket (Mua hàng / Hỗ trợ - Bảo hành)</li>
-                                <li>Sau khi nhập lý do → bot tạo kênh riêng tư</li>
-                                <li>Nhân viên khóa/mở khóa/đóng ticket</li>
-                                <li>Ticket đã đóng chuyển vào mục lưu trữ</li>
-                            </ul>
-                        </div>
-
-                        <h3>🔧 Tech Stack</h3>
-                        <ul>
-                            <li><strong>Node.js</strong> - Runtime environment</li>
-                            <li><strong>discord.js v14</strong> - Discord API wrapper</li>
-                            <li><strong>Nodemon</strong> - Auto reload khi code thay đổi (dev)</li>
-                        </ul>
-
-                        <h3>📂 Cấu trúc project</h3>
                         <pre><code>MaDao-Ticket-NodeJS/
-├── handlers/          # Xử lý commands & events
-├── config.js          # Token, role ID, category ID
-├── index.js           # Main file
+├── handlers/          # Nạp và điều phối commands, interactions
+├── config.js          # Khai báo roleSupport, category lưu trữ
+├── index.js           # Điểm vào chính của ứng dụng
 └── package.json</code></pre>
 
-                        <h3>⚙️ Setup & Config</h3>
-                        <p>File <code>config.js</code> của mình:</p>
-                        <pre><code>module.exports = {
-    token: "YOUR_BOT_TOKEN",           // Token từ Discord Dev Portal
-    roleSupport: "ROLE_ID_HERE",       // Role của nhân viên support
-    ticketCategory: "CATEGORY_ID_HERE" // Category chứa các ticket channels
-};</code></pre>
+                        <p>Khi gửi bảng hướng dẫn vào kênh hỗ trợ chính, sử dụng Embed kết hợp thành phần <code>ActionRowBuilder</code> và <code>ButtonBuilder</code> giúp người dùng thao tác chỉ với một cú nhấp thay vì phải nhớ cú pháp lệnh phức tạp:</p>
 
-                        <h3>🎨 Ticket Embed Design</h3>
-                        <p>Mình design embed cho đẹp và chuyên nghiệp:</p>
-                        <pre><code>// Embed giới thiệu ticket system
-const ticketEmbed = {
-    color: 0x5865F2,
-    title: '🎫 Hệ Thống Ticket - Ma Đạo Store',
-    description: 'Chọn loại ticket phù hợp để được hỗ trợ nhanh nhất!',
+                        <pre><code>const ticketEmbed = {
+    color: 0x0284c7,
+    title: 'Hệ Thống Ticket — Ma Đạo Store',
+    description: 'Vui lòng chọn đúng phân loại bên dưới để bộ phận phụ trách tiếp nhận nhanh hơn.',
     fields: [
         {
-            name: '🛒 Mua Hàng',
-            value: 'Mua item, package, hoặc sản phẩm từ store',
+            name: 'Mua hàng',
+            value: 'Tư vấn gói sản phẩm và xác nhận đơn từ cửa hàng',
             inline: true
         },
         {
-            name: '🔧 Hỗ Trợ - Bảo Hành',
-            value: 'Báo lỗi, khiếu nại, hoặc yêu cầu bảo hành',
+            name: 'Hỗ trợ - Bảo hành',
+            value: 'Kiểm tra lỗi, bảo hành và giải đáp thắc mắc kỹ thuật',
             inline: true
         }
     ],
-    footer: { text: 'Click nút bên dưới để tạo ticket' },
+    footer: { text: 'Hệ thống tự động tạo kênh riêng tư khi tiếp nhận' },
     timestamp: new Date()
 };</code></pre>
 
-                        <h3>2. Economy System đơn giản</h3>
-                        <p>Tạo hệ thống coin để members tương tác nhiều hơn:</p>
-
-                        <pre><code>const coins = new Map(); // Trong thực tế dùng database
-
-client.on(Events.MessageCreate, message => {
-    if (message.author.bot) return;
-    
-    // Cộng coin mỗi message (giới hạn 1 lần/phút)
-    const userId = message.author.id;
-    const userData = coins.get(userId) || { coins: 0, lastMsg: 0 };
-    
-    if (Date.now() - userData.lastMsg > 60000) {
-        userData.coins += 10;
-        userData.lastMsg = Date.now();
-        coins.set(userId, userData);
-    }
-    
-    // Command: !balance
-    if (message.content === '!balance') {
-        const data = coins.get(userId) || { coins: 0 };
-        message.reply(`💰 Bạn có **${data.coins}** coins!`);
-    }
-});</code></pre>
-
-                        <h2>💾 Database: MongoDB hay SQL?</h2>
-
-                        <p>Sau khi Ma Đạo Community có 1000+ members, mình phải chuyển từ lưu data tạm trong Map sang
-                            database thật sự. Dựa trên kinh nghiệm:</p>
+                        <h2>4. Lựa chọn lưu trữ dữ liệu theo quy mô</h2>
+                        <p>Giai đoạn đầu khi số ticket mở đồng thời chưa lớn, trạng thái kênh có thể gắn trực tiếp thông qua tên kênh hoặc topic ID trên Discord để giảm chi phí bảo trì. Khi cộng đồng vượt mốc 1.000+ thành viên và cần lưu điểm thưởng, cấu hình riêng cho từng kênh hoặc nhật ký dài hạn, việc chuyển sang cơ sở dữ liệu là bắt buộc.</p>
 
                         <div class="comparison-table">
-                            <h4>MongoDB (mình đang dùng)</h4>
-                            <p>✅ <strong>Ưu điểm:</strong></p>
+                            <h4>MongoDB (phù hợp với bot cộng đồng cỡ nhỏ và vừa)</h4>
                             <ul>
-                                <li>Setup nhanh, code đơn giản</li>
-                                <li>Flexible schema, dễ thay đổi structure</li>
-                                <li>Mongoose library rất mạnh</li>
-                                <li>Free tier MongoDB Atlas (512MB)</li>
-                            </ul>
-                            <p>❌ <strong>Nhược điểm:</strong></p>
-                            <ul>
-                                <li>Không phù hợp với quan hệ phức tạp</li>
-                                <li>Dễ bị duplicate data</li>
+                                <li>Cấu trúc document gần với đối tượng JSON của JavaScript, dễ triển khai nhanh với Mongoose.</li>
+                                <li>Thuận tiện khi cần bổ sung thêm thuộc tính người dùng mà không phải sửa bảng phức tạp.</li>
+                                <li>Hạn chế: cần kiểm soát kỹ việc chuẩn hóa dữ liệu nếu bắt đầu có nhiều liên kết chéo.</li>
                             </ul>
 
-                            <h4>SQL (PostgreSQL/MySQL)</h4>
-                            <p>✅ <strong>Ưu điểm:</strong></p>
+                            <h4>SQL — PostgreSQL / MySQL (phù hợp khi hệ thống mở rộng nghiệp vụ)</h4>
                             <ul>
-                                <li>Chuẩn hóa data tốt</li>
-                                <li>Xử lý quan hệ giữa bảng mạnh</li>
-                                <li>Transaction an toàn</li>
-                            </ul>
-                            <p>❌ <strong>Nhược điểm:</strong></p>
-                            <ul>
-                                <li>Code phức tạp hơn</li>
-                                <li>Khó modify schema sau này</li>
+                                <li>Đảm bảo tính toàn vẹn dữ liệu và transaction an toàn cho hệ thống thanh toán hoặc lịch sử giao dịch phức tạp.</li>
+                                <li>Truy vấn báo cáo thống kê rõ ràng, đổi lại thời gian thiết kế schema ban đầu kỹ hơn.</li>
                             </ul>
                         </div>
 
-                        <p><strong>Kết luận:</strong> Với Discord Bot quy mô nhỏ/vừa (&lt;5000 users), mình recommend
-                                <strong>MongoDB</strong>. Nếu làm bot lớn với nhiều tính năng phức tạp, thì SQL.</p>
-
-                        <h2>🚀 Deploy bot lên Cloud</h2>
-
-                        <p>Bot chỉ chạy khi máy tính bạn bật. Để bot online 24/7, cần host lên cloud:</p>
-
-                        <h3>Option 1: Heroku (Đơn giản nhất - Free tier bị khai tử rồi 😢)</h3>
-
-                        <h3>Option 2: Railway.app (Mình đang dùng)</h3>
-                        <ol>
-                            <li>Push code lên GitHub</li>
-                            <li>Tạo account <a href="https://railway.app" target="_blank">Railway</a></li>
-                            <li>Deploy from GitHub repo</li>
-                            <li>Add environment variables (TOKEN, DATABASE_URL)</li>
-                            <li>Done! Free $5/month credit</li>
-                        </ol>
-
-                        <h3>Option 3: VPS (Linode, DigitalOcean)</h3>
-                        <p>Mạnh mẽ nhất nhưng cần kiến thức Linux. Giá ~$5/tháng.</p>
-
-                        <h2>📚 Những gì mình học được</h2>
-
-                        <p>Sau 2 năm develop Ma Đạo Bot, mình đã:</p>
-
+                        <h2>5. Vận hành 24/7 và những điểm cần để ý</h2>
+                        <p>Trong thời gian duy trì <a href="https://github.com/luanem2709/MaDao-Ticket-NodeJS" target="_blank" rel="noopener">MaDao-Ticket-NodeJS</a>, có ba kinh nghiệm thực tế giúp bot hạn chế sập bất ngờ:</p>
                         <ul>
-                            <li>✅ Thành thạo <strong>Node.js</strong> và <strong>async/await</strong></li>
-                            <li>✅ Hiểu về <strong>WebSocket</strong> và real-time communication</li>
-                            <li>✅ Làm việc với <strong>MongoDB</strong> và schema design</li>
-                            <li>✅ Deploy và maintain <strong>production application</strong></li>
-                            <li>✅ Debug và optimize performance cho 3000+ concurrent users</li>
-                            <li>✅ Viết <strong>clean code</strong> với command handler pattern</li>
+                            <li><strong>Kiểm tra quyền trước khi tạo kênh:</strong> Luôn kiểm tra bot có quyền <code>ManageChannels</code> ở category đích trước khi gọi API để trả về thông báo rõ thay vì văng lỗi chưa bắt.</li>
+                            <li><strong>Bắt lỗi toàn cục ở Interaction:</strong> Với tương tác nút bấm trên Discord, người dùng sẽ thấy trạng thái "Interaction failed" nếu bot không phản hồi trong 3 giây đầu; nên dùng <code>deferReply({ ephemeral: true })</code> nếu cần xử lý nhiều bước.</li>
+                            <li><strong>Tách môi trường chạy thật và môi trường thử nghiệm:</strong> Luôn chạy thử trên server test riêng bằng token phụ trước khi đẩy bản mới lên máy chủ đang hoạt động (Railway hoặc VPS với PM2).</li>
                         </ul>
 
-                        <p>Quan trọng hơn: Mình có một dự án thực tế để show trong CV và portfolio! 🎯</p>
+                        <h2>Lời kết</h2>
+                        <p>Làm Discord Bot không chỉ giúp giải quyết vấn đề quản trị thực tế cho cộng đồng của mình mà còn là bài tập rất tốt để nắm vững lập trình hướng sự kiện, bất đồng bộ trong Node.js và cách đọc tài liệu API chuẩn chỉnh.</p>
 
-                        <h2>🎓 Tips từ kinh nghiệm thực tế</h2>
-
-                        <div class="tips-grid">
-                            <div class="tip-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <h4>Bắt đầu nhỏ</h4>
-                                <p>Đừng làm quá nhiều features ngay từ đầu. Mình bắt đầu chỉ với welcome message và
-                                    prefix commands, rồi mới thêm dần.</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <i class="fas fa-code"></i>
-                                <h4>Tổ chức code tốt</h4>
-                                <p>Dùng command handler từ đầu. Tách commands ra từng file riêng, không nhét hết vào
-                                    index.js.</p>
-                            </div>
-
-                            <div class="tip-card">
-                                <i class="fas fa-book"></i>
-                                <h4>Đọc docs</h4>
-                                <p>Discord.js guide và documentation cực kỳ chi tiết. Mọi thứ bạn cần đều có trong đó.
-                                </p>
-                            </div>
-
-                            <div class="tip-card">
-                                <i class="fas fa-users"></i>
-                                <h4>Join community</h4>
-                                <p>Discord.js official server có hơn 600K members, rất helpful khi gặp bug.</p>
-                            </div>
-                        </div>
-
-                        <h2>🔗 Resources hữu ích</h2>
-
-                        <ul>
-                            <li>📖 <a href="https://discord.js.org" target="_blank">Discord.js Documentation</a> - Bible
-                                của Discord bot dev</li>
-                            <li>🎥 <a href="https://www.youtube.com/@Computerphile" target="_blank">YouTube
-                                    Tutorials</a> - Visual learner thích hợp</li>
-                            <li>💬 <a href="https://discord.gg/djs" target="_blank">Discord.js Discord Server</a> - Hỏi
-                                đáp trực tiếp</li>
-                            <li>🌐 <a href="https://github.com/discordjs/guide" target="_blank">Discord.js Guide</a> -
-                                Step by step guide</li>
-                        </ul>
-
-                        <h2>💬 Kết luận</h2>
-
-                        <p>Làm Discord Bot là một trong những project tốt nhất mình làm lúc là sinh viên. Nó vừa
-                            practical (phục vụ cộng đồng thật), vừa học được nhiều thứ, lại còn fun nữa!</p>
-
-                        <p>Nếu bạn đang học IT và chưa biết làm dự án gì, mình khuyên là làm thử Discord Bot. Start
-                            small, learn by doing, và đừng ngại hỏi community khi gặp khó khăn.</p>
-
-                        <p><strong>Good luck và happy coding! 🚀</strong></p>
-
-                        <p class="signature">— Luân, founder of Ma Đạo Community</p>
+                        <p class="signature">— Nguyễn Thành Luân, ghi chú từ dự án MaDao-Ticket-NodeJS</p>
 
                         <div class="post-tags">
                             <span class="tag">Node.js</span>
-                            <span class="tag">Discord.js</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">Tutorial</span>
+                            <span class="tag">Discord.js v14</span>
+                            <span class="tag">Ticket System</span>
+                            <span class="tag">Kiến Trúc Module</span>
                         </div>
 
                         <div class="post-share">
@@ -437,33 +215,52 @@ client.on(Events.MessageCreate, message => {
                         </div>
                     </div>
 
-                    <aside class="sidebar">
-                        <div class="author-card">
+                    <aside class="post-sidebar">
+                        <div class="sidebar-card author-card">
                             <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân">
                             <h3>Nguyễn Thành Luân</h3>
-                            <p>Sinh viên CNTT, Founder Ma Đạo Community (3000+ members), Discord Bot Developer</p>
-                            <div class="social-links">
-                                <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
-                                <a href="https://github.com/luanem2709" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                                <a href="https://www.tiktok.com/@LuanEm2709" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
-                                <a href="https://discord.gg/NUh6Mf22" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+                            <p>Sinh viên Công nghệ Phần mềm (HUTECH) · Thực tập IT HelpDesk &amp; Web tại Hyundai Miền Nam · Founder Ma Đạo Community</p>
+                            <div class="author-social">
+                                <a href="https://www.linkedin.com/in/luanem2709" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://github.com/luanem2709" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                                <a href="https://discord.gg/NUh6Mf22" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
                             </div>
                         </div>
 
-                        <div class="related-posts">
-                            <h3>Bài viết liên quan</h3>
-                            <a href="blog-nodejs-tips.html" class="related-post">
-                                <div class="related-gradient code-bg">
-                                    <i class="fab fa-node-js"></i>
-                                </div>
-                                <h4>Node.js Tips & Tricks cho Developer</h4>
-                            </a>
-                            <a href="blog-dev-tips.html" class="related-post">
-                                <div class="related-gradient database-bg">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <h4>10 Development Tips Mọi Developer Cần Biết</h4>
-                            </a>
+                        <div class="sidebar-card">
+                            <h3>Bài Viết Liên Quan</h3>
+                            <div class="related-posts">
+                                <a href="blog-nodejs-tips.html" class="related-post">
+                                    <div class="related-gradient database-bg">
+                                        <i class="fab fa-node-js"></i>
+                                    </div>
+                                    <div class="related-info">
+                                        <h4>Những nguyên tắc giữ mã nguồn Node.js ổn định</h4>
+                                        <span>7 phút đọc</span>
+                                    </div>
+                                </a>
+                                <a href="blog-dev-tips.html" class="related-post">
+                                    <div class="related-gradient code-bg">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="related-info">
+                                        <h4>Thói quen làm việc với dự án thật</h4>
+                                        <span>6 phút đọc</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3>Chủ Đề Nổi Bật</h3>
+                            <div class="tag-cloud">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Discord.js</span>
+                                <span class="tag">Automation</span>
+                                <span class="tag">Backend</span>
+                                <span class="tag">Clean Code</span>
+                            </div>
                         </div>
                     </aside>
                 </div>
@@ -473,11 +270,12 @@ client.on(Events.MessageCreate, message => {
 
     <!-- Footer + nút cuộn được nạp bởi component-loader.js -->
 
-    <script src="js/config.js?v=2"></script>
+    <script src="js/config.js?v=5"></script>
     <script src="js/component-loader.js?v=2"></script>
-    <script src="js/theme-manager.js?v=2"></script>
-    <script src="js/blog-reading-progress.js?v=2"></script>
-    <script src="script.js"></script>
+    <script src="js/theme-manager.js?v=5"></script>
+    <script src="js/visual-effects.js?v=5"></script>
+    <script src="js/blog-reading-progress.js?v=5"></script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>

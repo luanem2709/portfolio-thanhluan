@@ -4,36 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node.js Tips & Tricks cho Developer - Nguyễn Thành Luân</title>
+    <title>Những nguyên tắc giữ mã nguồn Node.js ổn định và dễ bảo trì - Nguyễn Thành Luân</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Tổng hợp Node.js tips & tricks thực chiến cho developer: async/await, xử lý lỗi, tối ưu hiệu năng và các mẹo backend rút ra từ dự án thật.">
+        content="Ghi chú thực tế khi làm việc với Node.js qua các dự án bot và automation: quản lý biến môi trường, xử lý lỗi async, Promise.all, kiểm soát bộ nhớ và tách module.">
     <meta name="author" content="Nguyễn Thành Luân">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://luanem2709.github.io/portfolio-thanhluan/blog-nodejs-tips.html">
-    <meta property="og:title" content="Node.js Tips & Tricks cho Developer">
+    <meta property="og:title" content="Những nguyên tắc giữ mã nguồn Node.js ổn định và dễ bảo trì">
     <meta property="og:description"
-        content="Node.js tips & tricks thực chiến: async/await, xử lý lỗi, tối ưu hiệu năng và mẹo backend.">
+        content="Kinh nghiệm giữ ứng dụng Node.js chạy ổn định lâu dài: biến môi trường, error handling, tác vụ song song và tránh rò rỉ bộ nhớ.">
     <meta property="og:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Node.js Tips & Tricks cho Developer">
+    <meta property="twitter:title" content="Những nguyên tắc giữ mã nguồn Node.js ổn định và dễ bảo trì">
     <meta property="twitter:description"
-        content="Node.js tips & tricks thực chiến: async/await, xử lý lỗi, tối ưu hiệu năng và mẹo backend.">
+        content="Kinh nghiệm giữ ứng dụng Node.js chạy ổn định lâu dài: biến môi trường, error handling, tác vụ song song và tránh rò rỉ bộ nhớ.">
     <meta property="twitter:image" content="https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg">
 
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-nodejs-tips.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=2">
-    <link rel="stylesheet" href="blog-styles.css?v=2">
-    <link rel="stylesheet" href="blog-post.css?v=2">
-    <link rel="stylesheet" href="logo-style.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="blog-styles.css?v=5">
+    <link rel="stylesheet" href="blog-post.css?v=5">
+    <link rel="stylesheet" href="logo-style.css?v=5">
+    <link rel="stylesheet" href="animations.css?v=5">
+    <link rel="stylesheet" href="enhanced-styles.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Fonts -->
@@ -47,12 +49,12 @@
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "Node.js Tips & Tricks cho Developer",
+      "headline": "Những nguyên tắc giữ mã nguồn Node.js ổn định và dễ bảo trì",
       "author": { "@type": "Person", "name": "Nguyễn Thành Luân" },
       "url": "https://luanem2709.github.io/portfolio-thanhluan/blog-nodejs-tips.html",
       "image": "https://luanem2709.github.io/portfolio-thanhluan/assets/profile.jpg",
       "datePublished": "2025-01-10",
-      "publisher": { "@type": "Organization", "name": "Ma Đạo Community" }
+      "publisher": { "@type": "Organization", "name": "Nguyễn Thành Luân" }
     }
     </script>
 </head>
@@ -68,28 +70,27 @@
                     <span>/</span>
                     <a href="pages/blog.html">Blog</a>
                     <span>/</span>
-                    <span>Node.js Tips</span>
+                    <span>Kỹ Thuật &amp; Code</span>
                 </div>
-                <div class="post-category">Code</div>
-                <h1>Node.js Tips & Tricks cho Developer</h1>
+                <div class="post-category">Kỹ Thuật &amp; Code</div>
+                <h1>Những nguyên tắc giúp mã nguồn Node.js ổn định và dễ bảo trì hơn</h1>
                 <div class="post-meta">
                     <div class="author-info">
                         <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân">
                         <div>
-                            <span class="author-name">Nguyễn Thanh Luân</span>
+                            <span class="author-name">Nguyễn Thành Luân</span>
                             <span class="post-date">10 Tháng 01, 2025</span>
                         </div>
                     </div>
                     <div class="post-stats">
                         <span><i class="fas fa-clock"></i> 7 phút đọc</span>
-                        <span><i class="fas fa-eye"></i> 920 lượt xem</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="post-featured-image">
-            <div class="post-featured-gradient code-bg">
+            <div class="post-featured-gradient database-bg">
                 <i class="fab fa-node-js"></i>
             </div>
         </div>
@@ -98,150 +99,79 @@
             <div class="container">
                 <div class="content-wrapper">
                     <div class="main-content">
-                        <p class="lead">Sau 2 năm làm việc với Node.js qua các dự án Discord Bot, backend API, và
-                            automation tools, mình đã tích lũy được khá nhiều tips hữu ích. Bài này mình sẽ chia sẻ
-                            những trick thực tế giúp code Node.js hiệu quả hơn! 🚀</p>
+                        <p class="lead">Khi mới học Node.js, chỉ cần chương trình chạy đúng ở máy mình là thấy ổn. Nhưng khi đưa một ứng dụng hay Discord bot chạy liên tục nhiều tuần cho người khác dùng thật, phần khó hơn lại nằm ở sự ổn định, khả năng truy vết lỗi và việc sửa code cũ mà không làm gãy chỗ khác.</p>
 
-                        <h2>🎯 Tại sao Node.js?</h2>
-                        <p>Trước khi vào tips, mình muốn nói tại sao Node.js lại phổ biến:</p>
+                        <h2>1. Tách cấu hình và không viết cứng thông tin nhạy cảm</h2>
+                        <p>Mọi chuỗi kết nối cơ sở dữ liệu, khóa API hay token của bot nên đọc từ biến môi trường thông qua file <code>.env</code> ngay từ lần khởi tạo dự án đầu tiên. Đi kèm luôn là file <code>.env.example</code> chỉ giữ tên biến để người khác (hoặc chính mình khi đổi máy) biết cần điền trường gì.</p>
 
-                        <ul>
-                            <li><strong>JavaScript everywhere</strong> - Một ngôn ngữ cho cả frontend và backend</li>
-                            <li><strong>NPM ecosystem</strong> - Hàng triệu packages có sẵn</li>
-                            <li><strong>Async I/O</strong> - Xử lý concurrent requests cực tốt</li>
-                            <li><strong>Community</strong> - Cộng đồng lớn, nhiều tài liệu</li>
-                        </ul>
+                        <pre><code>require('dotenv').config();
 
-                        <h2>💡 Tips Quan Trọng Nhất</h2>
+const config = {
+    token: process.env.BOT_TOKEN,
+    dbUri: process.env.MONGODB_URL,
+    port: Number(process.env.PORT || 3000)
+};
 
-                        <h3>1. Luôn dùng Environment Variables</h3>
-                        <p>Đừng bao giờ hardcode sensitive data! Dùng <code>.env</code> file:</p>
-
-                        <pre><code>// ❌ SAI - Đừng làm thế này!
-const token = "MTIzNDU2Nzg5MDEyMzQ1Njc4OTA";
-const dbUrl = "mongodb://localhost:27017/mydb";
-
-// ✅ ĐÚNG - Dùng environment variables
-require('dotenv').config();
-
-const token = process.env.BOT_TOKEN;
-const dbUrl = process.env.MONGODB_URL;
-
-// .env file:
-// BOT_TOKEN=your_token_here
-// MONGODB_URL=mongodb://localhost:27017/mydb</code></pre>
+if (!config.token) {
+    throw new Error('Thiếu biến môi trường BOT_TOKEN');
+}</code></pre>
 
                         <div class="info-box">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <p><strong>Pro tip:</strong> Thêm <code>.env</code> vào <code>.gitignore</code>! Mình từng
-                                push token lên GitHub và bị leak 😅</p>
+                            <i class="fas fa-shield-halved"></i>
+                            <p>Kiểm tra sự tồn tại của các biến cấu hình bắt buộc ngay lúc khởi động giúp ứng dụng dừng sớm với thông báo rõ ràng, thay vì chạy nửa chừng mới phát sinh lỗi khó hiểu.</p>
                         </div>
 
-                        <h3>2. Error Handling đúng cách</h3>
-                        <p>Lỗi phổ biến nhất: không handle errors → app crash!</p>
+                        <h2>2. Bắt lỗi chủ động ở các hàm bất đồng bộ</h2>
+                        <p>Với <code>fetch</code> hoặc gọi API ngoài, một lỗi phổ biến là chỉ <code>await</code> mà không kiểm tra <code>response.ok</code> hoặc bọc <code>try/catch</code>. Khi dịch vụ bên thứ ba trả về lỗi 502 hay timeout, ứng dụng có thể dừng đột ngột nếu thiếu bước kiểm tra phản hồi.</p>
 
-                        <pre><code>// ❌ SAI - App sẽ crash khi có lỗi
-async function fetchUserData(userId) {
-    const data = await fetch(`/api/users/${userId}`);
-    return data.json();
-}
-
-// ✅ ĐÚNG - Handle errors properly
-async function fetchUserData(userId) {
+                        <pre><code>async function fetchUserProfile(userId) {
     try {
         const response = await fetch(`/api/users/${userId}`);
-        
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP ${response.status} khi tải user ${userId}`);
         }
-        
         const data = await response.json();
-        return { success: true, data };
-        
+        return { ok: true, data };
     } catch (error) {
-        console.error('Fetch error:', error.message);
-        return { success: false, error: error.message };
-    }
-}
-
-// Usage
-const result = await fetchUserData('123');
-if (result.success) {
-    console.log('User data:', result.data);
-} else {
-    console.log('Error:', result.error);
-}</code></pre>
-
-                        <h3>3. Async/Await > Callbacks/Promises Hell</h3>
-                        <p>Callback hell là ác mộng! Dùng async/await cho clean code:</p>
-
-                        <pre><code>// ❌ Callback Hell
-getUserData(userId, (err, user) => {
-    if (err) return console.error(err);
-    
-    getPosts(user.id, (err, posts) => {
-        if (err) return console.error(err);
-        
-        getComments(posts[0].id, (err, comments) => {
-            if (err) return console.error(err);
-            console.log(comments);
-        });
-    });
-});
-
-// ✅ Async/Await - Dễ đọc hơn nhiều!
-async function getUserContent(userId) {
-    try {
-        const user = await getUserData(userId);
-        const posts = await getPosts(user.id);
-        const comments = await getComments(posts[0].id);
-        return comments;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
+        console.error('[fetchUserProfile]', error.message);
+        return { ok: false, error: error.message };
     }
 }</code></pre>
 
-                        <h3>4. Promise.all() cho Parallel Requests</h3>
-                        <p>Đừng await từng request một khi chúng độc lập!</p>
+                        <h2>3. Tận dụng Promise.all cho các tác vụ độc lập</h2>
+                        <p>Nếu cần lấy ba nguồn dữ liệu không phụ thuộc kết quả của nhau, đặt ba lệnh <code>await</code> nối tiếp sẽ cộng dồn toàn bộ thời gian chờ. Gom chúng vào <code>Promise.all()</code> (hoặc <code>Promise.allSettled()</code> nếu một nhánh lỗi không được phép làm hỏng phần còn lại) giúp giảm đáng kể thời gian phản hồi.</p>
 
-                        <pre><code>// ❌ SAI - Chậm (6 giây nếu mỗi request 2s)
-async function fetchAllData() {
-    const users = await fetchUsers();      // 2s
-    const posts = await fetchPosts();      // 2s
-    const comments = await fetchComments(); // 2s
-    return { users, posts, comments };
-}
-
-// ✅ ĐÚNG - Nhanh (2 giây vì chạy parallel)
-async function fetchAllData() {
-    const [users, posts, comments] = await Promise.all([
-        fetchUsers(),
-        fetchPosts(),
-        fetchComments()
+                        <pre><code>async function loadDashboardSummary(userId) {
+    const [profile, orders, notifications] = await Promise.all([
+        fetchProfile(userId),
+        fetchRecentOrders(userId),
+        fetchUnreadCount(userId)
     ]);
-    return { users, posts, comments };
+
+    return { profile, orders, notifications };
 }</code></pre>
 
-                        <blockquote>
-                            <p><strong>Real example:</strong> Trong Ma Đạo Bot, mình dùng Promise.all() để fetch data từ
-                                5 APIs khác nhau. Giảm thời gian từ 10s xuống còn 2s! 🚀</p>
-                        </blockquote>
+                        <h2>4. Tránh rò rỉ bộ nhớ từ Event Listener và kết nối</h2>
+                        <p>Ở các ứng dụng chạy dài ngày như bot Discord hay worker nền, lỗi bộ nhớ thường đến từ việc đăng ký listener lặp đi lặp lại trong hàm xử lý hoặc tạo kết nối database mới cho mỗi request. Nguyên tắc là khởi tạo pool kết nối một lần ở tầng bootstrap và luôn tháo listener khi đối tượng không còn dùng.</p>
 
-                        <h3>5. Module Pattern đúng chuẩn</h3>
-                        <p>Organize code thành modules để dễ maintain:</p>
+                        <pre><code>// Chỉ đăng ký listener một lần khi khởi tạo
+const onMessage = (msg) => {
+    if (msg.author.bot) return;
+    // Xử lý thông điệp
+};
 
-                        <pre><code>// ❌ Tất cả trong 1 file (index.js) - Messy!
-const express = require('express');
-const app = express();
+client.on('messageCreate', onMessage);
 
-app.get('/users', (req, res) => { /* ... */ });
-app.post('/users', (req, res) => { /* ... */ });
-app.get('/posts', (req, res) => { /* ... */ });
-// ... 500 dòng code ...
+// Khi đóng ứng dụng có kiểm soát
+process.on('SIGTERM', () => {
+    client.off('messageCreate', onMessage);
+    client.destroy();
+});</code></pre>
 
-// ✅ Tách thành modules
-// routes/userRoutes.js
+                        <h2>5. Tổ chức module theo trách nhiệm và ghi log vừa đủ</h2>
+                        <p>Thay vì dồn tất cả route, kiểm tra dữ liệu và truy vấn vào một tệp <code>index.js</code>, tách nhỏ theo cấu trúc <code>routes/</code>, <code>controllers/</code>, <code>services/</code> giúp kiểm thử từng phần dễ hơn nhiều. Cùng với đó, các lỗi quan trọng nên ghi kèm ngữ cảnh (tên hàm, ID đối tượng, thông báo lỗi) hoặc dùng thư viện như <code>winston</code> để có thể lọc file <code>error.log</code> khi cần tra lại.</p>
+
+                        <pre><code>// routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
@@ -249,267 +179,18 @@ const userController = require('../controllers/userController');
 router.get('/', userController.getUsers);
 router.post('/', userController.createUser);
 
-module.exports = router;
+module.exports = router;</code></pre>
 
-// index.js
-const userRoutes = require('./routes/userRoutes');
-app.use('/users', userRoutes);</code></pre>
+                        <h2>6. Bảo vệ lớp đầu vào trước khi xử lý</h2>
+                        <p>Dù là API hay form tiếp nhận, luôn xác thực và chuẩn hóa dữ liệu từ người dùng (bằng <code>express-validator</code>, <code>joi</code> hoặc kiểm tra kiểu thủ công), đi kèm giới hạn tần suất (<code>express-rate-limit</code>) và header bảo mật (<code>helmet</code>) để giảm rủi ro khi mở cổng ra ngoài Internet.</p>
 
-                        <h2>🔥 Advanced Tips</h2>
-
-                        <h3>6. Middleware Pattern trong Express</h3>
-                        <p>Middleware giúp reuse logic authentication, validation, logging...</p>
-
-                        <pre><code>// middleware/auth.js
-const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization;
-    
-    if (!token) {
-        return res.status(401).json({ error: 'No token provided' });
-    }
-    
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next(); // Tiếp tục đến route handler
-    } catch (error) {
-        return res.status(401).json({ error: 'Invalid token' });
-    }
-};
-
-// Usage
-app.get('/profile', authMiddleware, (req, res) => {
-    res.json({ user: req.user });
-});
-
-app.post('/posts', authMiddleware, (req, res) => {
-    // req.user đã available ở đây
-});</code></pre>
-
-                        <h3>7. Nodemon cho Development</h3>
-                        <p>Đừng restart server manually mỗi lần sửa code!</p>
-
-                        <pre><code>// Install
-npm install --save-dev nodemon
-
-// package.json
-{
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  }
-}
-
-// Run
-npm run dev // Auto restart khi file thay đổi!</code></pre>
-
-                        <h3>8. Logging với Winston</h3>
-                        <p>console.log() OK cho dev, nhưng production cần proper logging:</p>
-
-                        <pre><code>const winston = require('winston');
-
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.json(),
-    transports: [
-        new winston.transports.File({ filename: 'error.log', level: 'error' }),
-        new winston.transports.File({ filename: 'combined.log' })
-    ]
-});
-
-// Development thì log ra console
-if (process.env.NODE_ENV !== 'production') {
-    logger.add(new winston.transports.Console({
-        format: winston.format.simple()
-    }));
-}
-
-// Usage
-logger.info('User logged in', { userId: '123' });
-logger.error('Database connection failed', { error: err.message });</code></pre>
-
-                        <h3>9. Rate Limiting</h3>
-                        <p>Bảo vệ API khỏi spam/abuse:</p>
-
-                        <pre><code>const rateLimit = require('express-rate-limit');
-
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 phút
-    max: 100, // Max 100 requests per windowMs
-    message: 'Too many requests, please try again later.'
-});
-
-app.use('/api/', limiter);</code></pre>
-
-                        <h2>⚡ Performance Tips</h2>
-
-                        <h3>10. Caching với Redis</h3>
-                        <p>Cache data thường xuyên truy cập để giảm load database:</p>
-
-                        <pre><code>const redis = require('redis');
-const client = redis.createClient();
-
-async function getUserById(userId) {
-    // Check cache trước
-    const cached = await client.get(`user:${userId}`);
-    if (cached) {
-        console.log('Cache hit!');
-        return JSON.parse(cached);
-    }
-    
-    // Nếu không có trong cache, query database
-    const user = await db.users.findById(userId);
-    
-    // Lưu vào cache (expire sau 1 giờ)
-    await client.setex(`user:${userId}`, 3600, JSON.stringify(user));
-    
-    return user;
-}</code></pre>
-
-                        <h3>11. Database Connection Pooling</h3>
-                        <p>Đừng tạo connection mới mỗi request!</p>
-
-                        <pre><code>// ❌ SAI - Tạo connection mỗi request
-app.get('/users', async (req, res) => {
-    const db = await MongoClient.connect(url);
-    const users = await db.collection('users').find().toArray();
-    await db.close();
-    res.json(users);
-});
-
-// ✅ ĐÚNG - Reuse connection pool
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_URL, {
-    maxPoolSize: 10 // Connection pool size
-});
-
-app.get('/users', async (req, res) => {
-    const users = await User.find(); // Reuse connection
-    res.json(users);
-});</code></pre>
-
-                        <h2>🛡️ Security Best Practices</h2>
-
-                        <h3>12. Helmet.js cho Express Security</h3>
-                        <pre><code>const helmet = require('helmet');
-app.use(helmet()); // Sets various HTTP headers for security</code></pre>
-
-                        <h3>13. Input Validation</h3>
-                        <p>Luôn validate input từ users!</p>
-
-                        <pre><code>const { body, validationResult } = require('express-validator');
-
-app.post('/users',
-    body('email').isEmail(),
-    body('password').isLength({ min: 8 }),
-    body('username').trim().isLength({ min: 3, max: 20 }),
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        
-        // Process valid data
-    }
-);</code></pre>
-
-                        <h2>📦 Package.json Best Practices</h2>
-
-                        <h3>14. Semantic Versioning</h3>
-                        <pre><code>{
-  "dependencies": {
-    "express": "^4.18.0",  // ^4.18.0 = >=4.18.0 <5.0.0
-    "mongoose": "~7.0.0",  // ~7.0.0 = >=7.0.0 <7.1.0
-    "lodash": "4.17.21"    // Exact version
-  }
-}</code></pre>
-
-                        <h3>15. Scripts tổ chức tốt</h3>
-                        <pre><code>{
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "jest",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  }
-}</code></pre>
-
-                        <h2>🎓 Bài Học Từ Thực Tế</h2>
-
-                        <div class="highlight-box">
-                            <h3>Lesson 1: Memory Leaks</h3>
-                            <p>Ma Đạo Bot từng bị crash mỗi 2-3 ngày. Nguyên nhân: event listeners không được cleanup!
-                                😅</p>
-                            <pre><code>// ❌ Memory leak
-setInterval(() => {
-    client.on('message', handler); // Listener mới mỗi 1s!
-}, 1000);
-
-// ✅ Cleanup properly
-const handler = (msg) => { /* ... */ };
-client.on('message', handler);
-
-// Khi cần remove
-client.off('message', handler);</code></pre>
-                        </div>
-
-                        <div class="highlight-box">
-                            <h3>Lesson 2: Unhandled Promise Rejections</h3>
-                            <p>App crash không rõ lý do? Có thể do unhandled rejections:</p>
-                            <pre><code>// Global handler
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    // Log to monitoring service
-});
-
-process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error);
-    // Graceful shutdown
-    process.exit(1);
-});</code></pre>
-                        </div>
-
-                        <h2>🚀 Bonus: Useful NPM Packages</h2>
-
-                        <ul>
-                            <li><strong>dotenv</strong> - Environment variables</li>
-                            <li><strong>nodemon</strong> - Auto-restart on file changes</li>
-                            <li><strong>express</strong> - Web framework</li>
-                            <li><strong>mongoose</strong> - MongoDB ODM</li>
-                            <li><strong>axios</strong> - HTTP client</li>
-                            <li><strong>joi</strong> - Data validation</li>
-                            <li><strong>winston</strong> - Logging</li>
-                            <li><strong>pm2</strong> - Production process manager</li>
-                            <li><strong>helmet</strong> - Security headers</li>
-                            <li><strong>cors</strong> - CORS middleware</li>
-                        </ul>
-
-                        <h2>🎯 Kết Luận</h2>
-
-                        <p>Node.js rất mạnh mẽ nhưng cũng dễ "bắn vào chân mình" nếu không cẩn thận! Những tips này mình
-                            học được qua 2 năm làm việc và... vô số lần debug đến 3-4 giờ sáng 😂</p>
-
-                        <p>Remember:</p>
-                        <ul>
-                            <li>✅ Luôn handle errors</li>
-                            <li>✅ Dùng environment variables</li>
-                            <li>✅ Async/await cho clean code</li>
-                            <li>✅ Promise.all() cho parallel operations</li>
-                            <li>✅ Validate inputs</li>
-                            <li>✅ Log properly</li>
-                            <li>✅ Monitor & optimize</li>
-                        </ul>
-
-                        <p>Happy coding! 🚀</p>
+                        <p class="signature">— Nguyễn Thành Luân, ghi chú kỹ thuật Node.js</p>
 
                         <div class="post-tags">
-                            <i class="fas fa-tags"></i>
                             <span class="tag">Node.js</span>
                             <span class="tag">JavaScript</span>
-                            <span class="tag">Backend</span>
-                            <span class="tag">Tips</span>
+                            <span class="tag">Async / Await</span>
+                            <span class="tag">Clean Code</span>
                         </div>
 
                         <div class="post-share">
@@ -525,13 +206,13 @@ process.on('uncaughtException', (error) => {
 
                     <aside class="post-sidebar">
                         <div class="sidebar-card author-card">
-                            <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân" class="author-image">
+                            <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân">
                             <h3>Nguyễn Thành Luân</h3>
-                            <p>Full-stack Developer với 2+ năm kinh nghiệm Node.js. Founder Ma Đạo Community! 💻</p>
+                            <p>Sinh viên Công nghệ Phần mềm (HUTECH) · Thực tập IT HelpDesk &amp; Web tại Hyundai Miền Nam · Founder Ma Đạo Community</p>
                             <div class="author-social">
-                                <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i
-                                        class="fab fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/in/luanem2709" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="https://github.com/luanem2709" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                                 <a href="https://discord.gg/NUh6Mf22" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
                             </div>
                         </div>
@@ -544,29 +225,29 @@ process.on('uncaughtException', (error) => {
                                         <i class="fas fa-robot blog-icon"></i>
                                     </div>
                                     <div class="related-info">
-                                        <h4>Discord Bot A-Z</h4>
+                                        <h4>Xây dựng hệ thống Ticket &amp; Bot Discord</h4>
                                         <span>8 phút đọc</span>
                                     </div>
                                 </a>
                                 <a href="blog-dev-tips.html" class="related-post">
-                                    <div class="related-gradient database-bg">
+                                    <div class="related-gradient code-bg">
                                         <i class="fas fa-code blog-icon"></i>
                                     </div>
                                     <div class="related-info">
-                                        <h4>10 Development Tips</h4>
-                                        <span>9 phút đọc</span>
+                                        <h4>Thói quen làm việc với dự án thật</h4>
+                                        <span>6 phút đọc</span>
                                     </div>
                                 </a>
                             </div>
                         </div>
 
                         <div class="sidebar-card">
-                            <h3>Tags Phổ Biến</h3>
+                            <h3>Chủ Đề Nổi Bật</h3>
                             <div class="tag-cloud">
                                 <span class="tag">Node.js</span>
-                                <span class="tag">Discord Bot</span>
-                                <span class="tag">JavaScript</span>
                                 <span class="tag">Backend</span>
+                                <span class="tag">Async</span>
+                                <span class="tag">Security</span>
                                 <span class="tag">API</span>
                             </div>
                         </div>
@@ -578,11 +259,12 @@ process.on('uncaughtException', (error) => {
 
     <!-- Footer + nút cuộn được nạp bởi component-loader.js -->
 
-    <script src="js/config.js?v=2"></script>
+    <script src="js/config.js?v=5"></script>
     <script src="js/component-loader.js?v=2"></script>
-    <script src="js/theme-manager.js?v=2"></script>
-    <script src="js/blog-reading-progress.js?v=2"></script>
-    <script src="script.js"></script>
+    <script src="js/theme-manager.js?v=5"></script>
+    <script src="js/visual-effects.js?v=5"></script>
+    <script src="js/blog-reading-progress.js?v=5"></script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>
