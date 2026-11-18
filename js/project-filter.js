@@ -5,6 +5,7 @@ class ProjectFilter {
     constructor() {
         this.filterBtns = document.querySelectorAll('.filter-btn');
         this.projectCards = document.querySelectorAll('.project-card');
+        this.timers = new WeakMap();
         this.init();
     }
 
@@ -16,38 +17,48 @@ class ProjectFilter {
         });
     }
 
+    clearCardTimer(card) {
+        const prev = this.timers.get(card);
+        if (prev) {
+            clearTimeout(prev);
+            this.timers.delete(card);
+        }
+    }
+
     filterProjects(btn) {
-        // Update active button
         this.filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // Get filter category
         const filter = btn.getAttribute('data-filter');
 
-        // Filter projects with smooth animation
         this.projectCards.forEach(card => {
+            this.clearCardTimer(card);
             const category = card.getAttribute('data-category');
+            const matches = filter === 'all' || category === filter;
 
-            if (filter === 'all' || category === filter) {
-                // Show card
+            if (matches) {
+                card.classList.add('fade-in-visible', 'reveal-active');
+                card.style.display = '';
+                card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
                 card.style.opacity = '0';
-                card.style.transform = 'scale(0.8)';
-                card.style.display = 'block';
+                card.style.transform = 'scale(0.95)';
 
-                setTimeout(() => {
-                    card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                const timer = setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'scale(1)';
-                }, 10);
+                    this.timers.delete(card);
+                }, 16);
+                this.timers.set(card, timer);
             } else {
-                // Hide card
-                card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
                 card.style.opacity = '0';
-                card.style.transform = 'scale(0.8)';
+                card.style.transform = 'scale(0.95)';
 
-                setTimeout(() => {
+                const timer = setTimeout(() => {
                     card.style.display = 'none';
-                }, 300);
+                    this.timers.delete(card);
+                }, 250);
+                this.timers.set(card, timer);
             }
         });
     }

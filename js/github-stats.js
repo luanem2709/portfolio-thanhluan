@@ -77,15 +77,15 @@ class GitHubStats {
             };
 
         } catch (error) {
-            console.error('Error fetching GitHub stats:', error);
+            console.warn('GitHub stats fallback:', error.message);
             // Use fallback data
             this.stats = {
-                repos: 15,
-                followers: 50,
-                following: 30,
-                stars: 100,
-                forks: 25,
-                topLanguages: ['JavaScript', 'Python', 'HTML'],
+                repos: 22,
+                followers: 2,
+                following: 5,
+                stars: 3,
+                forks: 0,
+                topLanguages: ['HTML', 'TypeScript', 'C#'],
                 latestRepo: { name: 'portfolio-thanhluan', updated_at: new Date().toISOString() }
             };
         }
@@ -93,15 +93,15 @@ class GitHubStats {
 
     createWidget() {
         const widget = document.createElement('div');
-        widget.className = 'github-stats-widget';
+        widget.className = 'github-stats-widget collapsed';
         widget.id = 'github-stats';
         widget.innerHTML = `
-            <div class="github-widget-header">
+            <div class="github-widget-header" role="button" tabindex="0" aria-expanded="false" aria-label="Mở hoặc thu gọn thống kê GitHub">
                 <i class="fab fa-github"></i>
                 <span>GitHub Stats</span>
-                <button class="widget-toggle" title="Toggle Widget">
+                <span class="widget-toggle" aria-hidden="true">
                     <i class="fas fa-chevron-down"></i>
-                </button>
+                </span>
             </div>
             <div class="github-widget-content">
                 <div class="github-stat-grid">
@@ -120,7 +120,7 @@ class GitHubStats {
                         <div class="stat-value" id="gh-followers">--</div>
                         <div class="stat-label">Followers</div>
                     </div>
-                    <div class="github-stat-item">
+                    <div class="github-stat-item github-stat-item--langs">
                         <i class="fas fa-code"></i>
                         <div class="stat-value" id="gh-languages">--</div>
                         <div class="stat-label">Top Languages</div>
@@ -139,9 +139,18 @@ class GitHubStats {
 
         document.body.appendChild(widget);
 
-        // Toggle functionality
-        widget.querySelector('.widget-toggle').addEventListener('click', () => {
-            widget.classList.toggle('collapsed');
+        const header = widget.querySelector('.github-widget-header');
+        const toggleWidget = () => {
+            const isCollapsed = widget.classList.toggle('collapsed');
+            header.setAttribute('aria-expanded', String(!isCollapsed));
+        };
+
+        header.addEventListener('click', toggleWidget);
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleWidget();
+            }
         });
     }
 
@@ -224,22 +233,31 @@ const githubStyles = document.createElement('style');
 githubStyles.textContent = `
     .github-stats-widget {
         position: fixed;
-        bottom: 30px;
-        left: 30px;
-        width: 320px;
+        bottom: 24px;
+        left: 24px;
+        width: 310px;
         background: linear-gradient(135deg, rgba(17, 34, 64, 0.95), rgba(26, 47, 82, 0.95));
         backdrop-filter: blur(20px);
         border-radius: 16px;
         border: 1px solid rgba(0, 212, 255, 0.2);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        z-index: 9996;
+        z-index: 940;
         overflow: hidden;
         transition: all 0.3s ease;
     }
 
+    .github-stats-widget.collapsed {
+        width: max-content;
+        border-radius: 999px;
+    }
+
+    .github-stats-widget.collapsed .github-widget-header {
+        padding: 10px 16px;
+        border-bottom-color: transparent;
+    }
+
     .github-stats-widget.collapsed .github-widget-content {
-        max-height: 0;
-        opacity: 0;
+        display: none;
     }
 
     .github-stats-widget.collapsed .widget-toggle i {
@@ -257,8 +275,9 @@ githubStyles.textContent = `
     }
 
     .github-widget-header i.fa-github {
-        font-size: 20px;
+        font-size: 18px;
         color: #00D4FF;
+        flex-shrink: 0;
     }
 
     .github-widget-header span {
@@ -266,14 +285,20 @@ githubStyles.textContent = `
         color: #E6F1FF;
         font-weight: 600;
         font-size: 14px;
+        white-space: nowrap;
+        line-height: 1.2;
     }
 
     .widget-toggle {
         background: none;
         border: none;
-        color: #8892B0;
+        color: #A8B2D1;
         cursor: pointer;
-        padding: 5px;
+        padding: 2px 4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
         transition: all 0.3s ease;
     }
 
@@ -348,6 +373,16 @@ githubStyles.textContent = `
         margin-bottom: 5px;
     }
 
+    .github-stat-item--langs .stat-value {
+        font-size: 13px;
+        line-height: 1.35;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        word-break: break-word;
+    }
+
     .stat-label {
         font-size: 11px;
         color: #8892B0;
@@ -405,15 +440,32 @@ githubStyles.textContent = `
     /* Mobile responsive */
     @media (max-width: 768px) {
         .github-stats-widget {
-            left: 10px;
-            right: 10px;
+            left: 16px;
+            right: 16px;
             width: auto;
-            bottom: 150px;
-            max-height: 70vh;
+            bottom: 74px;
+            max-height: 68vh;
+        }
+
+        .github-stats-widget.collapsed {
+            right: auto;
+            bottom: 20px;
+            width: max-content;
+            max-width: calc(100vw - 180px);
+        }
+
+        .github-stats-widget.collapsed .github-widget-header {
+            padding: 10px 12px;
+            gap: 8px;
+        }
+
+        .github-stats-widget.collapsed .github-widget-header span {
+            font-size: 12.5px;
+            white-space: nowrap;
         }
 
         .github-widget-content {
-            max-height: calc(70vh - 60px);
+            max-height: calc(68vh - 60px);
             padding: 15px;
         }
 

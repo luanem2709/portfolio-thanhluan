@@ -70,12 +70,12 @@
     }
 }
 
-/* Enhanced Gradient Orb Animations - More Dynamic */
+/* Enhanced Gradient Orb Animations - Subtle Atmospheric Glow */
 .gradient-orb {
     position: fixed;
     border-radius: 50%;
     filter: blur(120px);
-    opacity: 0.5;
+    opacity: 0.22;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: screen;
@@ -133,27 +133,27 @@
     0%,
     100% {
         transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.5;
+        opacity: 0.18;
     }
 
     20% {
         transform: translate(80px, -80px) scale(1.2) rotate(72deg);
-        opacity: 0.6;
+        opacity: 0.24;
     }
 
     40% {
         transform: translate(-60px, 60px) scale(0.9) rotate(144deg);
-        opacity: 0.45;
+        opacity: 0.15;
     }
 
     60% {
         transform: translate(60px, 80px) scale(1.1) rotate(216deg);
-        opacity: 0.55;
+        opacity: 0.22;
     }
 
     80% {
         transform: translate(-80px, -60px) scale(0.95) rotate(288deg);
-        opacity: 0.5;
+        opacity: 0.18;
     }
 }
 
@@ -162,22 +162,22 @@
     0%,
     100% {
         transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.5;
+        opacity: 0.18;
     }
 
     25% {
         transform: translate(-70px, 70px) scale(1.25) rotate(90deg);
-        opacity: 0.6;
+        opacity: 0.24;
     }
 
     50% {
         transform: translate(70px, -70px) scale(0.85) rotate(180deg);
-        opacity: 0.45;
+        opacity: 0.15;
     }
 
     75% {
         transform: translate(-60px, -80px) scale(1.15) rotate(270deg);
-        opacity: 0.55;
+        opacity: 0.2;
     }
 }
 
@@ -186,22 +186,22 @@
     0%,
     100% {
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
-        opacity: 0.5;
+        opacity: 0.16;
     }
 
     25% {
         transform: translate(-50%, -50%) scale(1.3) rotate(120deg);
-        opacity: 0.6;
+        opacity: 0.22;
     }
 
     50% {
         transform: translate(-50%, -50%) scale(0.8) rotate(240deg);
-        opacity: 0.4;
+        opacity: 0.14;
     }
 
     75% {
         transform: translate(-50%, -50%) scale(1.15) rotate(360deg);
-        opacity: 0.55;
+        opacity: 0.2;
     }
 }
 
@@ -210,17 +210,17 @@
     0%,
     100% {
         transform: translate(0, 0) scale(1);
-        opacity: 0.5;
+        opacity: 0.18;
     }
 
     33% {
         transform: translate(-50px, -50px) scale(1.15);
-        opacity: 0.6;
+        opacity: 0.22;
     }
 
     66% {
         transform: translate(50px, 50px) scale(0.9);
-        opacity: 0.45;
+        opacity: 0.15;
     }
 }
 
@@ -229,22 +229,22 @@
     0%,
     100% {
         transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.5;
+        opacity: 0.16;
     }
 
     30% {
         transform: translate(60px, -60px) scale(1.2) rotate(108deg);
-        opacity: 0.55;
+        opacity: 0.22;
     }
 
     60% {
         transform: translate(-60px, 60px) scale(0.85) rotate(216deg);
-        opacity: 0.45;
+        opacity: 0.14;
     }
 
     90% {
         transform: translate(50px, 50px) scale(1.1) rotate(324deg);
-        opacity: 0.5;
+        opacity: 0.18;
     }
 }
 
@@ -260,7 +260,7 @@
             rgba(0, 102, 255, 0.02) 50%);
     background-size: 100% 4px;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
     opacity: 0.3;
 }
 
@@ -304,7 +304,7 @@
     height: 100%;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.08"/></svg>');
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
     opacity: 0.5;
     animation: noiseMove 0.5s steps(10) infinite;
 }
@@ -358,6 +358,8 @@
 /* Spotlight Effect - Enhanced */
 .spotlight {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%),
@@ -365,7 +367,7 @@
             rgba(0, 102, 255, 0.06) 20%,
             transparent 40%);
     pointer-events: none;
-    z-index: 3;
+    z-index: 1;
     opacity: 0;
     transition: opacity 0.5s ease;
 }
@@ -386,7 +388,7 @@ body:hover .spotlight {
             rgba(10, 25, 47, 0.3) 70%,
             rgba(10, 25, 47, 0.6) 100%);
     pointer-events: none;
-    z-index: 4;
+    z-index: 1;
 }
 
 /* Floating Particles/Dust Effect */
@@ -397,7 +399,7 @@ body:hover .spotlight {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -439,7 +441,7 @@ body:hover .spotlight {
     .orb-4,
     .orb-5 {
         filter: blur(80px);
-        opacity: 0.3;
+        opacity: 0.14;
     }
 
     .grid-lines {
@@ -480,8 +482,6 @@ body:hover .spotlight {
     }
 }
 
-}
-
 /* ========================================
    NEW MYSTICAL COSMIC EFFECTS
    ======================================== */
@@ -491,7 +491,7 @@ body:hover .spotlight {
     position: fixed;
     border-radius: 50%;
     filter: blur(150px);
-    opacity: 0.4;
+    opacity: 0.12;
     pointer-events: none;
     mix-blend-mode: screen;
     will-change: transform, opacity;
@@ -508,7 +508,7 @@ body:hover .spotlight {
     top: -30%;
     right: -20%;
     animation: nebulaFloat1 90s ease-in-out infinite;
-    z-index: 8;
+    z-index: 1;
 }
 
 .nebula-2 {
@@ -522,7 +522,7 @@ body:hover .spotlight {
     bottom: -30%;
     left: -25%;
     animation: nebulaFloat2 100s ease-in-out infinite;
-    z-index: 8;
+    z-index: 1;
 }
 
 .nebula-3 {
@@ -536,7 +536,7 @@ body:hover .spotlight {
     top: 40%;
     left: 30%;
     animation: nebulaFloat3 85s ease-in-out infinite;
-    z-index: 8;
+    z-index: 1;
 }
 
 .nebula-4 {
@@ -550,7 +550,7 @@ body:hover .spotlight {
     top: 60%;
     right: 20%;
     animation: nebulaFloat4 95s ease-in-out infinite;
-    z-index: 8;
+    z-index: 1;
 }
 
 @keyframes nebulaFloat1 {
@@ -558,17 +558,17 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 0.4;
+        opacity: 0.12;
     }
 
     33% {
         transform: translate(-100px, 80px) rotate(120deg) scale(1.3);
-        opacity: 0.5;
+        opacity: 0.16;
     }
 
     66% {
         transform: translate(80px, -60px) rotate(240deg) scale(0.9);
-        opacity: 0.35;
+        opacity: 0.1;
     }
 }
 
@@ -577,17 +577,17 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 0.4;
+        opacity: 0.12;
     }
 
     40% {
         transform: translate(120px, -90px) rotate(144deg) scale(1.2);
-        opacity: 0.48;
+        opacity: 0.16;
     }
 
     80% {
         transform: translate(-90px, 100px) rotate(288deg) scale(0.85);
-        opacity: 0.38;
+        opacity: 0.1;
     }
 }
 
@@ -596,12 +596,12 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 0.4;
+        opacity: 0.12;
     }
 
     50% {
         transform: translate(-70px, -70px) rotate(180deg) scale(1.25);
-        opacity: 0.5;
+        opacity: 0.16;
     }
 }
 
@@ -610,29 +610,31 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 0.35;
+        opacity: 0.1;
     }
 
     25% {
         transform: translate(-80px, 60px) rotate(90deg) scale(1.15);
-        opacity: 0.42;
+        opacity: 0.15;
     }
 
     75% {
         transform: translate(90px, -80px) rotate(270deg) scale(0.92);
-        opacity: 0.38;
+        opacity: 0.11;
     }
 }
 
 /* Aurora Wave Effects */
 .aurora-wave {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.14;
     mix-blend-mode: screen;
-    z-index: 5;
+    z-index: 1;
 }
 
 .aurora-1 {
@@ -669,12 +671,12 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translateY(0%) scaleX(1);
-        opacity: 0.6;
+        opacity: 0.14;
     }
 
     50% {
         transform: translateY(-15%) scaleX(1.3);
-        opacity: 0.75;
+        opacity: 0.2;
     }
 }
 
@@ -683,12 +685,12 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translateX(0%) scaleY(1);
-        opacity: 0.6;
+        opacity: 0.14;
     }
 
     50% {
         transform: translateX(10%) scaleY(1.4);
-        opacity: 0.7;
+        opacity: 0.18;
     }
 }
 
@@ -697,17 +699,17 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0%, 0%) rotate(0deg);
-        opacity: 0.6;
+        opacity: 0.12;
     }
 
     33% {
         transform: translate(-5%, 5%) rotate(3deg);
-        opacity: 0.65;
+        opacity: 0.16;
     }
 
     66% {
         transform: translate(5%, -5%) rotate(-3deg);
-        opacity: 0.7;
+        opacity: 0.18;
     }
 }
 
@@ -719,7 +721,7 @@ body:hover .spotlight {
     background: linear-gradient(90deg, #fff, transparent);
     border-radius: 50%;
     pointer-events: none;
-    z-index: 3;
+    z-index: 1;
     opacity: 0;
 }
 
@@ -777,11 +779,12 @@ body:hover .spotlight {
 /* Ethereal Light Beams */
 .light-beam {
     position: fixed;
+    top: 0;
     width: 2px;
     height: 100%;
     pointer-events: none;
     opacity: 0.15;
-    z-index: 10;
+    z-index: 1;
     filter: blur(2px);
 }
 
@@ -887,9 +890,9 @@ body:hover .spotlight {
     border-radius: 50%;
     filter: blur(100px);
     pointer-events: none;
-    opacity: 0.25;
+    opacity: 0.1;
     mix-blend-mode: screen;
-    z-index: 6;
+    z-index: 1;
 }
 
 .dust-1 {
@@ -933,12 +936,12 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg);
-        opacity: 0.25;
+        opacity: 0.08;
     }
 
     50% {
         transform: translate(-50px, 30px) rotate(180deg);
-        opacity: 0.35;
+        opacity: 0.14;
     }
 }
 
@@ -947,12 +950,12 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg);
-        opacity: 0.25;
+        opacity: 0.08;
     }
 
     50% {
         transform: translate(40px, -40px) rotate(-180deg);
-        opacity: 0.32;
+        opacity: 0.13;
     }
 }
 
@@ -961,12 +964,12 @@ body:hover .spotlight {
     0%,
     100% {
         transform: translate(0, 0) rotate(0deg);
-        opacity: 0.25;
+        opacity: 0.08;
     }
 
     50% {
         transform: translate(-30px, -30px) rotate(180deg);
-        opacity: 0.3;
+        opacity: 0.12;
     }
 }
 
@@ -996,7 +999,7 @@ body:hover .spotlight {
     .aurora-wave,
     .light-beam,
     .cosmic-dust {
-        opacity: 0.2;
+        opacity: 0.08;
     }
 
     .shooting-star {

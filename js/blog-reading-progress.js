@@ -29,8 +29,36 @@ class BlogReadingProgress {
         this.createProgressBar();
         this.calculateReadingTime();
         this.attachScrollListener();
-        this.createBackToTop();
         this.markCurrentAsRead();
+        this.initShareButtons();
+    }
+
+    initShareButtons() {
+        const shareButtons = document.querySelectorAll('.share-btn');
+        if (!shareButtons.length) return;
+
+        const url = window.location.href;
+        const title = document.querySelector('h1')?.textContent?.trim() || document.title;
+
+        shareButtons.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (btn.classList.contains('facebook')) {
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+                } else if (btn.classList.contains('twitter')) {
+                    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank', 'noopener,noreferrer');
+                } else if (btn.classList.contains('linkedin')) {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+                } else if (btn.classList.contains('copy')) {
+                    try {
+                        await navigator.clipboard.writeText(url);
+                        this.showNotification('Đã sao chép liên kết bài viết!', 'success');
+                    } catch {
+                        this.showNotification('Không thể tự động sao chép liên kết.', 'info');
+                    }
+                }
+            });
+        });
     }
 
     createProgressBar() {
@@ -93,7 +121,7 @@ class BlogReadingProgress {
 
         // Progress percentage
         const totalScroll = documentHeight - windowHeight;
-        const currentProgress = (scrollTop / totalScroll) * 100;
+        const currentProgress = totalScroll > 0 ? (scrollTop / totalScroll) * 100 : 100;
         const progressPercent = Math.min(100, Math.max(0, currentProgress));
 
         // Update progress bar
@@ -123,32 +151,6 @@ class BlogReadingProgress {
         }
     }
 
-    createBackToTop() {
-        // Enhanced back to top button for blog posts
-        const backToTop = document.createElement('button');
-        backToTop.className = 'blog-back-to-top';
-        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-        backToTop.title = 'Về đầu trang';
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        document.body.appendChild(backToTop);
-
-        // Show/hide based on scroll
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-    }
-
     markCurrentAsRead() {
         // Get article ID from URL or data attribute
         const articleId = this.getArticleId();
@@ -160,7 +162,8 @@ class BlogReadingProgress {
             window.addEventListener('scroll', () => {
                 if (marked) return;
 
-                const scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = totalScroll > 0 ? (window.pageYOffset / totalScroll) * 100 : 0;
 
                 if (scrollPercent > 50) {
                     this.readArticles.push(articleId);
@@ -170,7 +173,7 @@ class BlogReadingProgress {
                     // Show subtle notification
                     this.showNotification('Đã đánh dấu bài viết là đã đọc', 'success');
                 }
-            });
+            }, { passive: true });
         }
     }
 
@@ -199,8 +202,13 @@ class BlogReadingProgress {
     }
 
     loadReadArticles() {
-        const saved = localStorage.getItem('readArticles');
-        return saved ? JSON.parse(saved) : [];
+        try {
+            const saved = localStorage.getItem('readArticles');
+            const parsed = saved ? JSON.parse(saved) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
     }
 
     saveReadArticles() {
@@ -261,10 +269,10 @@ progressStyles.textContent = `
         width: 100%;
         height: 4px;
         background: rgba(10, 25, 47, 0.95);
-        z-index: 9998;
+        z-index: 1005;
         opacity: 0;
         transform: translateY(-100%);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
@@ -282,21 +290,22 @@ progressStyles.textContent = `
     }
 
     .reading-stats {
-        position: absolute;
-        top: 100%;
-        right: 20px;
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
         display: flex;
-        gap: 15px;
+        gap: 12px;
         align-items: center;
-        background: linear-gradient(135deg, #0A192F, #112240);
-        padding: 8px 16px;
-        border-radius: 0 0 8px 8px;
+        background: linear-gradient(135deg, rgba(10, 25, 47, 0.94), rgba(17, 34, 64, 0.94));
+        backdrop-filter: blur(12px);
+        padding: 9px 16px;
+        border-radius: 999px;
         font-size: 12px;
         font-weight: 600;
         color: #E6F1FF;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(0, 212, 255, 0.2);
-        border-top: none;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(0, 212, 255, 0.25);
+        z-index: 940;
     }
 
     .time-remaining {
@@ -311,43 +320,10 @@ progressStyles.textContent = `
     }
 
     .progress-percentage {
-        color: #0066FF;
+        color: #E6F1FF;
         font-weight: 700;
-        min-width: 40px;
+        min-width: 34px;
         text-align: right;
-    }
-
-    .blog-back-to-top {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #0066FF, #00D4FF);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 0;
-        transform: translateY(20px) scale(0.8);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 9997;
-        box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
-        font-size: 18px;
-    }
-
-    .blog-back-to-top.visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-    .blog-back-to-top:hover {
-        transform: translateY(-5px) scale(1.1);
-        box-shadow: 0 8px 30px rgba(0, 212, 255, 0.6);
-    }
-
-    .blog-back-to-top:active {
-        transform: translateY(-2px) scale(1.05);
     }
 
     /* Read article indicator */
@@ -425,18 +401,11 @@ progressStyles.textContent = `
     /* Mobile responsive */
     @media (max-width: 768px) {
         .reading-stats {
-            right: 10px;
-            padding: 6px 12px;
-            gap: 10px;
-            font-size: 11px;
-        }
-
-        .blog-back-to-top {
-            width: 45px;
-            height: 45px;
             bottom: 20px;
-            right: 20px;
-            font-size: 16px;
+            left: 16px;
+            padding: 7px 12px;
+            gap: 8px;
+            font-size: 11px;
         }
 
         .blog-notification {

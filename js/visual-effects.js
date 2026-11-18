@@ -172,7 +172,7 @@ effectsStyles.textContent = `
         width: 0%;
         height: 3px;
         background: linear-gradient(90deg, #0066FF, #00D4FF);
-        z-index: 900;
+        z-index: 1002;
         transition: width 0.1s ease;
         box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     }
@@ -249,8 +249,7 @@ effectsStyles.textContent = `
     /* Performance optimizations */
     .project-card,
     .blog-card,
-    .achievement-card,
-    .hero {
+    .achievement-card {
         will-change: transform;
     }
 

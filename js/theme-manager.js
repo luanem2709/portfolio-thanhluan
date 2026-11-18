@@ -42,8 +42,8 @@ class ThemeManager {
         const controls = document.createElement('div');
         controls.className = 'theme-controls';
         controls.innerHTML = `
-            <button class="theme-toggle" id="dark-mode-toggle" title="Toggle Dark/Light Mode">
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button type="button" class="theme-toggle" id="dark-mode-toggle" title="Chuyển chế độ Tối / Sáng" aria-label="Chuyển chế độ Tối / Sáng">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>
                     <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -54,21 +54,24 @@ class ThemeManager {
                     <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
-                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
             </button>
             
             <div class="theme-selector">
-                <button class="theme-selector-btn" title="Change Theme">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M12 1v6m0 6v6m5-11l-4 4m0 4l-4 4m11-5h-6m-6 0H1m11-5l4-4m0 0l4 4m-4-4v0"></path>
+                <button type="button" class="theme-selector-btn" title="Đổi bảng màu" aria-label="Đổi bảng màu" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
                     </svg>
                 </button>
                 <div class="theme-dropdown">
                     ${Object.keys(this.themes).map(key => `
-                        <button class="theme-option ${key === this.currentTheme ? 'active' : ''}" data-theme="${key}">
+                        <button type="button" class="theme-option ${key === this.currentTheme ? 'active' : ''}" data-theme="${key}">
                             <span class="theme-preview" style="background: linear-gradient(135deg, ${this.themes[key].primary}, ${this.themes[key].secondary})"></span>
                             <span class="theme-name">${this.themes[key].name}</span>
                         </button>
@@ -82,21 +85,27 @@ class ThemeManager {
         // Event listeners
         document.getElementById('dark-mode-toggle').addEventListener('click', () => this.toggleDarkMode());
 
-        document.querySelectorAll('.theme-option').forEach(btn => {
+        const selectorBtn = controls.querySelector('.theme-selector-btn');
+        const dropdown = controls.querySelector('.theme-dropdown');
+
+        controls.querySelectorAll('.theme-option').forEach(btn => {
             btn.addEventListener('click', () => {
                 this.setTheme(btn.dataset.theme);
-                document.querySelector('.theme-dropdown').classList.remove('show');
+                dropdown.classList.remove('show');
+                selectorBtn.setAttribute('aria-expanded', 'false');
             });
         });
 
-        document.querySelector('.theme-selector-btn').addEventListener('click', () => {
-            document.querySelector('.theme-dropdown').classList.toggle('show');
+        selectorBtn.addEventListener('click', () => {
+            const isOpen = dropdown.classList.toggle('show');
+            selectorBtn.setAttribute('aria-expanded', String(isOpen));
         });
 
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.theme-selector')) {
-                document.querySelector('.theme-dropdown').classList.remove('show');
+                dropdown.classList.remove('show');
+                selectorBtn.setAttribute('aria-expanded', 'false');
             }
         });
     }
@@ -221,7 +230,7 @@ themeStyles.textContent = `
         position: fixed;
         top: 100px;
         right: 30px;
-        z-index: 9997;
+        z-index: 950;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -287,17 +296,17 @@ themeStyles.textContent = `
         position: absolute;
         right: 60px;
         top: 0;
-        background: linear-gradient(135deg, rgba(17, 34, 64, 0.95), rgba(26, 47, 82, 0.95));
+        background: rgba(13, 27, 52, 0.97);
         backdrop-filter: blur(20px);
         border-radius: 12px;
         padding: 10px;
         min-width: 200px;
-        border: 1px solid rgba(0, 212, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(0, 212, 255, 0.25);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
         opacity: 0;
         visibility: hidden;
         transform: translateX(10px);
-        transition: all 0.3s ease;
+        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
     }
 
     .theme-dropdown.show {
@@ -343,12 +352,8 @@ themeStyles.textContent = `
     }
 
     /* Smooth theme transition */
-    body.theme-transitioning,
-    body.theme-transitioning * {
-        transition: background-color 0.5s ease, 
-                    color 0.5s ease, 
-                    border-color 0.5s ease,
-                    box-shadow 0.5s ease !important;
+    body.theme-transitioning {
+        transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     /* Dark mode adjustments */
@@ -371,15 +376,28 @@ themeStyles.textContent = `
     @media (max-width: 768px) {
         .theme-controls {
             top: auto;
-            bottom: 80px;
-            right: 20px;
+            bottom: 20px;
+            right: 68px;
             flex-direction: row;
+            gap: 8px;
+        }
+
+        .theme-toggle,
+        .theme-selector-btn {
+            width: 42px;
+            height: 42px;
+        }
+
+        .theme-toggle svg,
+        .theme-selector-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
         .theme-dropdown {
             right: 0;
             top: auto;
-            bottom: 60px;
+            bottom: 52px;
         }
     }
 
@@ -451,13 +469,12 @@ themeStyles.textContent = `
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Ensure content is above overlay */
-    .navbar,
+    /* Ensure content is above overlay without overriding fixed navbar */
     .hero,
     section,
     footer {
         position: relative;
-        z-index: 10;
+        z-index: 2;
     }
 
     /* Footer Dark Mode Styles */

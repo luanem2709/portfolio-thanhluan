@@ -1,7 +1,13 @@
 // Hiệu ứng trang chủ: đếm số liệu + reveal khi scroll
 (function () {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     function animateCounter(el, target, suffix) {
-        const duration = 1400;
+        if (reducedMotion) {
+            el.textContent = target.toLocaleString('vi-VN') + (suffix || '');
+            return;
+        }
+        const duration = 1200;
         const start = performance.now();
         const from = 0;
 
@@ -40,7 +46,7 @@
                 statObserver.unobserve(el);
             });
         },
-        { threshold: 0.35 }
+        { threshold: 0.15 }
     );
 
     document.querySelectorAll('[data-count]').forEach((el) => statObserver.observe(el));
@@ -54,7 +60,7 @@
                 }
             });
         },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px 40px 0px' }
     );
 
     document

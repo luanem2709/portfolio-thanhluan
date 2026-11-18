@@ -9,7 +9,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
-    font-family: 'Montserrat', 'Poppins', sans-serif;
+    font-family: 'Sora', 'IBM Plex Sans', sans-serif;
 }
 
 .logo a::after {

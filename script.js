@@ -43,75 +43,98 @@ if (typingText) {
     document.addEventListener('DOMContentLoaded', type);
 }
 
-// Highlight mục điều hướng theo section đang xem (trang index nhiều section)
-const sections = document.querySelectorAll('section[id]');
+// Animate thanh kỹ năng khi cuộn tới
+const progressBars = document.querySelectorAll('.progress[data-progress]');
 
-function highlightNav() {
-    if (!sections.length) return;
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector(`.nav-link[href*="${sectionId}"]`)?.classList.add('active');
-        } else {
-            document.querySelector(`.nav-link[href*="${sectionId}"]`)?.classList.remove('active');
+if (progressBars.length) {
+    const fillBar = (bar) => {
+        if (bar.dataset.filled === 'true') return;
+        const progress = bar.getAttribute('data-progress');
+        if (progress) {
+            bar.style.width = `${progress}%`;
+            bar.dataset.filled = 'true';
         }
-    });
-}
+    };
 
-if (sections.length) {
-    window.addEventListener('scroll', highlightNav);
-}
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        progressBars.forEach(fillBar);
+    } else {
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                fillBar(entry.target);
+                skillObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px 40px 0px' });
 
-// Animate thanh kỹ năng khi cuộn tới (chỉ khi có #skills)
-const progressBars = document.querySelectorAll('.progress');
-let progressAnimated = false;
-
-function animateProgress() {
-    const skillsSection = document.getElementById('skills');
-    if (!skillsSection) return;
-
-    const skillsSectionTop = skillsSection.offsetTop;
-    const skillsSectionHeight = skillsSection.offsetHeight;
-    const scrollPosition = window.pageYOffset + window.innerHeight;
-
-    if (scrollPosition > skillsSectionTop + skillsSectionHeight / 3 && !progressAnimated) {
-        progressBars.forEach(bar => {
-            const progress = bar.getAttribute('data-progress');
-            bar.style.width = progress + '%';
-        });
-        progressAnimated = true;
+        progressBars.forEach(bar => skillObserver.observe(bar));
     }
 }
 
-if (document.getElementById('skills')) {
-    window.addEventListener('scroll', animateProgress);
-}
-
-// Reveal khi cuộn (nguồn duy nhất cho các card/section chung)
+// Reveal khi cuộn (bỏ qua card do home.js hoặc ProjectFilter tự quản lý)
 const fadeObserverOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px 40px 0px'
 };
 
 const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-active');
-            entry.target.classList.add('fade-in-visible');
+            entry.target.classList.add('reveal-active', 'fade-in-visible');
+            fadeObserver.unobserve(entry.target);
         }
     });
 }, fadeObserverOptions);
 
-const animateElements = document.querySelectorAll('.project-card, .achievement-card, .skill-item, .stat-item, .info-card, .skill-card, .blog-card, .section-header');
+const animateElements = document.querySelectorAll(
+    '.achievement-card, .skill-item, .stat-item, .info-card, .skill-card, .blog-card, .section-header'
+);
 animateElements.forEach(el => {
     el.classList.add('fade-in');
     fadeObserver.observe(el);
 });
+
+// Lightbox xem phóng to chứng chỉ ở trang Thành tựu
+const achievementCards = document.querySelectorAll('.achievement-card');
+if (achievementCards.length) {
+    const lightbox = document.createElement('div');
+    lightbox.className = 'cert-lightbox';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.innerHTML = `
+        <div class="cert-lightbox-inner">
+            <button type="button" class="cert-lightbox-close" aria-label="Đóng">&times;</button>
+            <img src="" alt="">
+            <div class="cert-lightbox-caption"></div>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lbImg = lightbox.querySelector('img');
+    const lbCaption = lightbox.querySelector('.cert-lightbox-caption');
+    const closeLb = () => lightbox.classList.remove('open');
+
+    lightbox.querySelector('.cert-lightbox-close').addEventListener('click', closeLb);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLb();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLb();
+    });
+
+    achievementCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const img = card.querySelector('.achievement-image img');
+            const title = card.querySelector('h3')?.textContent || '';
+            const issuer = card.querySelector('.issuer')?.textContent || '';
+            if (!img) return;
+            lbImg.src = img.src;
+            lbImg.alt = img.alt || title;
+            lbCaption.textContent = issuer ? `${title} — ${issuer}` : title;
+            lightbox.classList.add('open');
+        });
+    });
+}
 
 console.log('%c👋 Xin chào! Welcome!', 'color:#0066FF;font-size:20px;font-weight:bold');
 console.log('%cNguyễn Thành Luân - Software Engineer & Content Creator', 'color:#00D4FF;font-size:14px');

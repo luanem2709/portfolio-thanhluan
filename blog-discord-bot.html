@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="blog-styles.css">
     <link rel="stylesheet" href="blog-post.css">
+    <link rel="stylesheet" href="logo-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Fonts -->
@@ -81,7 +82,7 @@
                     </div>
                     <div class="post-stats">
                         <span><i class="fas fa-clock"></i> 8 phút đọc</span>
-                        <span><i class="fas fa-eye"></i> 1,245 lượt xem</span>
+                        <span><i class="fas fa-eye"></i> 1.2K lượt xem</span>
                     </div>
                 </div>
             </div>
@@ -186,7 +187,7 @@ client.on(Events.MessageCreate, async message => {
     
     // Command: !server
     if (message.content === '!server') {
-        message.reply(`Server: ${message.guild.name}\\nThành viên: ${message.guild.memberCount}`);
+        message.reply(`Server: ${message.guild.name}\nThành viên: ${message.guild.memberCount}`);
     }
 });
 
@@ -325,7 +326,7 @@ client.on(Events.MessageCreate, message => {
                             </ul>
                         </div>
 
-                        <p><strong>Kết luận:</strong> Với Discord Bot quy mô nhỏ/vừa (<5000 users), mình recommend
+                        <p><strong>Kết luận:</strong> Với Discord Bot quy mô nhỏ/vừa (&lt;5000 users), mình recommend
                                 <strong>MongoDB</strong>. Nếu làm bot lớn với nhiều tính năng phức tạp, thì SQL.</p>
 
                         <h2>🚀 Deploy bot lên Cloud</h2>
@@ -428,10 +429,10 @@ client.on(Events.MessageCreate, message => {
                         <div class="post-share">
                             <h4>Chia sẻ bài viết:</h4>
                             <div class="share-buttons">
-                                <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#" class="share-btn copy"><i class="fas fa-link"></i></a>
+                                <a href="#" class="share-btn facebook" title="Chia sẻ lên Facebook" aria-label="Chia sẻ lên Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-btn twitter" title="Chia sẻ lên Twitter / X" aria-label="Chia sẻ lên Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="share-btn linkedin" title="Chia sẻ lên LinkedIn" aria-label="Chia sẻ lên LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="share-btn copy" title="Sao chép liên kết" aria-label="Sao chép liên kết"><i class="fas fa-link"></i></a>
                             </div>
                         </div>
                     </div>

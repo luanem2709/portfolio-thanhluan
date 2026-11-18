@@ -1,9 +1,9 @@
 :root {
-    --home-surface: rgba(10, 25, 47, 0.78);
-    --home-surface-hover: rgba(17, 34, 64, 0.92);
+    --home-surface: rgba(10, 25, 47, 0.84);
+    --home-surface-hover: rgba(17, 34, 64, 0.94);
     --home-border: rgba(0, 212, 255, 0.16);
     --home-border-hover: rgba(0, 212, 255, 0.42);
-    --home-muted: #8892b0;
+    --home-muted: #A8B2D1;
     --home-text: #ccd6f6;
     --home-heading: #e6f1ff;
 }
@@ -12,6 +12,8 @@
 .home-hero {
     position: relative;
     overflow: hidden;
+    padding-top: 96px;
+    padding-bottom: 64px;
 }
 
 .home-hero::before {
@@ -40,13 +42,13 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 16px;
-    margin-bottom: 20px;
+    padding: 7px 14px;
+    margin-bottom: 14px;
     border-radius: 999px;
     background: rgba(0, 212, 255, 0.08);
     border: 1px solid rgba(0, 212, 255, 0.22);
     color: var(--home-text);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 500;
 }
 
@@ -65,25 +67,25 @@
 }
 
 .home-hero .greeting {
-    font-size: 1.05rem;
+    font-size: 1rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .home-hero .hero-title {
-    font-size: clamp(2.4rem, 5vw, 3.75rem);
-    margin-bottom: 12px;
+    font-size: clamp(2.15rem, 4vw, 3.25rem);
+    margin-bottom: 10px;
 }
 
 .home-hero .hero-subtitle {
-    font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
     min-height: 1.3em;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.15em;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .typing-prefix {
@@ -92,13 +94,18 @@
     font-weight: 600;
 }
 
+.home-hero .cursor {
+    -webkit-text-fill-color: var(--s);
+    color: var(--s);
+}
+
 .hero-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 18px;
+    gap: 8px 16px;
     list-style: none;
     padding: 0;
-    margin: 0 0 22px;
+    margin: 0 0 16px;
 }
 
 .hero-meta li {
@@ -116,16 +123,16 @@
 
 .home-hero .hero-description {
     max-width: 540px;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    margin-bottom: 22px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
 }
 
 .hero-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
 }
 
 .hero-tag {
@@ -140,8 +147,9 @@
 
 .home-hero .hero-buttons {
     flex-wrap: wrap;
+    align-items: center;
     gap: 14px;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
 }
 
 .home-hero .hero-buttons .btn {
@@ -149,15 +157,22 @@
 }
 
 .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: transparent;
     color: var(--home-muted);
-    border: none;
-    padding: 13px 8px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 12px 16px;
     font-weight: 600;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
 .btn-ghost:hover {
     color: #00d4ff;
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.22);
 }
 
 .hero-float-card {
@@ -426,16 +441,24 @@
 .home-featured .project-link {
     display: inline-flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
+    width: auto;
+    height: auto;
+    background: none;
+    border-radius: 0;
     margin-top: 16px;
     color: #00d4ff;
     font-weight: 600;
     font-size: 0.92rem;
-    transition: gap 0.2s ease;
+    transition: gap 0.2s ease, color 0.2s ease;
 }
 
 .home-featured .project-link:hover {
     gap: 12px;
+    transform: none;
+    box-shadow: none;
+    color: #e6f1ff;
 }
 
 /* About preview */
@@ -452,9 +475,11 @@
 
 .home-about-image img {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     border-radius: 20px;
-    border: 3px solid rgba(0, 212, 255, 0.25);
+    border: 3px solid rgba(0, 212, 255, 0.28);
+    background: #ffffff;
+    padding: 10px;
     display: block;
     margin: 0 auto;
 }
@@ -633,9 +658,15 @@
 }
 
 @media (max-width: 768px) {
+    .home-hero {
+        padding-top: 96px;
+        padding-bottom: 96px;
+        align-items: flex-start;
+    }
+
     .home-hero .hero-content {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 36px;
         text-align: center;
     }
 
@@ -654,11 +685,21 @@
     .hero-meta {
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
+        margin-bottom: 12px;
     }
 
     .home-hero .hero-subtitle {
         justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .home-hero .hero-description {
+        margin-bottom: 18px;
+    }
+
+    .home-hero .hero-buttons {
+        margin-bottom: 16px;
     }
 }
 

@@ -235,20 +235,10 @@
 
 /* Achievement Badge Enhancement */
 .achievement-badge {
-    box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
-    animation: badgeFloat 3s ease-in-out infinite;
+    box-shadow: 0 4px 16px rgba(0, 102, 255, 0.35);
 }
 
-@keyframes badgeFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-/* Button Enhancement */
+/* Button Icon Smooth Transition */
 .btn {
     position: relative;
     overflow: hidden;
@@ -260,41 +250,7 @@
 }
 
 .btn:hover i {
-    transform: translateX(5px);
-}
-
-.btn-primary i {
-    animation: buttonIconPulse 2s ease-in-out infinite;
-}
-
-@keyframes buttonIconPulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-/* Download CV Button Special Effect */
-a[download] {
-    position: relative;
-}
-
-a[download]::after {
-    content: '📄';
-    position: absolute;
-    right: -30px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-a[download]:hover::after {
-    right: -35px;
-    opacity: 1;
+    transform: translateX(3px);
 }
 
 /* Social Links Enhancement */
@@ -325,25 +281,6 @@ a[download]:hover::after {
 /* Filter Buttons Enhancement */
 .filter-btn {
     position: relative;
-}
-
-.filter-btn::before {
-    content: attr(data-filter);
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #0066FF;
-    color: white;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 10px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.filter-btn.active::before {
-    content: '✓';
-    opacity: 1;
 }
 
 /* Contact Form Enhancement */

@@ -8,14 +8,14 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', 'Sora', system-ui, sans-serif;
     background: linear-gradient(-45deg, #0A192F, #112240, #1a365d, #0d2847);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: #8892B0;
     line-height: 1.6;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 @keyframes gradientBG {
@@ -48,74 +48,7 @@ body::before {
 }
 
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(10, 25, 47, 0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    z-index: 1000;
-    padding: 20px 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo a {
-    font-size: 28px;
-    font-weight: 700;
-    color: #FFF;
-    text-decoration: none;
-    text-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
-    transition: 0.3s;
-}
-
-.logo a:hover {
-    color: #0066FF;
-}
-
-.nav-list {
-    display: flex;
-    list-style: none;
-    gap: 40px;
-}
-
-.nav-link {
-    color: #8892B0;
-    font-weight: 500;
-    position: relative;
-    padding: 5px 0;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(135deg, #0066FF, #00D4FF);
-    transition: 0.3s;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: #0066FF;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
+    padding: 16px 0;
 }
 
 .container {
@@ -146,6 +79,7 @@ body::before {
     right: 0;
     bottom: 0;
     background: radial-gradient(circle at 30% 50%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .breadcrumb {
@@ -273,6 +207,10 @@ body::before {
 
 .post-featured-gradient.community-bg {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.post-featured-gradient.database-bg {
+    background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
 }
 
 .post-featured-gradient i {
@@ -532,6 +470,7 @@ body::before {
 
 .post-tags {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 10px;
     margin: 50px 0 30px;
@@ -539,10 +478,16 @@ body::before {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.post-tags .tag,
+.tag-cloud .tag {
+    white-space: nowrap;
+}
+
 .post-share {
     margin-top: 40px;
     padding: 30px;
     background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
 }
 
@@ -553,17 +498,19 @@ body::before {
 
 .share-buttons {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 14px;
 }
 
 .share-btn {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff !important;
+    text-decoration: none !important;
     transition: all 0.3s;
 }
 
@@ -580,19 +527,35 @@ body::before {
 }
 
 .share-btn.copy {
-    background: #6c757d;
+    background: #4b5563;
 }
 
 .share-btn:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    color: #fff !important;
 }
 
 /* Sidebar */
-.sidebar {
+.sidebar,
+.post-sidebar {
     position: sticky;
     top: 100px;
     height: fit-content;
+}
+
+.sidebar-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 28px;
+    margin-bottom: 26px;
+}
+
+.sidebar-card h3 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 18px;
 }
 
 .author-card {
@@ -607,6 +570,7 @@ body::before {
 .author-card img {
     width: 100px;
     height: 100px;
+    object-fit: cover;
     border-radius: 50%;
     border: 3px solid #3498db;
     margin: 0 auto 20px;
@@ -624,13 +588,15 @@ body::before {
     margin-bottom: 20px;
 }
 
-.author-card .social-links {
+.author-card .social-links,
+.author-card .author-social {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
-.author-card .social-links a {
+.author-card .social-links a,
+.author-card .author-social a {
     width: 38px;
     height: 38px;
     background: rgba(52, 152, 219, 0.1);
@@ -642,7 +608,8 @@ body::before {
     transition: all 0.3s;
 }
 
-.author-card .social-links a:hover {
+.author-card .social-links a:hover,
+.author-card .author-social a:hover {
     background: #3498db;
     color: white;
 }
@@ -654,6 +621,12 @@ body::before {
     padding: 30px;
 }
 
+.sidebar-card .related-posts {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
 .related-posts h3 {
     color: white;
     font-size: 18px;
@@ -662,15 +635,31 @@ body::before {
 
 .related-post {
     display: flex;
+    align-items: center;
     gap: 15px;
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
     transition: all 0.3s;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+}
+
+.related-post:last-child {
+    margin-bottom: 0;
 }
 
 .related-post:hover {
-    background: rgba(52, 152, 219, 0.05);
+    background: rgba(52, 152, 219, 0.08);
+}
+
+.related-info span {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .related-post img {
@@ -703,7 +692,15 @@ body::before {
 }
 
 .related-gradient.database-bg {
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
+}
+
+.related-gradient.game-bg {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.related-gradient.marketing-bg {
+    background: linear-gradient(135deg, #ff2d55 0%, #7928ca 100%);
 }
 
 .related-gradient i {
@@ -729,7 +726,8 @@ body::before {
         grid-template-columns: 1fr;
     }
 
-    .sidebar {
+    .sidebar,
+    .post-sidebar {
         position: static;
     }
 
@@ -740,7 +738,15 @@ body::before {
 
 @media (max-width: 768px) {
     .post-header h1 {
-        font-size: 32px;
+        font-size: 30px;
+    }
+
+    .post-featured-gradient {
+        height: 240px;
+    }
+
+    .post-featured-gradient i {
+        font-size: 110px;
     }
 
     .main-content {

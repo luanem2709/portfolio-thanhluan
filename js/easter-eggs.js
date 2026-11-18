@@ -20,17 +20,24 @@ class EasterEggs {
         // Secret word listener
         document.addEventListener('keypress', (e) => this.checkSecretWord(e));
 
-        // Logo click counter
-        const logo = document.querySelector('.logo a');
-        if (logo) {
-            logo.addEventListener('click', (e) => this.handleLogoClick(e));
-        }
+        // Logo click counter (event delegation for async navbar)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.logo a')) {
+                this.handleLogoClick(e);
+            }
+        });
 
         // Console easter egg
         this.consoleArt();
     }
 
+    isTypingInField(e) {
+        const tag = e.target?.tagName;
+        return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || Boolean(e.target?.isContentEditable);
+    }
+
     checkKonamiCode(e) {
+        if (this.isTypingInField(e)) return;
         if (e.key === this.konamiCode[this.konamiIndex]) {
             this.konamiIndex++;
 
@@ -73,21 +80,36 @@ class EasterEggs {
 
         document.body.appendChild(gameContainer);
 
+        let rafId = null;
+        let isClosed = false;
+        const onKeyDown = (e) => { keys[e.key] = true; };
+        const onKeyUp = (e) => { keys[e.key] = false; };
+
         // Close button
         gameContainer.querySelector('.game-close').addEventListener('click', () => {
+            isClosed = true;
+            if (rafId) cancelAnimationFrame(rafId);
+            document.removeEventListener('keydown', onKeyDown);
+            document.removeEventListener('keyup', onKeyUp);
             gameContainer.remove();
         });
 
         // Initialize simple game
-        this.initSimpleGame(gameContainer.querySelector('#game-canvas'));
+        this.initSimpleGame(
+            gameContainer.querySelector('#game-canvas'),
+            () => isClosed,
+            (id) => { rafId = id; },
+            onKeyDown,
+            onKeyUp
+        );
     }
 
-    initSimpleGame(canvas) {
+    initSimpleGame(canvas, isClosed, setRafId, onKeyDown, onKeyUp) {
         const ctx = canvas.getContext('2d');
         let score = 0;
-        let player = { x: 200, y: 200, size: 20, speed: 5 };
-        let orbs = [];
-        let keys = {};
+        const player = { x: 200, y: 200, size: 20, speed: 5 };
+        const orbs = [];
+        const keys = {};
 
         // Generate orbs
         for (let i = 0; i < 5; i++) {
@@ -98,12 +120,25 @@ class EasterEggs {
             });
         }
 
-        // Key listeners
-        document.addEventListener('keydown', (e) => keys[e.key] = true);
-        document.addEventListener('keyup', (e) => keys[e.key] = false);
+        const handleKeyDown = (e) => {
+            keys[e.key] = true;
+            onKeyDown(e);
+        };
+        const handleKeyUp = (e) => {
+            keys[e.key] = false;
+            onKeyUp(e);
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
 
         // Game loop
         function gameLoop() {
+            if (isClosed()) {
+                document.removeEventListener('keydown', handleKeyDown);
+                document.removeEventListener('keyup', handleKeyUp);
+                return;
+            }
             // Clear canvas
             ctx.fillStyle = '#0A192F';
             ctx.fillRect(0, 0, 400, 400);
@@ -142,7 +177,8 @@ class EasterEggs {
                 if (distance < player.size + orb.size) {
                     orbs.splice(i, 1);
                     score += 10;
-                    document.getElementById('game-score').textContent = score;
+                    const scoreEl = document.getElementById('game-score');
+                    if (scoreEl) scoreEl.textContent = score;
 
                     // Add new orb
                     orbs.push({
@@ -153,13 +189,14 @@ class EasterEggs {
                 }
             }
 
-            requestAnimationFrame(gameLoop);
+            setRafId(requestAnimationFrame(gameLoop));
         }
 
         gameLoop();
     }
 
     checkSecretWord(e) {
+        if (this.isTypingInField(e) || !e.key) return;
         this.typedWord += e.key.toLowerCase();
 
         if (this.typedWord.length > this.secretWord.length) {
@@ -184,8 +221,18 @@ class EasterEggs {
     }
 
     handleLogoClick(e) {
+        const path = window.location.pathname;
+        const onHome = path.endsWith('/') || path.endsWith('/index.html') || path === 'index.html';
+        if (!onHome) return;
+
         e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         this.logoClickCount++;
+
+        clearTimeout(this.logoResetTimer);
+        this.logoResetTimer = setTimeout(() => {
+            this.logoClickCount = 0;
+        }, 2500);
 
         if (this.logoClickCount >= CONFIG.secrets.logoClickCount) {
             this.activateMatrixRain();

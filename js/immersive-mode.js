@@ -376,12 +376,11 @@ immersiveStyles.textContent = `
     }
 
     /* Ensure content is above overlay */
-    .navbar,
     .hero,
     section,
     footer {
         position: relative;
-        z-index: 10;
+        z-index: 2;
     }
 `;
 document.head.appendChild(immersiveStyles);
