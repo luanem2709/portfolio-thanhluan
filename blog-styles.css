@@ -87,71 +87,30 @@
 
 .blog-image {
     position: relative;
-    height: 196px;
+    height: 198px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #0369a1 0%, #38bdf8 100%);
+    background: var(--surface-muted, #eef6ff);
+    border-bottom: 1px solid var(--line, #dbeafe);
 }
 
 .blog-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 82% 20%, rgba(255, 255, 255, 0.24), transparent 55%);
-    pointer-events: none;
-}
-
-.blog-image.web-bg {
-    background: linear-gradient(135deg, #075985 0%, #0ea5e9 100%);
-}
-
-.blog-image.code-bg {
-    background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
-}
-
-.blog-image.database-bg {
-    background: linear-gradient(135deg, #1d4ed8 0%, #38bdf8 100%);
-}
-
-.blog-image.community-bg {
-    background: linear-gradient(135deg, #0ea5e9 0%, #7dd3fc 100%);
-}
-
-.blog-image.game-bg {
-    background: linear-gradient(135deg, #0369a1 0%, #60a5fa 100%);
-}
-
-.blog-image.marketing-bg,
-.blog-image.content-bg {
-    background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%);
-}
-
-.blog-image .blog-icon {
-    position: relative;
-    z-index: 1;
-    width: 78px;
-    height: 78px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    font-size: 36px;
-    color: #ffffff;
-    transition: transform 0.28s var(--ease-out), background 0.28s var(--ease-out);
-    text-shadow: 0 4px 16px rgba(7, 29, 51, 0.18);
-}
-
-.blog-card:hover .blog-icon {
-    transform: translateY(-3px) scale(1.08);
-    background: rgba(255, 255, 255, 0.24);
+    content: none;
 }
 
 .blog-image img {
-    display: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s var(--ease-out);
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
 }
 
 .blog-category {

@@ -30,9 +30,9 @@
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-nodejs-tips.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=5">
-    <link rel="stylesheet" href="blog-styles.css?v=5">
-    <link rel="stylesheet" href="blog-post.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="blog-styles.css?v=6">
+    <link rel="stylesheet" href="blog-post.css?v=6">
     <link rel="stylesheet" href="logo-style.css?v=5">
     <link rel="stylesheet" href="animations.css?v=5">
     <link rel="stylesheet" href="enhanced-styles.css?v=5">
@@ -90,9 +90,9 @@
         </div>
 
         <div class="post-featured-image">
-            <div class="post-featured-gradient database-bg">
-                <i class="fab fa-node-js"></i>
-            </div>
+            <figure class="post-cover-frame">
+                <img src="assets/blog-nodejs.jpg" alt="Không gian lập trình và kiến trúc ứng dụng Node.js">
+            </figure>
         </div>
 
         <div class="post-content">
@@ -184,6 +184,11 @@ module.exports = router;</code></pre>
                         <h2>6. Bảo vệ lớp đầu vào trước khi xử lý</h2>
                         <p>Dù là API hay form tiếp nhận, luôn xác thực và chuẩn hóa dữ liệu từ người dùng (bằng <code>express-validator</code>, <code>joi</code> hoặc kiểm tra kiểu thủ công), đi kèm giới hạn tần suất (<code>express-rate-limit</code>) và header bảo mật (<code>helmet</code>) để giảm rủi ro khi mở cổng ra ngoài Internet.</p>
 
+                        <figure class="article-figure article-figure--contain">
+                            <img src="assets/cisco-js2.jpg" alt="Chứng chỉ JavaScript Essentials 2 từ Cisco Networking Academy và JS Institute" loading="lazy">
+                            <figcaption>Nền tảng JavaScript vững từ khóa Cisco JS Essentials 2 giúp việc kiểm soát bất đồng bộ và scope trong Node.js chắc chắn hơn.</figcaption>
+                        </figure>
+
                         <p class="signature">— Nguyễn Thành Luân, ghi chú kỹ thuật Node.js</p>
 
                         <div class="post-tags">
@@ -221,18 +226,14 @@ module.exports = router;</code></pre>
                             <h3>Bài Viết Liên Quan</h3>
                             <div class="related-posts">
                                 <a href="blog-discord-bot.html" class="related-post">
-                                    <div class="related-gradient code-bg">
-                                        <i class="fas fa-robot blog-icon"></i>
-                                    </div>
+                                    <img class="related-thumb" src="assets/blog-discord-bot.jpg" alt="Xây dựng hệ thống Ticket và Bot Discord">
                                     <div class="related-info">
                                         <h4>Xây dựng hệ thống Ticket &amp; Bot Discord</h4>
                                         <span>8 phút đọc</span>
                                     </div>
                                 </a>
                                 <a href="blog-dev-tips.html" class="related-post">
-                                    <div class="related-gradient code-bg">
-                                        <i class="fas fa-code blog-icon"></i>
-                                    </div>
+                                    <img class="related-thumb" src="assets/blog-dev-tips.jpg" alt="Thói quen làm việc với dự án thật">
                                     <div class="related-info">
                                         <h4>Thói quen làm việc với dự án thật</h4>
                                         <span>6 phút đọc</span>

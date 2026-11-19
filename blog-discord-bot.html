@@ -30,9 +30,9 @@
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-discord-bot.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=5">
-    <link rel="stylesheet" href="blog-styles.css?v=5">
-    <link rel="stylesheet" href="blog-post.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="blog-styles.css?v=6">
+    <link rel="stylesheet" href="blog-post.css?v=6">
     <link rel="stylesheet" href="logo-style.css?v=5">
     <link rel="stylesheet" href="animations.css?v=5">
     <link rel="stylesheet" href="enhanced-styles.css?v=5">
@@ -90,9 +90,9 @@
         </div>
 
         <div class="post-featured-image">
-            <div class="post-featured-gradient code-bg">
-                <i class="fas fa-robot"></i>
-            </div>
+            <figure class="post-cover-frame">
+                <img src="assets/blog-discord-bot.jpg" alt="Minh họa hệ thống Ticket và Discord Bot bằng Node.js">
+            </figure>
         </div>
 
         <div class="post-content">
@@ -109,6 +109,11 @@
                             <li>Bot tự mở một kênh riêng tư chỉ gồm người gửi và đội ngũ có quyền <code>roleSupport</code>.</li>
                             <li>Nhân sự có thể khóa, mở lại hoặc đóng và đưa kênh về mục lưu trữ thay vì xóa mất dữ liệu.</li>
                         </ul>
+
+                        <figure class="article-figure">
+                            <img src="assets/cert6.jpg" alt="Hoạt động sinh hoạt cộng đồng Ma Đạo Community" loading="lazy">
+                            <figcaption>Một buổi tập trung thành viên trong cộng đồng Ma Đạo — bối cảnh phát triển Ma Đạo Ticket Bot.</figcaption>
+                        </figure>
 
                         <h2>2. Thiết lập môi trường &amp; bảo mật Token</h2>
                         <p>Dự án dùng Node.js bản LTS cùng hai gói cơ bản là <code>discord.js</code> và <code>dotenv</code>. Điểm quan trọng nhất khi khởi tạo trên <em>Discord Developer Portal</em> là bật đúng <strong>Gateway Intents</strong> phù hợp (<code>Guilds</code>, <code>GuildMessages</code>, <code>MessageContent</code>) và tách toàn bộ Token ra file <code>.env</code> kèm khai báo trong <code>.gitignore</code> để tránh rò rỉ khóa truy cập lên GitHub.</p>
@@ -232,18 +237,14 @@ client.login(process.env.TOKEN);</code></pre>
                             <h3>Bài Viết Liên Quan</h3>
                             <div class="related-posts">
                                 <a href="blog-nodejs-tips.html" class="related-post">
-                                    <div class="related-gradient database-bg">
-                                        <i class="fab fa-node-js"></i>
-                                    </div>
+                                    <img class="related-thumb" src="assets/blog-nodejs.jpg" alt="Những nguyên tắc giữ mã nguồn Node.js ổn định">
                                     <div class="related-info">
                                         <h4>Những nguyên tắc giữ mã nguồn Node.js ổn định</h4>
                                         <span>7 phút đọc</span>
                                     </div>
                                 </a>
                                 <a href="blog-dev-tips.html" class="related-post">
-                                    <div class="related-gradient code-bg">
-                                        <i class="fas fa-code"></i>
-                                    </div>
+                                    <img class="related-thumb" src="assets/blog-dev-tips.jpg" alt="Thói quen làm việc với dự án thật">
                                     <div class="related-info">
                                         <h4>Thói quen làm việc với dự án thật</h4>
                                         <span>6 phút đọc</span>

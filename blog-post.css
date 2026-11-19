@@ -145,78 +145,89 @@ body {
 
 .post-featured-image {
     max-width: 1200px;
-    margin: 30px auto 44px;
+    margin: 28px auto 40px;
     padding: 0 20px;
 }
 
-.post-featured-gradient {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 240px;
+.post-cover-frame {
+    margin: 0;
     border-radius: 22px;
-    box-shadow: var(--shadow-md, 0 18px 44px rgba(14, 116, 184, 0.14));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0369a1 0%, #38bdf8 100%);
-}
-
-.post-featured-gradient::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.26), transparent 48%),
-        radial-gradient(circle at 18% 85%, rgba(255, 255, 255, 0.14), transparent 42%);
-    pointer-events: none;
-}
-
-.post-featured-gradient.web-bg {
-    background: linear-gradient(135deg, #075985 0%, #0ea5e9 100%);
-}
-
-.post-featured-gradient.code-bg {
-    background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
-}
-
-.post-featured-gradient.marketing-bg,
-.post-featured-gradient.content-bg {
-    background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%);
-}
-
-.post-featured-gradient.game-bg {
-    background: linear-gradient(135deg, #0369a1 0%, #60a5fa 100%);
-}
-
-.post-featured-gradient.community-bg {
-    background: linear-gradient(135deg, #0ea5e9 0%, #7dd3fc 100%);
-}
-
-.post-featured-gradient.database-bg {
-    background: linear-gradient(135deg, #1d4ed8 0%, #38bdf8 100%);
-}
-
-.post-featured-gradient i {
-    position: relative;
-    z-index: 1;
-    width: 104px;
-    height: 104px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 28px;
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    font-size: 48px;
-    color: #ffffff;
-    text-shadow: 0 6px 20px rgba(7, 29, 51, 0.18);
-}
-
-.post-featured-image img {
-    width: 100%;
-    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--line, #dbeafe);
+    background: var(--surface, #ffffff);
     box-shadow: var(--shadow-md, 0 18px 44px rgba(14, 116, 184, 0.12));
+}
+
+.post-cover-frame img {
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.post-cover-frame--screenshot {
+    background: linear-gradient(135deg, var(--surface-muted, #eef6ff) 0%, var(--brand-soft, #e0f2fe) 100%);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-cover-frame--screenshot img {
+    width: min(100%, 760px);
+    height: auto;
+    max-height: 380px;
+    object-fit: contain;
+    border-radius: 14px;
+    border: 1px solid var(--line, #dbeafe);
+    box-shadow: var(--shadow-md, 0 14px 32px rgba(14, 116, 184, 0.14));
+}
+
+.article-figure {
+    margin: 28px 0;
+    background: var(--surface, #ffffff);
+    border: 1px solid var(--line, #dbeafe);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.article-figure img {
+    width: 100%;
+    max-height: 430px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.article-figure--contain img {
+    object-fit: contain;
+    padding: 16px;
+    background: var(--surface, #ffffff);
+    max-height: 380px;
+}
+
+.article-figure--compact {
+    max-width: 500px;
+    margin: 28px auto;
+}
+
+.article-figure--compact img {
+    object-fit: contain;
+    padding: 18px;
+    background: var(--surface-muted, #eef6ff);
+    max-height: 240px;
+}
+
+.article-figure figcaption {
+    padding: 12px 18px;
+    font-size: 13.5px;
+    color: var(--muted, #5a728a);
+    background: var(--surface-muted, #eef6ff);
+    border-top: 1px solid var(--line, #dbeafe);
+    text-align: center;
+    line-height: 1.5;
 }
 
 .post-content {
@@ -689,6 +700,17 @@ body {
     gap: 8px;
 }
 
+.related-thumb {
+    width: 74px;
+    height: 54px;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+    border: 1px solid var(--line, #dbeafe);
+    background: var(--surface-muted, #eef6ff);
+}
+
 .related-gradient {
     width: 68px;
     height: 68px;
@@ -782,5 +804,13 @@ body {
 
     .post-featured-image {
         margin: 22px auto 30px;
+    }
+
+    .post-cover-frame img {
+        max-height: 240px;
+    }
+
+    .post-cover-frame--screenshot {
+        padding: 12px;
     }
 }
