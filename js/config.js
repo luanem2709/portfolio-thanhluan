@@ -44,12 +44,10 @@ const CONFIG = {
         }
     },
 
-    // Feature flags (chỉ giữ những flag thực sự được script đọc)
+    // Feature flags
     features: {
-        particleCursor: false,
         easterEggs: true,
-        githubStats: true,
-        musicPlayer: false
+        githubStats: true
     },
 
     // API endpoints
@@ -71,14 +69,6 @@ const CONFIG = {
         github: 'luanem2709',
         discord: 'Ma Đạo Community',
         tiktok: '@LuanEm2709'
-    },
-
-    // Animation settings
-    animations: {
-        terminalSpeed: 50,
-        particleCount: 50,
-        typingSpeed: 150,
-        scrollRevealDelay: 100
     },
 
     // Easter eggs

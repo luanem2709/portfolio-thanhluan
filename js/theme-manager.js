@@ -121,14 +121,9 @@ class ThemeManager {
         const theme = this.themes[this.currentTheme] || this.themes.default;
         const root = document.documentElement;
 
-        // Xoá lớp overlay cũ nếu tồn tại
-        const oldOverlay = document.querySelector('.immersive-overlay');
-        if (oldOverlay) oldOverlay.remove();
-
         root.dataset.theme = this.isDark ? 'dark' : 'light';
         root.style.colorScheme = this.isDark ? 'dark' : 'light';
         document.body.classList.toggle('dark-mode', this.isDark);
-        document.body.classList.remove('immersive-mode');
 
         if (this.currentTheme === 'default' && !this.isDark) {
             root.style.removeProperty('--brand');

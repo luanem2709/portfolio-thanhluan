@@ -356,6 +356,7 @@
     color: var(--home-heading);
     margin-bottom: 6px;
     font-family: 'Be Vietnam Pro', 'Sora', sans-serif;
+    font-variant-numeric: tabular-nums;
 }
 
 .home-stat span {
