@@ -1,0 +1,188 @@
+class BlogReadingProgress{constructor(){this.progressBar=null,this.progressContainer=null,this.timeEstimate=null,this.articleBody=null,this.readingSpeed=200,this.totalWords=0,this.readArticles=this.loadReadArticles(),this.init()}init(){if(this.articleBody=document.querySelector(".blog-post-content, .post-content, article.blog-post"),!this.articleBody){this.markReadArticlesInList(),this.initBlogFilter();return}this.createProgressBar(),this.calculateReadingTime(),this.attachScrollListener(),this.markCurrentAsRead(),this.initShareButtons(),this.initCodeCopyButtons()}initBlogFilter(){const i=document.querySelectorAll(".blog-filter-btn"),e=document.querySelectorAll(".blog-card[data-category]");!i.length||!e.length||i.forEach(t=>{t.addEventListener("click",()=>{i.forEach(r=>{r.classList.remove("active"),r.setAttribute("aria-pressed","false")}),t.classList.add("active"),t.setAttribute("aria-pressed","true");const o=t.getAttribute("data-filter");e.forEach(r=>{const n=r.getAttribute("data-category"),s=o==="all"||n===o;r.style.display=s?"":"none"})})})}initCodeCopyButtons(){this.articleBody.querySelectorAll("pre").forEach(e=>{if(e.querySelector(".copy-code-btn"))return;e.classList.add("has-copy-btn");const t=document.createElement("button");t.type="button",t.className="copy-code-btn",t.innerHTML='<i class="far fa-copy"></i> Sao ch\xE9p',t.addEventListener("click",async()=>{const o=e.querySelector("code"),r=o?o.innerText:e.innerText;try{await navigator.clipboard.writeText(r),t.innerHTML='<i class="fas fa-check"></i> \u0110\xE3 ch\xE9p',t.classList.add("copied"),setTimeout(()=>{t.innerHTML='<i class="far fa-copy"></i> Sao ch\xE9p',t.classList.remove("copied")},1800)}catch{this.showNotification("Kh\xF4ng th\u1EC3 sao ch\xE9p \u0111o\u1EA1n m\xE3.","info")}}),e.appendChild(t)})}initShareButtons(){const i=document.querySelectorAll(".share-btn");if(!i.length)return;const e=window.location.href,t=document.querySelector("h1")?.textContent?.trim()||document.title;i.forEach(o=>{o.addEventListener("click",async r=>{if(r.preventDefault(),o.classList.contains("facebook"))window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(e)}`,"_blank","noopener,noreferrer");else if(o.classList.contains("twitter"))window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(e)}&text=${encodeURIComponent(t)}`,"_blank","noopener,noreferrer");else if(o.classList.contains("linkedin"))window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(e)}`,"_blank","noopener,noreferrer");else if(o.classList.contains("copy"))try{await navigator.clipboard.writeText(e),this.showNotification("\u0110\xE3 sao ch\xE9p li\xEAn k\u1EBFt b\xE0i vi\u1EBFt!","success")}catch{this.showNotification("Kh\xF4ng th\u1EC3 t\u1EF1 \u0111\u1ED9ng sao ch\xE9p li\xEAn k\u1EBFt.","info")}})})}createProgressBar(){this.progressContainer=document.createElement("div"),this.progressContainer.className="reading-progress-container",this.progressContainer.innerHTML='<div class="reading-progress-bar"></div>',document.body.prepend(this.progressContainer);const i=document.createElement("div");i.className="reading-stats",i.innerHTML=`
+            <span class="time-remaining">
+                <i class="fas fa-clock"></i>
+                <span class="time-text">T\xEDnh to\xE1n...</span>
+            </span>
+            <span class="progress-percentage">0%</span>
+        `,document.body.appendChild(i),this.progressBar=this.progressContainer.querySelector(".reading-progress-bar"),this.timeEstimate=i.querySelector(".time-text"),this.progressPercentage=i.querySelector(".progress-percentage")}calculateReadingTime(){const i=this.articleBody.innerText||this.articleBody.textContent;this.totalWords=i.trim().split(/\s+/).length;const e=Math.ceil(this.totalWords/this.readingSpeed),t=e<60?`${e} ph\xFAt \u0111\u1ECDc`:`${Math.floor(e/60)}h ${e%60}m \u0111\u1ECDc`;this.timeEstimate.textContent=t,this.totalReadingMinutes=e}attachScrollListener(){let i=!1;window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(()=>{this.updateProgress(),i=!1}),i=!0)}),this.updateProgress()}updateProgress(){const i=window.innerHeight,e=document.documentElement.scrollHeight,t=window.pageYOffset||document.documentElement.scrollTop,o=e-i,r=o>0?t/o*100:100,n=Math.min(100,Math.max(0,r));if(this.progressBar.style.transform=`scaleX(${n/100})`,this.progressPercentage&&(this.progressPercentage.textContent=`${Math.round(n)}%`),this.totalReadingMinutes){const s=100-n,a=Math.ceil(this.totalReadingMinutes*s/100);a>0?this.timeEstimate.textContent=`C\xF2n ${a} ph\xFAt`:this.timeEstimate.textContent="Ho\xE0n th\xE0nh!"}t>100?this.progressContainer.classList.add("visible"):this.progressContainer.classList.remove("visible")}markCurrentAsRead(){const i=this.getArticleId();if(i&&!this.readArticles.includes(i)){let e=!1,t=!1;const o=()=>{e||t||(t=!0,window.requestAnimationFrame(()=>{if(t=!1,e)return;const r=document.documentElement.scrollHeight-window.innerHeight;(r>0?window.pageYOffset/r*100:0)>50&&(this.readArticles.push(i),this.saveReadArticles(),e=!0,window.removeEventListener("scroll",o),this.showNotification("\u0110\xE3 \u0111\xE1nh d\u1EA5u b\xE0i vi\u1EBFt l\xE0 \u0111\xE3 \u0111\u1ECDc","success"))}))};window.addEventListener("scroll",o,{passive:!0})}}getArticleId(){const e=new URLSearchParams(window.location.search).get("id");if(e)return e;const t=this.articleBody?.getAttribute("data-article-id");if(t)return t;const o=document.querySelector("h1")?.textContent;return o?this.slugify(o):null}slugify(i){return i.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}loadReadArticles(){try{const i=localStorage.getItem("readArticles"),e=i?JSON.parse(i):[];return Array.isArray(e)?e:[]}catch{return[]}}saveReadArticles(){localStorage.setItem("readArticles",JSON.stringify(this.readArticles))}markReadArticlesInList(){document.querySelectorAll(".blog-card").forEach(e=>{const t=e.querySelector(".blog-link"),o=e.querySelector("h3")?.textContent;if(o){const r=this.slugify(o);if(this.readArticles.includes(r)&&(e.classList.add("read-article"),!e.querySelector(".read-indicator"))){const n=document.createElement("div");n.className="read-indicator",n.innerHTML='<i class="fas fa-check-circle"></i> \u0110\xE3 \u0111\u1ECDc',e.querySelector(".blog-content").prepend(n)}}})}showNotification(i,e="info"){const t=document.createElement("div");t.className=`blog-notification ${e}`,t.innerHTML=`
+            <i class="fas fa-${e==="success"?"check-circle":"info-circle"}"></i>
+            <span>${i}</span>
+        `,document.body.appendChild(t),setTimeout(()=>t.classList.add("show"),100),setTimeout(()=>{t.classList.remove("show"),setTimeout(()=>t.remove(),300)},3e3)}}const progressStyles=document.createElement("style");progressStyles.textContent=`
+    .reading-progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--line, #dbeafe);
+        z-index: 1005;
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .reading-progress-container.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reading-progress-bar {
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, var(--brand, #0284c7), var(--accent, #38bdf8));
+        transform: scaleX(0);
+        transform-origin: left center;
+        will-change: transform;
+    }
+
+    .reading-stats {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        background: var(--surface, #ffffff);
+        padding: 9px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-strong, #0b1f33);
+        box-shadow: var(--shadow-md, 0 8px 24px rgba(14, 116, 184, 0.12));
+        border: 1px solid var(--line, #dbeafe);
+        z-index: 940;
+    }
+
+    .time-remaining {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--brand, #0284c7);
+    }
+
+    .time-remaining i {
+        font-size: 14px;
+    }
+
+    .progress-percentage {
+        color: var(--text-strong, #0b1f33);
+        font-weight: 700;
+        min-width: 34px;
+        text-align: right;
+    }
+
+    /* Read article indicator */
+    .blog-card.read-article {
+        opacity: 0.94;
+        position: relative;
+    }
+
+    .read-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: var(--brand-soft, #e0f2fe);
+        border: 1px solid color-mix(in srgb, var(--brand, #0284c7) 24%, transparent);
+        border-radius: 20px;
+        color: var(--brand-hover, #0369a1);
+        font-size: 11px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        width: fit-content;
+    }
+
+    .read-indicator i {
+        font-size: 12px;
+    }
+
+    /* Code block copy button */
+    .main-content pre.has-copy-btn {
+        position: relative;
+        padding-top: 44px;
+    }
+
+    .copy-code-btn {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(125, 211, 252, 0.28);
+        background: rgba(15, 42, 72, 0.85);
+        color: #bae6fd;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .copy-code-btn:hover {
+        background: #0284c7;
+        border-color: #38bdf8;
+        color: #ffffff;
+    }
+
+    .copy-code-btn.copied {
+        background: #059669;
+        border-color: #34d399;
+        color: #ffffff;
+    }
+
+    /* Notification */
+    .blog-notification {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: var(--surface, #ffffff);
+        color: var(--text-strong, #0b1f33);
+        padding: 12px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        z-index: 10000;
+        box-shadow: var(--shadow-md, 0 12px 32px rgba(14, 116, 184, 0.15));
+        border: 1px solid var(--line, #dbeafe);
+        opacity: 0;
+        transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .blog-notification.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .blog-notification.success {
+        border-color: rgba(12, 122, 84, 0.35);
+    }
+
+    .blog-notification i {
+        color: #0c7a54;
+        font-size: 18px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .reading-stats {
+            bottom: 20px;
+            left: 16px;
+            padding: 7px 12px;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .blog-notification {
+            bottom: 20px;
+            max-width: 90%;
+            padding: 10px 16px;
+            font-size: 13px;
+        }
+    }
+`,document.head.appendChild(progressStyles),document.readyState==="loading"?document.addEventListener("DOMContentLoaded",()=>{new BlogReadingProgress}):new BlogReadingProgress;

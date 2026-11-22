@@ -26,8 +26,9 @@ class ProjectFilter {
     }
 
     filterProjects(btn) {
-        this.filterBtns.forEach(b => b.classList.remove('active'));
+        this.filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
 
         const filter = btn.getAttribute('data-filter');
 

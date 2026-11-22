@@ -649,7 +649,7 @@
     box-shadow: var(--shadow-md);
 }
 
-.home-skill-group h4 {
+.home-skill-group h3 {
     color: var(--home-heading);
     font-size: 0.95rem;
     margin-bottom: 14px;
@@ -658,7 +658,7 @@
     gap: 8px;
 }
 
-.home-skill-group h4 i {
+.home-skill-group h3 i {
     color: var(--brand, #0284c7);
 }
 

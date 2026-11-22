@@ -14,6 +14,13 @@ Portfolio cá nhân của sinh viên Công nghệ Phần mềm (HUTECH 2026), t�
 
 HTML, CSS, JavaScript thuần (không framework), giao diện trắng – xanh da trời, animation chỉ dùng `transform`/`opacity`, triển khai bằng GitHub Pages.
 
+## Cấu trúc & công cụ
+
+- `assets/` — ảnh WebP, font tự host (Be Vietnam Pro, Font Awesome subset) đã tối ưu
+- `assets-src/` — ảnh gốc; chạy `python tools/build_images.py` để xuất lại WebP
+- `tools/build_icons.py` — tạo lại bộ icon Font Awesome chỉ gồm icon đang dùng
+- `.github/workflows/deploy-pages.yml` — triển khai GitHub Pages, tự nén CSS/JS khi build
+
 ## Chạy local
 
 ```bash

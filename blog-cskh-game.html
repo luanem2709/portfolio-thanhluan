@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0284c7">
     <title>Bài học lắng nghe và xử lý sự cố từ công việc CSKH tại MOLA - Nguyễn Thành Luân</title>
 
     <!-- SEO Meta Tags -->
@@ -30,19 +31,14 @@
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-cskh-game.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=7">
-    <link rel="stylesheet" href="blog-styles.css?v=6">
-    <link rel="stylesheet" href="blog-post.css?v=6">
-    <link rel="stylesheet" href="logo-style.css?v=5">
-    <link rel="stylesheet" href="animations.css?v=5">
-    <link rel="stylesheet" href="enhanced-styles.css?v=5">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="css/fonts.css?v=2">
+    <link rel="stylesheet" href="css/icons.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="blog-styles.css?v=8">
+    <link rel="stylesheet" href="blog-post.css?v=8">
+    <link rel="stylesheet" href="logo-style.css?v=8">
+    <link rel="stylesheet" href="animations.css?v=8">
+    <link rel="stylesheet" href="enhanced-styles.css?v=8">
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
@@ -60,6 +56,7 @@
 </head>
 
 <body>
+    <main id="main-content">
     <!-- Navbar được nạp bởi component-loader.js -->
 
     <article class="blog-post">
@@ -76,7 +73,7 @@
                 <h1>Bài học về lắng nghe và xử lý sự cố từ công việc CSKH ngành Game tại MOLA</h1>
                 <div class="post-meta">
                     <div class="author-info">
-                        <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân" decoding="async">
+                        <img width="212" height="240" src="assets/avatar.webp" alt="Nguyễn Thành Luân" decoding="async">
                         <div>
                             <span class="author-name">Nguyễn Thành Luân</span>
                             <span class="post-date">20 Tháng 12, 2025</span>
@@ -91,7 +88,7 @@
 
         <div class="post-featured-image">
             <figure class="post-cover-frame">
-                <img src="assets/blog-cskh-game.jpg" alt="Bàn làm việc hỗ trợ khách hàng và xử lý ticket kỹ thuật ngành game" decoding="async">
+                <img fetchpriority="high" srcset="assets/blog-cskh-game-sm.webp 720w, assets/blog-cskh-game.webp 1280w" sizes="(max-width: 1240px) 92vw, 1160px" width="1280" height="714" src="assets/blog-cskh-game.webp" alt="Bàn làm việc hỗ trợ khách hàng và xử lý ticket kỹ thuật ngành game" decoding="async">
             </figure>
         </div>
 
@@ -106,7 +103,7 @@
                         <p>Bài học đầu tiên mình học được là tách hai việc ra rõ ràng: ghi nhận cảm xúc của người dùng trước, rồi tập trung thu thập đủ dữ liệu kỹ thuật (mã tài khoản, thời điểm lỗi, ảnh chụp màn hình, thiết bị sử dụng) để chuyển đúng bộ phận xử lý.</p>
 
                         <figure class="article-figure article-figure--compact">
-                            <img src="assets/mola-experience.jpg" alt="MOLA INTERACTIVE — Kinh nghiệm CSKH và tư vấn kỹ thuật game" loading="lazy" decoding="async">
+                            <img width="480" height="480" src="assets/mola-experience.webp" alt="MOLA INTERACTIVE — Kinh nghiệm CSKH và tư vấn kỹ thuật game" loading="lazy" decoding="async">
                             <figcaption>MOLA INTERACTIVE — nơi mình đảm nhiệm tiếp nhận, phân loại yêu cầu và tư vấn kỹ thuật cho người chơi.</figcaption>
                         </figure>
 
@@ -141,7 +138,7 @@
                         </div>
 
                         <div class="post-share">
-                            <h4>Chia sẻ bài viết:</h4>
+                            <h3 class="share-title">Chia sẻ bài viết:</h3>
                             <div class="share-buttons">
                                 <a href="#" class="share-btn facebook" title="Chia sẻ lên Facebook" aria-label="Chia sẻ lên Facebook"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#" class="share-btn twitter" title="Chia sẻ lên Twitter / X" aria-label="Chia sẻ lên Twitter"><i class="fab fa-twitter"></i></a>
@@ -153,11 +150,11 @@
 
                     <aside class="post-sidebar">
                         <div class="sidebar-card author-card">
-                            <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân" decoding="async">
+                            <img width="212" height="240" src="assets/avatar.webp" alt="Nguyễn Thành Luân" decoding="async">
                             <h3>Nguyễn Thành Luân</h3>
                             <p>Sinh viên Công nghệ Phần mềm (HUTECH) · Thực tập IT HelpDesk &amp; Web tại Hyundai Miền Nam · Founder Ma Đạo Community</p>
                             <div class="author-social">
-                                <a href="https://www.linkedin.com/in/luanem2709" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/xiata-sano-521143391/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="https://github.com/luanem2709" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                                 <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                                 <a href="https://discord.gg/NUh6Mf22" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
@@ -168,14 +165,14 @@
                             <h3>Bài Viết Liên Quan</h3>
                             <div class="related-posts">
                                 <a href="blog-thuc-tap-it-web.html" class="related-post">
-                                    <img class="related-thumb" src="assets/hyundai-web.jpg" alt="9 tuần thực tập IT và Web tại Hyundai Miền Nam" decoding="async">
+                                    <img width="640" height="319" class="related-thumb" src="assets/hyundai-web.webp" alt="9 tuần thực tập IT và Web tại Hyundai Miền Nam" decoding="async">
                                     <div class="related-info">
                                         <h4>9 tuần thực tập IT &amp; Web tại Hyundai Miền Nam</h4>
                                         <span>6 phút đọc</span>
                                     </div>
                                 </a>
                                 <a href="blog-discord-bot.html" class="related-post">
-                                    <img class="related-thumb" src="assets/blog-discord-bot.jpg" alt="Xây dựng hệ thống Ticket và Bot Discord" decoding="async">
+                                    <img width="720" height="402" class="related-thumb" src="assets/blog-discord-bot-sm.webp" alt="Xây dựng hệ thống Ticket và Bot Discord" decoding="async">
                                     <div class="related-info">
                                         <h4>Xây dựng hệ thống Ticket &amp; Bot Discord</h4>
                                         <span>8 phút đọc</span>
@@ -198,15 +195,16 @@
             </div>
         </div>
     </article>
+    </main>
 
     <!-- Footer + nút cuộn được nạp bởi component-loader.js -->
 
-    <script src="js/config.js?v=7"></script>
-    <script src="js/component-loader.js?v=2"></script>
-    <script src="js/theme-manager.js?v=5"></script>
-    <script src="js/visual-effects.js?v=5"></script>
-    <script src="js/blog-reading-progress.js?v=5"></script>
-    <script src="script.js?v=5"></script>
+    <script src="js/config.js?v=8"></script>
+    <script src="js/component-loader.js?v=8"></script>
+    <script src="js/theme-manager.js?v=8"></script>
+    <script src="js/visual-effects.js?v=8"></script>
+    <script src="js/blog-reading-progress.js?v=8"></script>
+    <script src="script.js?v=8"></script>
 </body>
 
 </html>

@@ -1,0 +1,151 @@
+class EasterEggs{constructor(){this.konamiCode=CONFIG.secrets.konamiCode,this.konamiIndex=0,this.secretWord=CONFIG.secrets.secretWord,this.typedWord="",this.logoClickCount=0,this.init()}init(){document.addEventListener("keydown",e=>this.checkKonamiCode(e)),document.addEventListener("keypress",e=>this.checkSecretWord(e)),document.addEventListener("click",e=>{e.target.closest(".logo a")&&this.handleLogoClick(e)}),this.consoleArt()}isTypingInField(e){const i=e.target?.tagName;return i==="INPUT"||i==="TEXTAREA"||i==="SELECT"||!!e.target?.isContentEditable}checkKonamiCode(e){this.isTypingInField(e)||(e.key===this.konamiCode[this.konamiIndex]?(this.konamiIndex++,this.konamiIndex===this.konamiCode.length&&(this.activateKonamiCode(),this.konamiIndex=0)):this.konamiIndex=0)}activateKonamiCode(){this.showNotification("\u{1F3AE} KONAMI CODE ACTIVATED! \u{1F3AE}","success"),this.startMiniGame()}startMiniGame(){const e=document.createElement("div");e.className="easter-egg-game",e.innerHTML=`
+            <div class="game-window">
+                <div class="game-header">
+                    <h3>\u{1F3AE} Ma \u0110\u1EA1o Mini Game</h3>
+                    <button class="game-close">\xD7</button>
+                </div>
+                <div class="game-content">
+                    <div class="game-score">Score: <span id="game-score">0</span></div>
+                    <canvas id="game-canvas" width="400" height="400"></canvas>
+                    <div class="game-instructions">
+                        Use Arrow Keys to move<br>
+                        Collect the blue orbs!
+                    </div>
+                </div>
+            </div>
+        `,document.body.appendChild(e);let i=null,n=!1;const r=o=>{keys[o.key]=!0},c=o=>{keys[o.key]=!1};e.querySelector(".game-close").addEventListener("click",()=>{n=!0,i&&cancelAnimationFrame(i),document.removeEventListener("keydown",r),document.removeEventListener("keyup",c),e.remove()}),this.initSimpleGame(e.querySelector("#game-canvas"),()=>n,o=>{i=o},r,c)}initSimpleGame(e,i,n,r,c){const o=e.getContext("2d");let m=0;const t={x:200,y:200,size:20,speed:5},a=[],d={};for(let s=0;s<5;s++)a.push({x:Math.random()*360+20,y:Math.random()*360+20,size:10});const h=s=>{d[s.key]=!0,r(s)},g=s=>{d[s.key]=!1,c(s)};document.addEventListener("keydown",h),document.addEventListener("keyup",g);function p(){if(i()){document.removeEventListener("keydown",h),document.removeEventListener("keyup",g);return}o.fillStyle="#0A192F",o.fillRect(0,0,400,400),d.ArrowUp&&(t.y-=t.speed),d.ArrowDown&&(t.y+=t.speed),d.ArrowLeft&&(t.x-=t.speed),d.ArrowRight&&(t.x+=t.speed),t.x=Math.max(t.size,Math.min(400-t.size,t.x)),t.y=Math.max(t.size,Math.min(400-t.size,t.y)),o.fillStyle="#0066FF",o.beginPath(),o.arc(t.x,t.y,t.size,0,Math.PI*2),o.fill();for(let s=a.length-1;s>=0;s--){const l=a[s];o.fillStyle="#00D4FF",o.beginPath(),o.arc(l.x,l.y,l.size,0,Math.PI*2),o.fill();const f=t.x-l.x,u=t.y-l.y;if(Math.sqrt(f*f+u*u)<t.size+l.size){a.splice(s,1),m+=10;const y=document.getElementById("game-score");y&&(y.textContent=m),a.push({x:Math.random()*360+20,y:Math.random()*360+20,size:10})}}n(requestAnimationFrame(p))}p()}checkSecretWord(e){this.isTypingInField(e)||!e.key||(this.typedWord+=e.key.toLowerCase(),this.typedWord.length>this.secretWord.length&&(this.typedWord=this.typedWord.slice(-this.secretWord.length)),this.typedWord===this.secretWord&&(this.activateSecretWord(),this.typedWord=""))}activateSecretWord(){this.showNotification("\u{1F389} Secret word discovered! Ma \u0110\u1EA1o Power! \u{1F389}","success"),document.body.classList.add("madao-power"),setTimeout(()=>{document.body.classList.remove("madao-power")},5e3)}handleLogoClick(e){const i=window.location.pathname;(i.endsWith("/")||i.endsWith("/index.html")||i==="index.html")&&(e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"}),this.logoClickCount++,clearTimeout(this.logoResetTimer),this.logoResetTimer=setTimeout(()=>{this.logoClickCount=0},2500),this.logoClickCount>=CONFIG.secrets.logoClickCount&&(this.activateMatrixRain(),this.logoClickCount=0))}activateMatrixRain(){if(document.querySelector(".matrix-rain"))return;this.showNotification("\u{1F327}\uFE0F Matrix Mode Activated! \u{1F327}\uFE0F","success");const e=document.createElement("canvas");e.className="matrix-rain",e.width=window.innerWidth,e.height=window.innerHeight,document.body.appendChild(e);const i=e.getContext("2d"),n="MADAO0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",r=14,c=e.width/r,o=Array(Math.floor(c)).fill(1);function m(){i.fillStyle="rgba(10, 25, 47, 0.05)",i.fillRect(0,0,e.width,e.height),i.fillStyle="#00FF41",i.font=r+"px monospace";for(let a=0;a<o.length;a++){const d=n[Math.floor(Math.random()*n.length)];i.fillText(d,a*r,o[a]*r),o[a]*r>e.height&&Math.random()>.975&&(o[a]=0),o[a]++}}const t=setInterval(m,33);setTimeout(()=>{clearInterval(t),e.remove()},1e4)}showNotification(e,i="info"){const n=document.createElement("div");n.className=`easter-egg-notification ${i}`,n.textContent=e,document.body.appendChild(n),setTimeout(()=>n.classList.add("show"),100),setTimeout(()=>{n.classList.remove("show"),setTimeout(()=>n.remove(),300)},3e3)}consoleArt(){console.log(`
+%c
+\u2588\u2588\u2588\u2557   \u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2588\u2557     \u2588\u2588\u2588\u2588\u2588\u2588\u2557  \u2588\u2588\u2588\u2588\u2588\u2557  \u2588\u2588\u2588\u2588\u2588\u2588\u2557 
+\u2588\u2588\u2588\u2588\u2557 \u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557    \u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557\u2588\u2588\u2554\u2550\u2550\u2550\u2588\u2588\u2557
+\u2588\u2588\u2554\u2588\u2588\u2588\u2588\u2554\u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551    \u2588\u2588\u2551  \u2588\u2588\u2551\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551\u2588\u2588\u2551   \u2588\u2588\u2551
+\u2588\u2588\u2551\u255A\u2588\u2588\u2554\u255D\u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551    \u2588\u2588\u2551  \u2588\u2588\u2551\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551\u2588\u2588\u2551   \u2588\u2588\u2551
+\u2588\u2588\u2551 \u255A\u2550\u255D \u2588\u2588\u2551\u2588\u2588\u2551  \u2588\u2588\u2551    \u2588\u2588\u2588\u2588\u2588\u2588\u2554\u255D\u2588\u2588\u2551  \u2588\u2588\u2551\u255A\u2588\u2588\u2588\u2588\u2588\u2588\u2554\u255D
+\u255A\u2550\u255D     \u255A\u2550\u255D\u255A\u2550\u255D  \u255A\u2550\u255D    \u255A\u2550\u2550\u2550\u2550\u2550\u255D \u255A\u2550\u255D  \u255A\u2550\u255D \u255A\u2550\u2550\u2550\u2550\u2550\u255D 
+                                                  
+%cWelcome to Ma \u0110\u1EA1o Portfolio! \u{1F680}
+%cTry these easter eggs:
+%c1. Konami Code: \u2191\u2191\u2193\u2193\u2190\u2192\u2190\u2192BA
+%c2. Type "madao" anywhere
+%c3. Click logo 5 times
+%c4. Check out the source code \u{1F609}
+        `,"color: #0066FF; font-weight: bold;","color: #00D4FF; font-size: 16px; font-weight: bold;","color: #E6F1FF; font-size: 14px;","color: #8892B0;","color: #8892B0;","color: #8892B0;","color: #8892B0;")}}const easterEggStyles=document.createElement("style");easterEggStyles.textContent=`
+    .easter-egg-game {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .game-window {
+        background: linear-gradient(135deg, #0A192F, #112240);
+        border-radius: 20px;
+        padding: 20px;
+        border: 2px solid #0066FF;
+        box-shadow: 0 20px 60px rgba(0, 102, 255, 0.3);
+    }
+
+    .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .game-header h3 {
+        color: #E6F1FF;
+        margin: 0;
+    }
+
+    .game-close {
+        background: #FF5F56;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .game-close:hover {
+        transform: scale(1.1);
+    }
+
+    .game-content {
+        text-align: center;
+    }
+
+    .game-score {
+        color: #00D4FF;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    #game-canvas {
+        border: 2px solid #0066FF;
+        border-radius: 10px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .game-instructions {
+        color: #8892B0;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .easter-egg-notification {
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100px);
+        background: linear-gradient(135deg, #0066FF, #00D4FF);
+        color: white;
+        padding: 20px 40px;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 18px;
+        box-shadow: 0 10px 40px rgba(0, 102, 255, 0.5);
+        z-index: 99998;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .easter-egg-notification.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    .matrix-rain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99997;
+        pointer-events: none;
+    }
+
+    @keyframes madaoPower {
+        0%, 100% { filter: hue-rotate(0deg); }
+        50% { filter: hue-rotate(360deg); }
+    }
+
+    body.madao-power {
+        animation: madaoPower 2s ease-in-out;
+    }
+
+    body.madao-power * {
+        animation: madaoPower 2s ease-in-out;
+    }
+`,document.head.appendChild(easterEggStyles),CONFIG.features.easterEggs&&window.addEventListener("load",()=>{new EasterEggs});

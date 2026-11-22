@@ -96,7 +96,7 @@ class GitHubStats {
         widget.className = 'github-stats-widget collapsed';
         widget.id = 'github-stats';
         widget.innerHTML = `
-            <div class="github-widget-header" role="button" tabindex="0" aria-expanded="false" aria-label="Mở hoặc thu gọn thống kê GitHub">
+            <div class="github-widget-header" role="button" tabindex="0" aria-expanded="false" aria-label="GitHub Stats - mở hoặc thu gọn thống kê">
                 <i class="fab fa-github"></i>
                 <span>GitHub Stats</span>
                 <span class="widget-toggle" aria-hidden="true">
@@ -414,7 +414,7 @@ githubStyles.textContent = `
         justify-content: center;
         gap: 8px;
         padding: 11px 14px;
-        background: linear-gradient(135deg, var(--brand, #0284c7), var(--accent, #38bdf8));
+        background: linear-gradient(135deg, var(--brand-hover, #075985), var(--brand, #0369a1));
         color: var(--on-brand, #ffffff);
         text-decoration: none;
         border-radius: 10px;

@@ -71,9 +71,11 @@ class ComponentLoader {
 
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
+            link.removeAttribute('aria-current');
             const target = (link.getAttribute('href') || '').split('/').pop();
             if (target === currentKey) {
                 link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
             }
         });
     }
@@ -115,11 +117,11 @@ class ComponentLoader {
             if (pending) return;
             pending = true;
             requestAnimationFrame(() => {
-                navbar.classList.toggle('scrolled', window.pageYOffset > 50);
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
                 pending = false;
             });
         };
-        navbar.classList.toggle('scrolled', window.pageYOffset > 50);
+        requestAnimationFrame(() => navbar.classList.toggle('scrolled', window.scrollY > 50));
         window.addEventListener('scroll', onScroll, { passive: true });
     }
 
@@ -132,7 +134,7 @@ class ComponentLoader {
             if (pending) return;
             pending = true;
             requestAnimationFrame(() => {
-                btn.classList.toggle('show', window.pageYOffset > 300);
+                btn.classList.toggle('show', window.scrollY > 300);
                 pending = false;
             });
         };

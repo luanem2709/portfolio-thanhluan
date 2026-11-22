@@ -62,11 +62,20 @@ if (!document.querySelector('article.blog-post')) {
     document.body.appendChild(scrollProgress);
 
     let progressPending = false;
+    let maxScroll = 0;
     function syncScrollProgress() {
-        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const ratio = windowHeight > 0 ? Math.min(1, Math.max(0, window.pageYOffset / windowHeight)) : 0;
+        const ratio = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
         scrollProgress.style.transform = `scaleX(${ratio})`;
     }
+    // Đo chiều cao trang trong ResizeObserver (sau layout) để tránh forced reflow khi cuộn
+    function measureScroll() {
+        maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        syncScrollProgress();
+    }
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(measureScroll).observe(document.body);
+    }
+    window.addEventListener('resize', () => requestAnimationFrame(measureScroll), { passive: true });
 
     window.addEventListener('scroll', () => {
         if (progressPending) return;
@@ -77,11 +86,7 @@ if (!document.querySelector('article.blog-post')) {
         });
     }, { passive: true });
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', syncScrollProgress);
-    } else {
-        syncScrollProgress();
-    }
+    window.addEventListener('load', () => requestAnimationFrame(measureScroll));
 }
 
 if (document.readyState === 'loading') {

@@ -8,9 +8,9 @@ const CONFIG = {
     themes: {
         default: {
             name: 'Sky Blue',
-            primary: '#0284c7',
+            primary: '#0369a1',
             secondary: '#38bdf8',
-            hover: '#0369a1',
+            hover: '#075985',
             soft: '#e0f2fe',
             dark: '#07121e',
             light: '#e6f1fc'

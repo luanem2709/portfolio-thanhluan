@@ -42,8 +42,9 @@ class BlogReadingProgress {
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                buttons.forEach(b => b.classList.remove('active'));
+                buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
                 const filter = btn.getAttribute('data-filter');
 
                 cards.forEach(card => {

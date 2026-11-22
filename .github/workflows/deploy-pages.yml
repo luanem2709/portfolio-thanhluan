@@ -22,6 +22,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      # Nén CSS/JS trên máy chủ build (không đổi mã nguồn trong repo).
+      # Nếu bước này lỗi thì site vẫn được triển khai với file gốc.
+      - name: Minify CSS and JS
+        continue-on-error: true
+        run: |
+          npm install --global esbuild@0.21.5
+          find . -type f \( -name '*.css' -o -name '*.js' \) -not -path './.git/*' -not -path './node_modules/*' | while read -r f; do
+            esbuild "$f" --minify --allow-overwrite --outfile="$f" --log-level=error || echo "skip $f"
+          done
+
+      # Không đưa file nguồn/công cụ lên site
+      - name: Remove build-only files
+        run: rm -rf assets-src tools
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

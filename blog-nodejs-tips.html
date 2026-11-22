@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0284c7">
     <title>Những nguyên tắc giữ mã nguồn Node.js ổn định và dễ bảo trì - Nguyễn Thành Luân</title>
 
     <!-- SEO Meta Tags -->
@@ -30,19 +31,14 @@
     <link rel="canonical" href="https://luanem2709.github.io/portfolio-thanhluan/blog-nodejs-tips.html">
     <link rel="icon" type="image/png" href="assets/madao-logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=7">
-    <link rel="stylesheet" href="blog-styles.css?v=6">
-    <link rel="stylesheet" href="blog-post.css?v=6">
-    <link rel="stylesheet" href="logo-style.css?v=5">
-    <link rel="stylesheet" href="animations.css?v=5">
-    <link rel="stylesheet" href="enhanced-styles.css?v=5">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="css/fonts.css?v=2">
+    <link rel="stylesheet" href="css/icons.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="blog-styles.css?v=8">
+    <link rel="stylesheet" href="blog-post.css?v=8">
+    <link rel="stylesheet" href="logo-style.css?v=8">
+    <link rel="stylesheet" href="animations.css?v=8">
+    <link rel="stylesheet" href="enhanced-styles.css?v=8">
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
@@ -60,6 +56,7 @@
 </head>
 
 <body>
+    <main id="main-content">
     <!-- Navbar được nạp bởi component-loader.js -->
 
     <article class="blog-post">
@@ -76,7 +73,7 @@
                 <h1>Những nguyên tắc giúp mã nguồn Node.js ổn định và dễ bảo trì hơn</h1>
                 <div class="post-meta">
                     <div class="author-info">
-                        <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân" decoding="async">
+                        <img width="212" height="240" src="assets/avatar.webp" alt="Nguyễn Thành Luân" decoding="async">
                         <div>
                             <span class="author-name">Nguyễn Thành Luân</span>
                             <span class="post-date">10 Tháng 01, 2025</span>
@@ -91,7 +88,7 @@
 
         <div class="post-featured-image">
             <figure class="post-cover-frame">
-                <img src="assets/blog-nodejs.jpg" alt="Không gian lập trình và kiến trúc ứng dụng Node.js" decoding="async">
+                <img fetchpriority="high" srcset="assets/blog-nodejs-sm.webp 720w, assets/blog-nodejs.webp 1280w" sizes="(max-width: 1240px) 92vw, 1160px" width="1280" height="714" src="assets/blog-nodejs.webp" alt="Không gian lập trình và kiến trúc ứng dụng Node.js" decoding="async">
             </figure>
         </div>
 
@@ -185,7 +182,7 @@ module.exports = router;</code></pre>
                         <p>Dù là API hay form tiếp nhận, luôn xác thực và chuẩn hóa dữ liệu từ người dùng (bằng <code>express-validator</code>, <code>joi</code> hoặc kiểm tra kiểu thủ công), đi kèm giới hạn tần suất (<code>express-rate-limit</code>) và header bảo mật (<code>helmet</code>) để giảm rủi ro khi mở cổng ra ngoài Internet.</p>
 
                         <figure class="article-figure article-figure--contain">
-                            <img src="assets/cisco-js2.jpg" alt="Chứng chỉ JavaScript Essentials 2 từ Cisco Networking Academy và JS Institute" loading="lazy" decoding="async">
+                            <img srcset="assets/cisco-js2-sm.webp 720w, assets/cisco-js2.webp 1053w" sizes="(max-width: 1100px) 92vw, 730px" width="1053" height="813" src="assets/cisco-js2.webp" alt="Chứng chỉ JavaScript Essentials 2 từ Cisco Networking Academy và JS Institute" loading="lazy" decoding="async">
                             <figcaption>Nền tảng JavaScript vững từ khóa Cisco JS Essentials 2 giúp việc kiểm soát bất đồng bộ và scope trong Node.js chắc chắn hơn.</figcaption>
                         </figure>
 
@@ -199,7 +196,7 @@ module.exports = router;</code></pre>
                         </div>
 
                         <div class="post-share">
-                            <h4>Chia sẻ bài viết:</h4>
+                            <h3 class="share-title">Chia sẻ bài viết:</h3>
                             <div class="share-buttons">
                                 <a href="#" class="share-btn facebook" title="Chia sẻ lên Facebook" aria-label="Chia sẻ lên Facebook"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#" class="share-btn twitter" title="Chia sẻ lên Twitter / X" aria-label="Chia sẻ lên Twitter"><i class="fab fa-twitter"></i></a>
@@ -211,11 +208,11 @@ module.exports = router;</code></pre>
 
                     <aside class="post-sidebar">
                         <div class="sidebar-card author-card">
-                            <img src="assets/avatar.jpg" alt="Nguyễn Thành Luân" decoding="async">
+                            <img width="212" height="240" src="assets/avatar.webp" alt="Nguyễn Thành Luân" decoding="async">
                             <h3>Nguyễn Thành Luân</h3>
                             <p>Sinh viên Công nghệ Phần mềm (HUTECH) · Thực tập IT HelpDesk &amp; Web tại Hyundai Miền Nam · Founder Ma Đạo Community</p>
                             <div class="author-social">
-                                <a href="https://www.linkedin.com/in/luanem2709" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.linkedin.com/in/xiata-sano-521143391/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="https://github.com/luanem2709" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                                 <a href="https://facebook.com/LuanEm2709" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                                 <a href="https://discord.gg/NUh6Mf22" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
@@ -226,14 +223,14 @@ module.exports = router;</code></pre>
                             <h3>Bài Viết Liên Quan</h3>
                             <div class="related-posts">
                                 <a href="blog-discord-bot.html" class="related-post">
-                                    <img class="related-thumb" src="assets/blog-discord-bot.jpg" alt="Xây dựng hệ thống Ticket và Bot Discord" decoding="async">
+                                    <img width="720" height="402" class="related-thumb" src="assets/blog-discord-bot-sm.webp" alt="Xây dựng hệ thống Ticket và Bot Discord" decoding="async">
                                     <div class="related-info">
                                         <h4>Xây dựng hệ thống Ticket &amp; Bot Discord</h4>
                                         <span>8 phút đọc</span>
                                     </div>
                                 </a>
                                 <a href="blog-dev-tips.html" class="related-post">
-                                    <img class="related-thumb" src="assets/blog-dev-tips.jpg" alt="Thói quen làm việc với dự án thật" decoding="async">
+                                    <img width="720" height="402" class="related-thumb" src="assets/blog-dev-tips-sm.webp" alt="Thói quen làm việc với dự án thật" decoding="async">
                                     <div class="related-info">
                                         <h4>Thói quen làm việc với dự án thật</h4>
                                         <span>6 phút đọc</span>
@@ -257,15 +254,16 @@ module.exports = router;</code></pre>
             </div>
         </div>
     </article>
+    </main>
 
     <!-- Footer + nút cuộn được nạp bởi component-loader.js -->
 
-    <script src="js/config.js?v=7"></script>
-    <script src="js/component-loader.js?v=2"></script>
-    <script src="js/theme-manager.js?v=5"></script>
-    <script src="js/visual-effects.js?v=5"></script>
-    <script src="js/blog-reading-progress.js?v=5"></script>
-    <script src="script.js?v=5"></script>
+    <script src="js/config.js?v=8"></script>
+    <script src="js/component-loader.js?v=8"></script>
+    <script src="js/theme-manager.js?v=8"></script>
+    <script src="js/visual-effects.js?v=8"></script>
+    <script src="js/blog-reading-progress.js?v=8"></script>
+    <script src="script.js?v=8"></script>
 </body>
 
 </html>
