@@ -71,13 +71,65 @@ if (progressBars.length) {
     }
 }
 
-// Bảo đảm các card nội dung luôn hiển thị sẵn (tránh bị ẩn khi cuộn nhanh)
-document.querySelectorAll(
-    '.achievement-card, .skill-item, .stat-item, .info-card, .skill-card, .blog-card, .section-header'
-).forEach(el => {
-    el.classList.remove('fade-in');
-    el.classList.add('reveal-active', 'fade-in-visible');
-});
+// Hiệu ứng hiện dần khi cuộn (chỉ opacity/transform).
+// Chỉ ẩn các khối nằm dưới màn hình đầu tiên; khối nào đã hoặc vừa lướt qua đều được hiện lại,
+// nên cuộn nhanh cũng không bị trắng. Tôn trọng prefers-reduced-motion.
+(function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const SELECTOR = [
+        '.section-header', '.project-card', '.blog-card', '.achievement-card', '.info-card',
+        '.skills-category', '.soft-skill-item', '.stat-item', '.home-service', '.home-skill-group',
+        '.home-about', '.home-cta', '.edu-card', '.contact-form'
+    ].join(',');
+    let pending = [];
+    let queued = false;
+
+    function check() {
+        queued = false;
+        if (!pending.length) return;
+        const limit = window.innerHeight * 0.92;
+        const hit = pending.filter(el => el.getBoundingClientRect().top < limit); // đọc trước
+        if (!hit.length) return;
+        hit.forEach(el => el.classList.add('is-in'));                              // ghi sau
+        pending = pending.filter(el => !hit.includes(el));
+        setTimeout(() => hit.forEach(el => el.classList.remove('reveal', 'is-in')), 1000);
+    }
+
+    function queue() {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(check);
+    }
+
+    function revealAll() {
+        pending.forEach(el => el.classList.remove('reveal', 'is-in'));
+        pending = [];
+    }
+
+    window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+            const limit = window.innerHeight * 0.92;
+            const groups = new Map();
+            pending = Array.from(document.querySelectorAll(SELECTOR)).filter(el => {
+                const r = el.getBoundingClientRect();
+                return r.height > 0 && r.top > limit;
+            });
+            pending.forEach(el => {
+                const i = groups.get(el.parentElement) || 0;
+                groups.set(el.parentElement, i + 1);
+                el.style.setProperty('--reveal-delay', (i % 4) * 70 + 'ms');
+                el.classList.add('reveal');
+            });
+            window.addEventListener('scroll', queue, { passive: true });
+            window.addEventListener('resize', queue, { passive: true });
+            queue();
+        });
+    });
+    // Bộ lọc dự án/blog đổi vị trí thẻ -> kiểm tra lại để thẻ vừa hiện không bị ẩn
+    window.addEventListener('reveal:check', queue);
+    window.addEventListener('beforeprint', revealAll);
+})();
 
 // Lightbox xem phóng to chứng chỉ ở trang Thành tựu
 const achievementCards = document.querySelectorAll('.achievement-card');

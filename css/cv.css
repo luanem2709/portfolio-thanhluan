@@ -1,0 +1,363 @@
+/* Trang CV trực tuyến — hiển thị trên web và tối ưu khi in A4 */
+.cv-page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 108px 20px 72px;
+}
+
+.cv-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+
+.cv-sheet {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.cv-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 36px 40px 28px;
+    background: linear-gradient(120deg, var(--surface) 0%, var(--surface) 55%, color-mix(in srgb, var(--brand-soft) 85%, var(--surface)) 100%);
+    border-bottom: 3px solid var(--brand);
+}
+
+.cv-header h1 {
+    font-size: clamp(30px, 4vw, 42px);
+    line-height: 1.15;
+    color: var(--text-strong);
+}
+
+.cv-title {
+    margin-top: 6px;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--brand);
+}
+
+.cv-sub {
+    color: var(--muted);
+    font-size: 14.5px;
+}
+
+.cv-contact {
+    list-style: none;
+    display: grid;
+    gap: 7px;
+    font-size: 14.5px;
+    color: var(--text);
+}
+
+.cv-contact i {
+    width: 18px;
+    margin-right: 6px;
+    text-align: center;
+    color: var(--brand);
+}
+
+.cv-contact a {
+    color: var(--text);
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.cv-contact a:hover {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+}
+
+.cv-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+}
+
+.cv-main {
+    padding: 28px 36px 36px 40px;
+}
+
+.cv-side {
+    padding: 28px 36px 36px 28px;
+    background: var(--surface-muted);
+    border-left: 1px solid var(--line);
+}
+
+.cv-section {
+    padding: 0;
+}
+
+.cv-section + .cv-section {
+    margin-top: 26px;
+}
+
+.cv-section h2 {
+    break-after: avoid;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand);
+    border-bottom: 2px solid var(--brand-soft-strong);
+}
+
+.cv-section p,
+.cv-section li {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.cv-item + .cv-item {
+    margin-top: 18px;
+}
+
+.cv-item-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 14px;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.cv-item h3,
+.cv-side h3 {
+    font-size: 15.5px;
+    color: var(--text-strong);
+}
+
+.cv-side h3 {
+    margin: 12px 0 6px;
+    font-size: 14px;
+}
+
+.cv-section h2 + h3 {
+    margin-top: 0;
+}
+
+.cv-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted-strong);
+    white-space: nowrap;
+}
+
+.cv-org {
+    margin: 2px 0 6px;
+    font-weight: 600;
+    color: var(--brand);
+}
+
+.cv-item ul,
+.cv-plain {
+    margin: 6px 0 0 18px;
+}
+
+.cv-item li,
+.cv-plain li {
+    margin-bottom: 4px;
+}
+
+.cv-plain {
+    list-style: disc;
+}
+
+.cv-item code {
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: var(--brand-soft);
+    color: var(--brand-hover);
+    font-size: 0.92em;
+}
+
+.cv-item a {
+    color: var(--brand);
+    word-break: break-word;
+}
+
+.cv-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+}
+
+.cv-tags li {
+    margin: 0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+@media (max-width: 860px) {
+    .cv-body {
+        grid-template-columns: 1fr;
+    }
+
+    .cv-side {
+        border-left: none;
+        border-top: 1px solid var(--line);
+    }
+
+    .cv-header,
+    .cv-main,
+    .cv-side {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}
+
+@media print {
+    @page {
+        size: A4;
+        margin: 9mm 10mm;
+    }
+
+    html,
+    body {
+        background: #fff !important;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 11pt;
+    }
+
+    .navbar,
+    .footer,
+    .skip-link,
+    .scroll-top,
+    .scroll-progress,
+    .theme-controls,
+    .github-stats-widget,
+    .cv-toolbar {
+        display: none !important;
+    }
+
+    .cv-page {
+        max-width: none;
+        padding: 0;
+    }
+
+    .cv-sheet {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .cv-header {
+        padding: 0 0 12px;
+    }
+
+    .cv-main {
+        padding: 14px 18px 0 0;
+    }
+
+    .cv-side {
+        padding: 14px 0 0 16px;
+    }
+
+    /* Giữ bố cục 2 cột khi in (khổ A4 hẹp hơn breakpoint mobile) */
+    .cv-header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 24px;
+        background: none;
+    }
+
+    .cv-header h1 {
+        font-size: 26pt;
+    }
+
+    .cv-contact {
+        gap: 3px;
+        font-size: 9.5pt;
+    }
+
+    .cv-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+    }
+
+    .cv-side {
+        border-top: none;
+        border-left: 1px solid var(--line);
+        background: #f7fafc;
+    }
+
+    .cv-item {
+        break-inside: avoid;
+    }
+
+    .cv-section + .cv-section {
+        margin-top: 14px;
+    }
+
+    .cv-section p,
+    .cv-section li {
+        font-size: 9.2pt;
+        line-height: 1.38;
+    }
+
+    .cv-item h3,
+    .cv-side h3 {
+        font-size: 10pt;
+    }
+
+    .cv-section h2 {
+        margin-bottom: 7px;
+        font-size: 9.5pt;
+    }
+
+    .cv-item + .cv-item {
+        margin-top: 10px;
+    }
+
+    .cv-tags li {
+        padding: 1px 7px;
+        font-size: 8.2pt;
+    }
+
+    .cv-main {
+        padding: 10px 14px 0 0;
+    }
+
+    .cv-side {
+        padding: 10px 0 0 12px;
+    }
+
+    .cv-header h1 {
+        font-size: 22pt;
+    }
+
+    .cv-title {
+        font-size: 11.5pt;
+    }
+
+    .cv-sub,
+    .cv-date {
+        font-size: 9pt;
+    }
+
+    .cv-contact {
+        font-size: 8.8pt;
+        white-space: nowrap;
+    }
+}

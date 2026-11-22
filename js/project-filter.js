@@ -56,6 +56,7 @@ class ProjectFilter {
                 card.style.transform = 'scale(0.97)';
             }
         });
+        window.dispatchEvent(new Event('reveal:check'));
     }
 }
 

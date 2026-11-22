@@ -52,6 +52,7 @@ class BlogReadingProgress {
                     const visible = filter === 'all' || cat === filter;
                     card.style.display = visible ? '' : 'none';
                 });
+                window.dispatchEvent(new Event('reveal:check'));
             });
         });
     }
